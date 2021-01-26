@@ -45,7 +45,8 @@ const vite_config = {
 		'@assets': resolve(__dirname, 'src/assets'),
 		'@components': resolve(__dirname, 'src/components'),
 		'@views': resolve(__dirname, 'src/views'),
-		'@common': resolve(__dirname, 'src/common')
+		'@common': resolve(__dirname, 'src/common'),
+		'@styles': resolve(__dirname, 'src/styles')
 	},
 
 	// 资源路径

@@ -1,6 +1,6 @@
 //全局状态
 const state = {
-	test: 'test'
+	name: 'copy'
 }
 
 //同步方法

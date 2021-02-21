@@ -1,7 +1,7 @@
 // user module 里的测试接口 mock
 export default [
 	{
-		url: '/api/user',
+		url: '/api/user/get_user',
 		method: 'get',
 		response: () => {
 			return {

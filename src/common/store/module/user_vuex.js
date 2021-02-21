@@ -18,8 +18,8 @@ const mutations = {
 	 * 1是赋予状态属性的值
 	 * 例 commit('set_vuex', ['token', '值'])
 	 */
-	set_vuex(state, info) {
-		state[info[0]] = info[1]
+	set_vuex(state, [key, val]) {
+		state[key] = val
 		// console.log(state)
 	},
 	set_token(state, token) {
@@ -28,11 +28,11 @@ const mutations = {
 	},
 	set_userInfo(state, info) {
 		state.user_info = info
-		localStorage.setItem('user_info', info)
+		localStorage.setItem('user_info', JSON.stringify(info))
 	},
 	set_userRole(state, role) {
 		state.user_role = role
-		localStorage.setItem('user_role', role)
+		localStorage.setItem('user_role', JSON.stringify(role))
 	},
 	set_logout(state) {
 		state.token = ''
@@ -47,7 +47,7 @@ const mutations = {
 //get方法
 const getters = {
 	// 用户是否登录
-	hasLogin: (state) => state.token || false
+	hasLogin: (state) => state.token || state.user_info || false
 }
 
 //异步方法
@@ -55,7 +55,7 @@ const actions = {
 	//检查是否登陆状态
 	check_login({ commit, state, getters, rootState }) {
 		// console.log(rootState)
-		if (!getters.hasLogin || !state.is_login_page || !state.user_info) {
+		if (!getters.hasLogin) {
 			commit('set_logout')
 			commit('set_vuex', ['is_login_page', true])
 			return Promise.resolve(false)

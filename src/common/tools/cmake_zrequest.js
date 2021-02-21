@@ -1,6 +1,6 @@
-import http_intercept from './http_request.js' //拦截请求
-import is_cache from './cache_time.js' //缓存
-import qs from 'qs'
+import http_intercept from './cmake_zintercept.js' //拦截请求
+import is_cache from './cmake_cache.js' //缓存
+import { stringify } from 'qs'
 
 const get_args = (json = {}, cur = [1, 10]) => {
 	cur[0] <= 0 ? (cur[0] = 1) : false
@@ -53,8 +53,8 @@ const http_action = async (api, param = {}, body = {}, req_type = 'POST') => {
 		delete param['_id']
 	}
 
-	let key_api = `${api}?${qs.stringify(param)}`
-	const body_md5 = btoa(qs.stringify(body))
+	let key_api = `${api}?${stringify(param)}`
+	const body_md5 = btoa(stringify(body))
 	const sum_body = `${key_api}bodymd5=${body_md5}`
 	const cache_name = 'cache_' + sum_body
 

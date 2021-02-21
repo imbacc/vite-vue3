@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
-import home from '@views/home.vue'
+import { registerModule } from '@/common/tools/cmake_lazy.js'
+import { LOCA_ROUTER, set_state, get_state } from '@/common/provide/lazy_state.js'
 
-let routes = [
+const routes = [
 	{
 		path: '/',
-		name: 'home',
-		component: home
+		component: () => import('@views/index.vue')
 	},
 	{
 		path: '/login',
@@ -14,14 +14,36 @@ let routes = [
 	}
 ]
 
-// vite 自动化导入模块
-const moduleFiles = import.meta.globEager('./module/*.js')
-Object.values(moduleFiles).forEach((module) => (routes = [...routes, ...module.default]))
-console.log('router modules=', routes)
-
 const router = createRouter({
-	history: createWebHashHistory(process.env.BASE_URL) || createWebHistory(process.env.BASE_URL),
+	history: createWebHashHistory() || createWebHistory(),
 	routes
 })
 
-export default router
+// vite自动导入
+const moduleArray = import.meta.glob('./module/*.js')
+
+/**
+ * 注册router
+ * @param {*} name: string | Array
+ */
+const registerRouter = (name) => {
+	return new Promise((resovle) => {
+		registerModule(name, moduleArray).then((res) => {
+			res.forEach((r) => {
+				let has = router.hasRoute(r.name) // 初始化加载过的不再重复加载
+				if (!has) router.addRoute(r)
+			})
+			set_state(LOCA_ROUTER, name)
+			resovle(router)
+		})
+	})
+}
+
+// 懒加载 加载过的router
+const initLzayRouter = () => {
+	const lazyState = get_state(LOCA_ROUTER)
+	if (lazyState && Array.isArray(lazyState) && lazyState.length > 0) return registerRouter(lazyState)
+	return Promise.resolve()
+}
+
+export { router, registerRouter, initLzayRouter }

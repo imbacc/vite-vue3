@@ -1,15 +1,19 @@
 import vue from '@vitejs/plugin-vue' // v2.0 核心现在与框架无关。现在通过提供Vue支持@vitejs/plugin-vue
 import { resolve } from 'path'
-import { viteMockServe } from 'vite-plugin-mock' // mock
+import envPlugin from './vite-plugin/vite-plugin-env'
 
 /**
  * @type {import('vite').UserConfig}
  */
 
-const vite_config = {
+const config = {
 	server: {
-		port: 3000
+		// port: 3000,
 		// host: '127.0.0.1',
+		// 压缩
+		// minify: 'esbuild'
+		// 热更新
+		hmr: { overlay: false }
 	},
 
 	// 输出路径
@@ -17,23 +21,28 @@ const vite_config = {
 
 	//编译
 	build: {
+		outDir: 'dist',
 		// 打包引入 输出
 		rollupOptions: {
 			format: 'commonjs'
-			//   external: ['vue']
-			//   output: {
-			//     globals: {
-			//       vue: 'Vue'
-			//     }
-			//   }
+			// external: ['vue']
+			// output: {
+			// 	globals: {
+			// 		vue: 'Vue'
+			// 	}
+			// }
 		},
 		// 生成生产map
-		sourcemap: false
+		sourcemap: false,
+		// 关闭brotliSize显示可以稍微缩短打包时间
+		brotliSize: false,
+		chunkSizeWarningLimit: 1200
 	},
 
 	//部门优化选项
 	optimizeDeps: {
-		// exclude: ['axios', 'qs', 'vue', 'vuex']
+		include: ['element-plus', 'mockjs', 'axios', 'qs', 'vuex']
+		// exclude: ['element-plus', 'mockjs', 'axios', 'qs', 'vuex']
 	},
 
 	// 别名包 必须以 / 开头、结尾
@@ -59,18 +68,7 @@ const vite_config = {
 	cssCodeSplit: true,
 
 	// 插件
-	plugins: [vue()]
-
-	// 代理
-	// proxy: {
-	// 	// '/foo': 'http://localhost:4567/foo',
-
-	// 	// '/api': {
-	// 	//   target: 'http://proxy.com',
-	// 	//   changeOrigin: true,
-	// 	//   rewrite: (path) => path.replace(/^\/api/, '')
-	// 	// }
-	// },
+	plugins: [vue(), envPlugin()]
 
 	// 要将一些共享的全局变量传递给所有的Less样式
 	// cssPreprocessOptions: {
@@ -83,15 +81,27 @@ const vite_config = {
 }
 
 export default ({ command, mode }) => {
+	const { VITE_USE_IMAGEMIN, VITE_USE_MOCK } = process.env
+
 	console.log('command=', command)
 	console.log('mode=', mode)
-	if (command === 'serve' && mode === 'development') {
-		// 开发环境配置
-		vite_config.server.port = 3000
-		vite_config.plugins.push(viteMockServe({ supportTs: false })) // 添加mock
-	} else {
+	if (command === 'build' && mode === 'production') {
 		// 编译环境配置
-		vite_config.server.port = 3333
+		const vitePluginImgmin = require('./vite-plugin/vite-plugin-imgmin')
+		const gzipPlugin = require('rollup-plugin-gzip')
+
+		//vite-plugin-imagemin
+		VITE_USE_IMAGEMIN && config.plugins.push(vitePluginImgmin())
+
+		// rollup-plugin-gzip
+		config.plugins.push(gzipPlugin())
+	} else {
+		// 开发环境配置
+		if (VITE_USE_MOCK || false) {
+			// vite-plugin-mock
+			const { viteMockServe } = require('vite-plugin-mock')
+			config.plugins.push(viteMockServe({ supportTs: false }))
+		}
 	}
-	return vite_config
+	return config
 }

@@ -12,7 +12,7 @@
 			"@common/*": ["src/common/*"],
 			"@styles/*": ["src/styles/*"]
 		},
-		"sourceMap": true,
+		"sourceMap": false,
 		"strict": true,
 		"types": ["vite/client"]
 	},

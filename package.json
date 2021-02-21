@@ -1,34 +1,35 @@
 {
-  "name": "vite2-vue3",
-  "version": "1.0.0",
-  "license": "ISC",
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development vite",
-    "debug": "vite --debug",
-    "build": "vite build --debug"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/imbacc/vite2-vue3.git"
-  },
-  "dependencies": {
-    "axios": "^0.20.0",
-    "mockjs": "^1.1.0",
-    "qs": "^6.9.4",
-    "vue": "^3.0.5",
-    "vue-router": "^4.0.3",
-    "vuex": "^4.0.0-rc.2"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^1.0.4",
-    "@vue/compiler-sfc": "^3.0.5",
-    "cross-env": "^7.0.3",
-    "eslint": "^7.18.0",
-    "eslint-config-prettier": "^7.2.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "prettier": "^2.2.1",
-    "sass": "^1.32.5",
-    "vite": "^2.0.0-beta.12",
-    "vite-plugin-mock": "^2.0.0-beta.3"
-  }
+	"name": "vite2-vue3",
+	"version": "1.0.0",
+	"license": "ISC",
+	"scripts": {
+		"dev": "cross-env NODE_ENV=development vite",
+		"debug": "cross-env NODE_ENV=development vite --debug",
+		"build": " cross-env NODE_ENV=production vite build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/imbacc/vite2-vue3.git"
+	},
+	"dependencies": {
+		"axios": "^0.20.0",
+		"mockjs": "^1.1.0",
+		"qs": "^6.9.4",
+		"vue": "^3.0.5",
+		"vue-router": "^4.0.3",
+		"vuex": "^4.0.0-rc.2"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-vue": "^1.0.4",
+		"@vue/compiler-sfc": "^3.0.5",
+		"cross-env": "^7.0.3",
+		"dotenv": "^8.2.0",
+		"eslint": "^7.18.0",
+		"eslint-config-prettier": "^7.2.0",
+		"eslint-plugin-prettier": "^3.3.1",
+		"prettier": "^2.2.1",
+		"sass": "^1.32.5",
+		"vite": "^2.0.0-beta.12",
+		"vite-plugin-mock": "^2.0.0-beta.3"
+	}
 }

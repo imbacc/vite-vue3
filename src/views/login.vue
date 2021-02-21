@@ -5,13 +5,17 @@
 
 <script setup>
 import { useStore } from 'vuex'
-import { getCurrentInstance } from 'vue'
-const { ctx } = getCurrentInstance() // ctx => vue2 vm
-const store = useStore()
+import { registerRouter } from '@/common/router/index.js'
+
+const { commit } = useStore()
 
 const login = () => {
-	store.commit('user_vuex/set_vuex', ['token', 'vue3 token'])
-	store.commit('user_vuex/set_vuex', ['user_info', { username: 'imbacc', password: 'vite2vue3' }])
-	ctx.$router.push('/')
+	commit('user_vuex/set_token', 'vue3 token')
+	commit('user_vuex/set_userInfo', { username: 'imbacc', password: 'vite2vue3' })
+	commit('user_vuex/set_vuex', ['is_login_page', false])
+
+	registerRouter(['init_module', 'action_module', 'test_module']).then((router) => {
+		router.replace({ path: '/' })
+	})
 }
 </script>

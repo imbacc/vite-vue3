@@ -2,11 +2,9 @@
 
 # 使用 vite2 构建 vue3
 
-vite2.0 https://vitejs.dev
-vue3.0 https://v3.cn.vuejs.org
+vite2.0 <https://vitejs.dev> vue3.0 <https://v3.cn.vuejs.org>
 
-`yarn install`
-`yarn dev or yarn debug`
+`yarn install` `yarn dev or yarn debug`
 
 ```
  ├── node_modules                      依赖包
@@ -29,16 +27,20 @@ vue3.0 https://v3.cn.vuejs.org
  │   │     │      ├── module           vuex模块配置
  │   │     │      ├── index.js         vuex配置入口
  │   │     ├── tools                   工具
- │   │     │      ├── cache_time.js    缓存数据时间设定
+ │   │     │      ├── cmake_cache.js   缓存数据时间设定
+ │   │     │      ├── cmake_lazy.js    懒加载js module
  │   │     │      ├── cmake_router.js  路由拦截
  │   │     │      ├── cmake_tools.js   自定义工具
- │   │     │      ├── http_action.js   请求封装
- │   │     │      ├── http_request.js  请求和响应拦截
+ │   │     │      ├── cmake_zintercept.js   请求封装
+ │   │     │      ├── cmake_zrequest.js     请求和响应拦截
  │   │     │── components              组件
  │   │     │── styles                  全局样式
  │   │     │── views                   页面入口
  │   │     │── App.vue                 app.vue
  │   │     │── main.js                 入口
+ ├── .env                        默认配置
+ ├── .env.development            开发配置
+ ├── .env.production             线上配置
  ├── package.json                依赖包及配置信息文件
  ├── vite.config.js              vite配置文件
 ```

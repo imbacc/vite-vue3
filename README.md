@@ -2,6 +2,8 @@
 
 # 使用 vite2 构建 vue3
 
+掘金文章 -> https://juejin.cn/post/6931614543999303694
+
 vite2.0 <https://vitejs.dev> vue3.0 <https://v3.cn.vuejs.org>
 
 `yarn install` `yarn dev or yarn debug`

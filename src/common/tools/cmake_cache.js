@@ -51,13 +51,29 @@ const get_cache = (key) => {
 	return false
 }
 
+// 删除缓存和记录缓存时间
 const del_cache = (key) => {
 	localStorage.removeItem(key)
 	localStorage.removeItem(key + '_time')
 }
 
+export const set_cache_loca = (key, val) => {
+	localStorage.setItem(key, JSON.stringify(val))
+}
+
+export const get_cache_loca = (key) => {
+	let loca = localStorage.getItem(key)
+	try {
+		return JSON.parse(loca)
+	} catch (err) {
+		return loca
+	}
+}
+
 export default {
 	set_cache,
 	get_cache,
-	del_cache
+	del_cache,
+	set_cache_loca,
+	get_cache_loca
 }

@@ -1,4 +1,5 @@
 <template>
+	<a href="javascript:history.back(-1)">返回上一页</a>
 	<div class="home">
 		<h1>obj: {{ obj.ddd }}</h1>
 		<h1>test count: {{ count }}</h1>

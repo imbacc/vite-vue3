@@ -28,10 +28,10 @@ const context = useContext()
 context.expose({
 	refClick() {
 		console.log('refclick...')
-		fetch('/api/user')
+		fetch('/api/index/ddd')
 			.then((res) => res.json())
 			.then((res) => {
-				console.log('/api/user', res)
+				console.log('/api/index/ddd', res)
 			})
 	}
 })

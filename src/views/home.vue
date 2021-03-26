@@ -1,4 +1,5 @@
 <template>
+	<a href="javascript:history.back(-1)">返回上一页</a>
 	<div class="home">
 		<img alt="Vue logo" src="src/assets/logo.png" />
 		<HelloWorld :msg="react.msg" @call="callClick" ref="hw_ref" />

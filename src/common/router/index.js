@@ -5,12 +5,26 @@ import { LOCA_ROUTER, set_state, get_state } from '@/common/provide/lazy_state.j
 const routes = [
 	{
 		path: '/',
-		component: () => import('@views/index.vue')
+		component: () => import('@views/index.vue'),
+		meta: {
+			// auth: ['user']
+			router: ['init_module', 'action_module', 'test_module']
+		}
 	},
 	{
 		path: '/login',
 		name: 'login',
 		component: () => import('@views/login.vue')
+	},
+	{
+		path: '/401',
+		name: '401',
+		component: () => import('@views/error-page/401.vue')
+	},
+	{
+		path: '/404',
+		name: '404',
+		component: () => import('@views/error-page/404.vue')
 	}
 ]
 

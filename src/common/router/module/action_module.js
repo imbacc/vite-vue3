@@ -2,6 +2,9 @@ export default [
 	{
 		path: '/action',
 		name: 'action',
-		component: () => import('@views/action.vue')
+		component: () => import('@views/action.vue'),
+		meta: {
+			auth: ['user']
+		}
 	}
 ]

@@ -6,11 +6,12 @@ import { router, initLzayRouter } from './common/tools/cmake_router.js'
 
 // 全局样式
 import './styles/index.scss'
+import 'nprogress/nprogress.css'
 
 const app = createApp(App)
 Promise.allSettled([initLzayStore(), initLzayRouter()]).then(() => {
-	app.use(router)
 	app.use(store)
+	app.use(router)
 	app.mount('#app')
 })
 

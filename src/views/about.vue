@@ -1,4 +1,5 @@
 <template>
+	<a href="javascript:history.back(-1)">返回上一页</a>
 	<div>
 		<button @click="register">点击我懒加载test_vuex copy_vuex模块 js</button>
 		<button @click="update_test">点我修改test_vuex copy_vuex模块 模块内容(需要先加载 test_vuex copy_vuex模块模块)</button>

@@ -1,4 +1,5 @@
 <template>
+	<a href="javascript:history.back(-1)">返回上一页</a>
 	<div>action</div>
 	<button @click="test_api_get_test">请求 test_api/get_test</button>
 	<button @click="test_api_get_test222">请求 test_api/get_test222</button>

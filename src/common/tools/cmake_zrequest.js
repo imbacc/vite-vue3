@@ -1,5 +1,5 @@
 import http_intercept from './cmake_zintercept.js' //拦截请求
-import is_cache from './cmake_cache.js' //缓存
+import { get_cache, set_cache, del_cache } from './cmake_cache.js' //缓存
 import { stringify } from 'qs'
 
 const get_args = (json = {}, cur = [1, 10]) => {
@@ -39,7 +39,7 @@ const http_action = async (api, param = {}, body = {}, req_type = 'POST') => {
 		delete param['_page']
 	}
 
-	if (param['_cache']) {
+	if (param['_cache'] || param['_cache'] === 0) {
 		cache_time = param['_cache']
 		delete param['_cache']
 	}
@@ -61,7 +61,7 @@ const http_action = async (api, param = {}, body = {}, req_type = 'POST') => {
 	if (key_api.length === key_api.lastIndexOf('?') + 1) key_api = key_api.substring(0, key_api.length - 1)
 
 	if (cache_time > 0) {
-		const cache = is_cache.get_cache(cache_name)
+		const cache = get_cache(cache_name)
 		console.log('cache service:' + api, cache)
 		if (cache) return cache
 	}
@@ -71,8 +71,8 @@ const http_action = async (api, param = {}, body = {}, req_type = 'POST') => {
 	return await is_http
 		.then((res) => {
 			if (res === false) return false
-			if (cache_time > 0 && res) is_cache.set_cache(cache_name, res, cache_time)
-			if (cache_time === 0 && res) is_cache.del_cache(cache_name)
+			if (cache_time > 0 && res) set_cache(cache_name, res, cache_time)
+			if (cache_time === 0 && res) del_cache(cache_name)
 			console.log('service:' + key_api, res)
 			return res || false
 		})

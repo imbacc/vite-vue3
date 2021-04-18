@@ -10,7 +10,7 @@
 
 <script setup>
 //setup 方式书写
-import HelloWorld from '@components/HelloWorld.vue'
+import HelloWorld from '@/components/HelloWorld.vue'
 // ref 要丢前面
 import { ref, reactive } from 'vue'
 const react = reactive({ msg: 'Welcome to Your vite2 + vue3' })

@@ -2,8 +2,9 @@
  * 拦截请求
  */
 import axios from 'axios'
+import { env } from '@common/config/cfg.js'
 
-const BASE_API = import.meta.env.VITE_GLOB_API_URL
+const BASE_API = env.VITE_GLOB_API_URL
 const http = axios.create({
 	baseURL: BASE_API, // url = base url + request url
 	timeout: 9000

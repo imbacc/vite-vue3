@@ -41,7 +41,7 @@ const config = {
 
 	//部门优化选项
 	optimizeDeps: {
-		include: ['element-plus', 'mockjs', 'axios', 'qs', 'vuex']
+		include: ['mockjs', 'axios', 'qs-stringify', 'nprogress', 'vue-router', 'vuex']
 		// exclude: ['element-plus', 'mockjs', 'axios', 'qs', 'vuex']
 	},
 

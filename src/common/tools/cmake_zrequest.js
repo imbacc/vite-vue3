@@ -1,6 +1,6 @@
 import http_intercept from './cmake_zintercept.js' //拦截请求
 import { get_cache, set_cache, del_cache } from './cmake_cache.js' //缓存
-import { stringify } from 'qs'
+import stringify from 'qs-stringify'
 
 const get_args = (json = {}, cur = [1, 10]) => {
 	cur[0] <= 0 ? (cur[0] = 1) : false

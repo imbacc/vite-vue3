@@ -4,6 +4,9 @@ import App from './App.vue'
 import { store, initLzayStore } from './common/store/index.js'
 import { router, initLzayRouter } from './common/tools/cmake_router.js'
 
+// js
+import { env, is_cdn } from '@common/config/cfg.js'
+
 // 全局样式
 import './styles/index.scss'
 import 'nprogress/nprogress.css'
@@ -15,10 +18,10 @@ Promise.allSettled([initLzayStore(), initLzayRouter()]).then(() => {
 	app.mount('#app')
 })
 
-console.log('import.meta.env', import.meta.env)
+console.log('import.meta.env', env)
 
 // 全局 property
-app.config.globalProperties.is_cdn = 'https://www.baidu.com/static/img/'
+app.config.globalProperties.is_cdn = is_cdn
 
 // dev工具
 app.config.devtools = true

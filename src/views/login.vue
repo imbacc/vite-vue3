@@ -4,6 +4,7 @@
 </template>
 
 <script setup>
+//setup 方式书写 实验阶段正式环境不建议
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 

@@ -9,6 +9,7 @@ for (const k in envConfig) {
 }
 
 const createProxy = (list = []) => {
+	if (typeof list === 'string') list = JSON.parse(list)
 	const ret = {}
 	for (const [prefix, target] of list) {
 		ret[prefix] = {

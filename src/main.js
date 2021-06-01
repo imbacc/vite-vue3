@@ -5,7 +5,7 @@ import { store, initLzayStore } from './common/store/index.js'
 import { router, initLzayRouter } from './common/tools/cmake_router.js'
 
 // js
-import { env, is_cdn } from '@common/config/cfg.js'
+import { env, is_cdn } from './common/config/cfg.js'
 
 // 全局样式
 import './styles/index.scss'
@@ -22,6 +22,7 @@ console.log('import.meta.env', env)
 
 // 全局 property
 app.config.globalProperties.is_cdn = is_cdn
+// app.config.globalProperties.is_app = app
 
 // dev工具
 app.config.devtools = true

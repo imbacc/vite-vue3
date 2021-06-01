@@ -4,6 +4,7 @@ import { LOCA_STORE, set_state, get_state } from '@/common/provide/lazy_state.js
 
 import user_vuex from './module/user_vuex.js' // 初始化 user_vuex
 
+// 也可以弃用store,利用reactive特性来实现全局状态管理
 const store = createStore({
 	state: {
 		title: 'i am title'

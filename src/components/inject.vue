@@ -5,36 +5,21 @@
 	</div>
 </template>
 
-<script setup>
-//setup 方式书写
-import { watchEffect, defineProps } from 'vue'
+<script>
+import { watchEffect, defineComponent } from 'vue'
 import { useState } from '../common/provide/num.js'
 
-defineProps({ msg: String })
-const numObj = useState()
-watchEffect(() => console.log(`watchEffect num: ${numObj.num}`))
+export default defineComponent({
+	props: {
+		msg: String
+	},
+	setup() {
+		const numObj = useState()
+		watchEffect(() => console.log(`watchEffect num: ${numObj.num}`))
 
-// vue3 setup(props, context) 书写
-// 	import { watchEffect } from 'vue'
-
-// 	import { useState } from '../common/provide/num.js'
-
-// 	export default {
-// 	  props: {
-// 		msg: String
-// 	  },
-// 	  setup(aa,bb){
-// 		  const numObj = useState()
-
-// 		  watchEffect(() => {
-// 		    console.log(`watchEffect set num: ${numObj.num}`)
-// 		  })
-
-// 		  return {
-// 			  numObj
-// 		  }
-// 	  }
-// 	}
-//
-//
+		return {
+			numObj
+		}
+	}
+})
 </script>

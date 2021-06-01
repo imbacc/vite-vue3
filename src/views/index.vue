@@ -14,12 +14,19 @@
 	</div>
 </template>
 
-<script setup>
+<script>
 import { useStore } from 'vuex'
 
-const { commit } = useStore()
-const auth = () => {
-	commit('user_vuex/set_role', ['user']) // 添加user权限
-	alert('授权完成,看缓存')
+export default {
+	setup() {
+		const { commit } = useStore()
+
+		const auth = () => {
+			commit('user_vuex/set_role', ['user']) // 添加user权限
+			alert('授权完成,看缓存')
+		}
+
+		return { auth }
+	}
 }
 </script>

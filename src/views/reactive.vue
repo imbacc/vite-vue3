@@ -30,7 +30,8 @@ import {
 } from 'vue'
 
 import { provideState, numObj, numAddFun } from '../common/provide/num.js'
-import inject from '../components/inject.vue'
+
+import inject from '@/components/inject.vue'
 
 export default {
 	components: {

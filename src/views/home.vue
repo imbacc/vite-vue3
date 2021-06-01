@@ -2,26 +2,46 @@
 	<a href="javascript:history.back(-1)">返回上一页</a>
 	<div class="home">
 		<img alt="Vue logo" src="src/assets/logo.png" />
-		<HelloWorld :msg="react.msg" @call="callClick" ref="hw_ref" />
+		<HelloWorld :msg="msg" @call="callClick" ref="childRef" />
 		<button @click="callClick('ref 操作 HelloWorld')">ref 操作 HelloWorld</button>
 		--------------------------------------------
 	</div>
 </template>
 
-<script setup>
-//setup 方式书写
-import HelloWorld from '@/components/HelloWorld.vue'
-// ref 要丢前面
-import { ref, reactive } from 'vue'
-const react = reactive({ msg: 'Welcome to Your vite2 + vue3' })
-const hw_ref = ref(null) // 直接映射到ref相同名字
+<script>
+import { reactive, toRefs, ref } from 'vue'
 
-const callClick = (e) => {
-	console.log('callClick hhhhhhhhhh')
-	if (e) {
-		console.log('hw_ref=', hw_ref)
-		hw_ref.value.refClick()
-		react.msg = e
+import HelloWorld from '@/components/HelloWorld.vue'
+
+export default {
+	components: {
+		HelloWorld
+	},
+	setup() {
+		// ---reactive---
+		const data = reactive({ ddd: 'ddd', msg: 'Welcome to Your vite2 + vue3' })
+
+		// ---ref---
+		const childRef = ref()
+
+		// ---function---
+		const callClick = (e) => {
+			console.log('callClick hhhhhhhhhh')
+			if (e) {
+				console.log('childRef=', childRef)
+				childRef.value.refClick()
+				data.msg = e
+			}
+		}
+
+		return {
+			// ---reactive---
+			...toRefs(data),
+			// ---ref---
+			childRef,
+			// ---function---
+			callClick
+		}
 	}
 }
 </script>

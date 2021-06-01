@@ -7,6 +7,9 @@ export default [
 	{
 		path: '/about',
 		name: 'about',
-		component: () => import('@views/about.vue')
+		component: () => import('@views/about.vue'),
+		meta: {
+			store: ['test_vuex', 'copy_vuex']
+		}
 	}
 ]

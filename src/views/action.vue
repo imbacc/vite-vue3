@@ -16,6 +16,7 @@
 </template>
 
 <script setup>
+//setup 方式书写 实验阶段正式环境不建议
 import api from '@/common/config/api.js'
 
 // api('https://www.baidu.com', { _onec: true, wd: 'vite2vue3' }, {}, 'GET') // 外链请求

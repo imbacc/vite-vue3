@@ -45,7 +45,22 @@ const config = {
 		// exclude: ['element-plus', 'mockjs', 'axios', 'qs', 'vuex']
 	},
 
-	// 别名包 必须以 / 开头、结尾
+	// 别名包 resolve
+	resolve: {
+		alias: {
+			// v2.0不再需要/开始/结束斜杠。 /@/ -> @
+			// '/@': root, vite 内部在用，这里不能用了
+			// '/root': __dirname, vite 内部在用，这里不能用了
+			'@': resolve(__dirname, 'src'),
+			'@assets': resolve(__dirname, 'src/assets'),
+			'@components': resolve(__dirname, 'src/components'),
+			'@views': resolve(__dirname, 'src/views'),
+			'@common': resolve(__dirname, 'src/common'),
+			'@styles': resolve(__dirname, 'src/styles')
+		}
+	},
+
+	// 别名包 踏马的npm和yarn不一样
 	alias: {
 		// v2.0不再需要/开始/结束斜杠。 /@/ -> @
 		// '/@': root, vite 内部在用，这里不能用了
@@ -97,11 +112,12 @@ export default ({ command, mode }) => {
 		config.plugins.push(gzipPlugin())
 	} else {
 		// 开发环境配置
-		if (VITE_USE_MOCK || false) {
+		if (VITE_USE_MOCK === true || VITE_USE_MOCK === 'true') {
 			// vite-plugin-mock
 			const { viteMockServe } = require('vite-plugin-mock')
 			config.plugins.push(viteMockServe({ supportTs: false }))
 		}
 	}
+	// console.log('config=', config)
 	return config
 }

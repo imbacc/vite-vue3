@@ -8,6 +8,10 @@ vite2.0 <https://vitejs.dev> vue3.0 <https://v3.cn.vuejs.org>
 
 `yarn install` `yarn dev or yarn debug` `建议使用yarn`
 
+`yarn run force` `清除node_module缓存依赖...`
+`yarn run debug` `开启debug显示相关debug信息...`
+`yarn run serve` `生成线上版本预览...`
+
 ```
  ├── node_modules                      依赖包
  ├── mock                              mock

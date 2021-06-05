@@ -1,15 +1,15 @@
 <template>
-	<p><button @click="register">这个按钮是懒加载test_vuex copy_vuex模块 js代码</button></p>
 	<a href="javascript:history.back(-1)">返回上一页</a>
+	<p></p>
 	<div>
 		<button @click="update_test">点我修改test_vuex copy_vuex模块 模块内容(需要先加载 test_vuex copy_vuex模块模块)</button>
-		<img src="src/assets/logo.png" />
 		<h1>我是test_vuex的state内容 {{ test }}</h1>
 		<h1>我是copy_vuex的state内容 {{ name }}</h1>
 		<hr />
 		<h1>{{ title }}</h1>
 		<button @click="update">更新标题</button>
 	</div>
+	<p><button @click="register">这个按钮是懒加载test_vuex copy_vuex模块 js代码</button></p>
 </template>
 
 <script>

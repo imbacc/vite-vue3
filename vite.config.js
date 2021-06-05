@@ -1,6 +1,15 @@
 import vue from '@vitejs/plugin-vue' // v2.0 核心现在与框架无关。现在通过提供Vue支持@vitejs/plugin-vue
 import { resolve } from 'path'
-import envPlugin from './vite-plugin/vite-plugin-env'
+
+// plugin
+import envPlugin from './vite-plugin/vite-plugin-env.js' // env 环境
+import gzipPlugin from 'rollup-plugin-gzip' //Gzip
+import { viteMockServe } from 'vite-plugin-mock' // mock
+import componentsPlugin from './vite-plugin/vite-plugin-components.js' // Vite 的按需组件自动导入
+import ViteIcons from 'vite-plugin-icons' // icon 按需引入
+import RemoteAssets from 'vite-plugin-remote-assets' // 远程图片地址转换成本地地址 http://example.com/image.jpg -> /node_modules/.remote-assets/f83j2f.jpg
+import windicssPlugin from 'vite-plugin-windicss' // 自动导入路由 需要可以用
+// import routerPages from 'vite-plugin-pages'	// 自动导入路由 需要可以用
 
 /**
  * @type {import('vite').UserConfig}
@@ -41,7 +50,9 @@ const config = {
 
 	//部门优化选项
 	optimizeDeps: {
-		include: ['mockjs', 'axios', 'qs-stringify', 'nprogress', 'vue-router', 'vuex']
+		// include: ['mockjs', 'axios', 'qs-stringify', 'nprogress', 'vue-router', 'vuex']
+		include: ['nprogress', 'qs-stringify', 'axios', 'vuex'],
+		exclude: ['element-plus', 'screenfull', 'nprogress']
 		// exclude: ['element-plus', 'mockjs', 'axios', 'qs', 'vuex']
 	},
 
@@ -83,7 +94,7 @@ const config = {
 	cssCodeSplit: true,
 
 	// 插件
-	plugins: [vue(), envPlugin()]
+	plugins: [vue(), envPlugin(), componentsPlugin(), ViteIcons(), windicssPlugin()]
 
 	// 要将一些共享的全局变量传递给所有的Less样式
 	// cssPreprocessOptions: {
@@ -96,28 +107,19 @@ const config = {
 }
 
 export default ({ command, mode }) => {
-	const { VITE_USE_IMAGEMIN, VITE_USE_MOCK } = process.env
-
+	const { VITE_USE_MOCK, VITE_BUILD_GZIP, VITE_REMOTE_ASSETS } = process.env
 	console.log('command=', command)
 	console.log('mode=', mode)
+
 	if (command === 'build' && mode === 'production') {
 		// 编译环境配置
-		const vitePluginImgmin = require('./vite-plugin/vite-plugin-imgmin')
-		const gzipPlugin = require('rollup-plugin-gzip')
-
-		//vite-plugin-imagemin
-		VITE_USE_IMAGEMIN && config.plugins.push(vitePluginImgmin())
-
-		// rollup-plugin-gzip
-		config.plugins.push(gzipPlugin())
+		// Gzip
+		if (VITE_REMOTE_ASSETS) config.plugins.push(RemoteAssets())
+		if (VITE_BUILD_GZIP) config.plugins.push(gzipPlugin())
 	} else {
 		// 开发环境配置
-		if (VITE_USE_MOCK === true || VITE_USE_MOCK === 'true') {
-			// vite-plugin-mock
-			const { viteMockServe } = require('vite-plugin-mock')
-			config.plugins.push(viteMockServe({ supportTs: false }))
-		}
+		// vite-plugin-mock
+		if (VITE_USE_MOCK) config.plugins.push(viteMockServe({ supportTs: false }))
 	}
-	// console.log('config=', config)
 	return config
 }

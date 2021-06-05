@@ -11,12 +11,7 @@
 <script>
 import { reactive, toRefs, ref } from 'vue'
 
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-	components: {
-		HelloWorld
-	},
 	setup() {
 		// ---reactive---
 		const data = reactive({ ddd: 'ddd', msg: 'Welcome to Your vite2 + vue3' })

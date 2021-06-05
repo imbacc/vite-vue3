@@ -29,14 +29,9 @@ import {
 	onErrorCaptured
 } from 'vue'
 
-import { provideState, numObj, numAddFun } from '../common/provide/num.js'
-
-import inject from '@/components/inject.vue'
+import { provideState, numObj, numAddFun } from '@common/provide/num.js'
 
 export default {
-	components: {
-		inject
-	},
 	setup() {
 		//data
 		const count = ref(0)

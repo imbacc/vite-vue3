@@ -26,8 +26,20 @@ http.interceptors.request.use(
 			record[config.url] = true
 		}
 
-		let token = localStorage.getItem('token') || false
-		if (token) config.headers['Authorization'] = ''
+		if (config.data._noToken) {
+			delete config.data['_noToken']
+			delete config.header['x-access-token']
+		}
+		
+		if (config.data._formData) {
+			config.header['content-Type'] = 'application/x-www-form-urlencoded'
+			delete config.data['_formData']
+		}
+		
+		if (config.data._header) {
+			config.header = { ...config.header, ...config.data._header }
+			delete config.data['_header']
+		}
 
 		// console.log("【config】 " + JSON.stringify(config))
 
@@ -46,6 +58,7 @@ http.interceptors.response.use(
 
 		if (response.status === 401) {
 			// removeToken
+			localStorage.clear()
 			window.location = '/login'
 			return
 		}

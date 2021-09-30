@@ -1,0 +1,20 @@
+/* 按以下格式 */
+.mb10 {
+	margin-bottom: 10px;
+}
+
+.ml10 {
+	margin-left: 10px;
+}
+
+.mt20 {
+	margin-top: 20px;
+}
+
+.w500 {
+	width: 500px;
+}
+
+.w100b {
+	width: 100% !important;
+}

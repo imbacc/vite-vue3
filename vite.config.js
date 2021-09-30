@@ -52,23 +52,7 @@ const config = {
 	optimizeDeps: {
 		// include: ['mockjs', 'axios', 'qs-stringify', 'nprogress', 'vue-router', 'vuex']
 		include: ['nprogress', 'qs-stringify', 'axios', 'vuex'],
-		exclude: ['element-plus', 'screenfull', 'nprogress']
-		// exclude: ['element-plus', 'mockjs', 'axios', 'qs', 'vuex']
-	},
-
-	// 别名包 resolve
-	resolve: {
-		alias: {
-			// v2.0不再需要/开始/结束斜杠。 /@/ -> @
-			// '/@': root, vite 内部在用，这里不能用了
-			// '/root': __dirname, vite 内部在用，这里不能用了
-			'@': resolve(__dirname, 'src'),
-			'@assets': resolve(__dirname, 'src/assets'),
-			'@components': resolve(__dirname, 'src/components'),
-			'@views': resolve(__dirname, 'src/views'),
-			'@common': resolve(__dirname, 'src/common'),
-			'@styles': resolve(__dirname, 'src/styles')
-		}
+		exclude: ['screenfull', 'nprogress']
 	},
 
 	// 别名包 踏马的npm和yarn不一样

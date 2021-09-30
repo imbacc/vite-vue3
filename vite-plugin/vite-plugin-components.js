@@ -13,6 +13,6 @@ export default () => {
 		dirs: ['src/components'], // 搜索路径
 		customComponentResolvers: [ViteIconsResolver()], // 解析器 -> element plus ui解析
 		extensions: ['vue'], // 组件的有效文件扩展名。
-		deep: false // 搜索子目录
+		deep: true // 搜索子目录
 	})
 }

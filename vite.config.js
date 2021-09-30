@@ -50,12 +50,10 @@ const config = {
 
 	//部门优化选项
 	optimizeDeps: {
-		// include: ['mockjs', 'axios', 'qs-stringify', 'nprogress', 'vue-router', 'vuex']
 		include: ['nprogress', 'qs-stringify', 'axios', 'vuex'],
 		exclude: ['screenfull', 'nprogress']
 	},
 
-	// 别名包 踏马的npm和yarn不一样
 	alias: {
 		// v2.0不再需要/开始/结束斜杠。 /@/ -> @
 		// '/@': root, vite 内部在用，这里不能用了

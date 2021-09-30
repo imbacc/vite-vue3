@@ -5,7 +5,7 @@ import { store, initLzayStore } from '@/common/store/index.js'
 import { router, initLzayRouter } from '@/common/tools/cmake_router.js'
 
 // js
-import { env, is_cdn } from '@/common/config/cfg.js'
+import { env, is_cdn, is_dev } from '@/common/config/cfg.js'
 
 // 全局样式
 import 'nprogress/nprogress.css'
@@ -24,7 +24,7 @@ console.log('import.meta.env', env)
 app.config.globalProperties.is_cdn = is_cdn
 
 // dev工具
-app.config.devtools = true
+app.config.devtools = is_dev
 
 // 处理错误
 // app.config.errorHandler = (err, vm, info) => {

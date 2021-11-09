@@ -3,12 +3,11 @@
  * @param {*} fileName 文件名
  * @param {*} moduleFiles module文件夹下的*.js集合
  */
-const lazyModule = (fileName, moduleFiles) => {
+ const lazyModule = (fileName, moduleFiles, type = 'js') => {
 	return new Promise((resolve) => {
-		let name = `./module/${fileName}.js`
+		let name = `./module/${fileName}.${type}`
 		let module = moduleFiles[name]
 		if (module && typeof module === 'function') {
-			// 加载完替换懒加载函数 下次直接使用不再加载
 			module().then((res) => resolve(res.default))
 		} else {
 			resolve(module && typeof module === 'object' ? module : false)
@@ -21,7 +20,7 @@ const lazyModule = (fileName, moduleFiles) => {
  * @param {*} registerName 注册名称
  * @param {*} lazyName: string | Array 文件名称 懒加载文件名
  */
-const registerModule = (lazyName, lazyArray) => {
+const registerModule = (lazyName, lazyArray, type = 'js') => {
 	// console.log('lazyName', lazyName)
 	// console.log('lazyArray', lazyArray)
 	return new Promise((resolve) => {
@@ -41,7 +40,7 @@ const registerModule = (lazyName, lazyArray) => {
 				}
 			})
 		} else {
-			lazyModule(lazyName, lazyArray).then((res) => resolve(res))
+			lazyModule(lazyName, lazyArray, type).then((res) => resolve(res))
 		}
 	})
 }

@@ -4,7 +4,7 @@
 		"module": "commonjs",
 		"baseUrl": "./",
 		"paths": {
-			//用vite配置 alias
+			//用vite配置 alias 你有feelstyle吗?
 			"@/*": ["src/*"],
 			"@assets/*": ["src/assets/*"],
 			"@components/*": ["src/components/*"],

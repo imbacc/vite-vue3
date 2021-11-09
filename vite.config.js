@@ -7,9 +7,10 @@ import gzipPlugin from 'rollup-plugin-gzip' //Gzip
 import { viteMockServe } from 'vite-plugin-mock' // mock
 import componentsPlugin from './vite-plugin/vite-plugin-components.js' // Vite 的按需组件自动导入
 import ViteIcons from 'vite-plugin-icons' // icon 按需引入
-import RemoteAssets from 'vite-plugin-remote-assets' // 远程图片地址转换成本地地址 http://example.com/image.jpg -> /node_modules/.remote-assets/f83j2f.jpg
-import windicssPlugin from 'vite-plugin-windicss' // 自动导入路由 需要可以用
+// import RemoteAssets from 'vite-plugin-remote-assets' // 远程图片地址转换成本地地址 http://example.com/image.jpg -> /node_modules/.remote-assets/f83j2f.jpg
+// import windicssPlugin from 'vite-plugin-windicss' // 自动导入路由 需要可以用
 // import routerPages from 'vite-plugin-pages'	// 自动导入路由 需要可以用
+import viteCompression from 'vite-plugin-compression'
 
 /**
  * @type {import('vite').UserConfig}
@@ -17,11 +18,8 @@ import windicssPlugin from 'vite-plugin-windicss' // 自动导入路由 需要�
 
 const config = {
 	server: {
-		// port: 3000,
-		// host: '127.0.0.1',
-		// 压缩
-		// minify: 'esbuild'
-		// 热更新
+		// minify: 'esbuild',
+		// open: '/',
 		hmr: { overlay: false }
 	},
 
@@ -30,44 +28,59 @@ const config = {
 
 	//编译
 	build: {
+		target: 'modules',
+		cssCodeSplit: true,
 		outDir: 'dist',
-		// 打包引入 输出
-		rollupOptions: {
-			format: 'commonjs'
-			// external: ['vue']
-			// output: {
-			// 	globals: {
-			// 		vue: 'Vue'
-			// 	}
-			// }
-		},
+		assetsDir: 'assets',
 		// 生成生产map
 		sourcemap: false,
 		// 关闭brotliSize显示可以稍微缩短打包时间
 		brotliSize: false,
-		chunkSizeWarningLimit: 1200
+		// chunk 大小警告的限制
+		chunkSizeWarningLimit: 500,
+		// 小于此数字（以字节为单位）的静态资产文件将内联为 base64字符串。默认限制为“4096”（4kb）。设置为“0”以禁用。
+		assetsInlineLimit: 4096,
+		// 是否对CSS进行代码拆分。启用时，异步块中的CSS将在块中作为字符串内联，并通过动态创建的加载块时的样式标记。
+		// 打包引入 输出
+		rollupOptions: {
+			format: 'commonjs',
+			// external: ['vue'],
+			output: {
+				// chunks 做操作 注释将减少分割
+				manualChunks(id) {
+					if (id.includes('node_modules')) {
+						return id.toString().split('node_modules/')[1].split('/')[0].toString()
+					}
+				}
+				// globals: {
+				// 	vue: 'Vue'
+				// }
+			}
+		}
 	},
 
 	//部门优化选项
 	optimizeDeps: {
-		include: ['nprogress', 'qs-stringify', 'axios', 'vuex'],
-		exclude: ['screenfull', 'nprogress']
+		include: ['nprogress', 'qs-stringify', 'axios', 'vuex']
+		// exclude: ['screenfull', 'nprogress']
 	},
 
-	alias: {
-		// v2.0不再需要/开始/结束斜杠。 /@/ -> @
-		// '/@': root, vite 内部在用，这里不能用了
-		// '/root': __dirname, vite 内部在用，这里不能用了
-		'@': resolve(__dirname, 'src'),
-		'@assets': resolve(__dirname, 'src/assets'),
-		'@components': resolve(__dirname, 'src/components'),
-		'@views': resolve(__dirname, 'src/views'),
-		'@common': resolve(__dirname, 'src/common'),
-		'@styles': resolve(__dirname, 'src/styles')
+	resolve: {
+		alias: {
+			// v2.0不再需要/开始/结束斜杠。 /@/ -> @
+			// '/@': root, vite 内部在用，这里不能用了
+			// '/root': __dirname, vite 内部在用，这里不能用了
+			'@': resolve(__dirname, 'src'),
+			'@assets': resolve(__dirname, 'src/assets'),
+			'@components': resolve(__dirname, 'src/components'),
+			'@views': resolve(__dirname, 'src/views'),
+			'@common': resolve(__dirname, 'src/common'),
+			'@styles': resolve(__dirname, 'src/styles')
+		}
 	},
 
 	// 资源路径
-	assetsDir: 'assets',
+	// assetsDir: 'assets',
 
 	// 小于此数字（以字节为单位）的静态资产文件将内联为 base64字符串。默认限制为“4096”（4kb）。设置为“0”以禁用。
 	assetsInlineLimit: 4096,
@@ -76,16 +89,22 @@ const config = {
 	cssCodeSplit: true,
 
 	// 插件
-	plugins: [vue(), envPlugin(), componentsPlugin(), ViteIcons(), windicssPlugin()]
+	plugins: [
+		vue(),
+		envPlugin(),
+		componentsPlugin(),
+		ViteIcons()
+		// windicssPlugin()
+	],
 
 	// 要将一些共享的全局变量传递给所有的Less样式
-	// cssPreprocessOptions: {
-	//     less: {
-	//       modifyVars: {
-	//         'preprocess-custom-color': 'green'
-	//       }
-	//     }
-	//   }
+	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: `@use "@styles/global.scss" as *;`
+			}
+		}
+	}
 }
 
 export default ({ command, mode }) => {
@@ -96,7 +115,7 @@ export default ({ command, mode }) => {
 	if (command === 'build' && mode === 'production') {
 		// 编译环境配置
 		// Gzip
-		if (VITE_REMOTE_ASSETS) config.plugins.push(RemoteAssets())
+		// if (VITE_REMOTE_ASSETS) config.plugins.push(RemoteAssets())
 		if (VITE_BUILD_GZIP) config.plugins.push(gzipPlugin())
 	} else {
 		// 开发环境配置

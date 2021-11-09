@@ -8,7 +8,7 @@ configure({ showSpinner: false })
 // 跳过
 const jump_list = ['/ddd']
 //检查权限
-const user_role = () => [...store.state.user_vuex.user_role]
+const user_role = () => store.state.user_vuex.user_role
 // 检查登录
 const check_login = () => store.state.user_vuex.token
 // 懒加载状态
@@ -51,15 +51,14 @@ const router_lazy = (meta_router, next) => {
 // ...前置守卫
 router.beforeEach(({ path, matched, fullPath }, from, next) => {
 	start()
-	if (path === '/login' || jump_list.includes(path)) {
+	if (path === '/login') {
 		next()
-		done()
 		return
 	}
 
-	if (!check_login()) {
+	const ignore = jump_list.includes(path)
+	if (!ignore && !check_login()) {
 		next('/login')
-		done()
 		return
 	}
 
@@ -75,7 +74,7 @@ router.beforeEach(({ path, matched, fullPath }, from, next) => {
 		const auth_some = meta_auth.some((min) => user_role().includes(min))
 		console.log('auth_some', auth_some)
 		if (!auth_some) {
-			console.log('没有权限!')
+			console.error('没有权限!')
 			next('/401')
 			return
 		}

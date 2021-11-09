@@ -1,5 +1,6 @@
 import action from '@/common/tools/cmake_zrequest.js'
 import { lazyModule } from '@/common/tools/cmake_lazy.js'
+import { METHOD } from './cfg.js'
 
 // 公共api
 const api = {
@@ -8,10 +9,11 @@ const api = {
 	app_222: 'index/:id/fff', // 在param传入 _id 即可
 
 	// 定义API [地址,请求类型,缓存时间] 缓存时间默认0
-	app_333: ['index/ddd/:id', 'GET'],
-	app_444: ['index/www', 'GET', 10],
-	app_555: ['index/eee', 'POST', 20],
-	app_666: ['index/qqq/:id/update', 'POST'] // 修改或删除 不要定义缓存时间
+	app_333: ['index/ddd/:id', METHOD.GET],
+	app_444: ['index/www', METHOD.GET, 10],
+	app_555: ['index/eee', METHOD.POST, 20],
+	app_666: ['index/qqq/:id/update', METHOD.POST], // 修改或删除 不要定义缓存时间
+	error: ['error', METHOD.POST] // 试错请求 没有配置mock
 }
 
 // vite 自动化导入模块
@@ -27,8 +29,7 @@ export default (name, ...args) => {
 		let [fileName, apiName] = name.split('/')
 		return new Promise((resolve) => {
 			lazyModule(fileName, moduleFiles).then((moduleApi) => {
-				let actionApi = moduleApi[apiName]
-				resolve(actionApi && action(actionApi, ...args))
+				resolve(action(moduleApi[apiName], ...args))
 			})
 		})
 	}

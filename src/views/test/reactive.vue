@@ -14,89 +14,92 @@
 </template>
 
 <script>
-import {
-	ref,
-	reactive,
-	computed,
-	watch,
-	getCurrentInstance,
-	onBeforeMount,
-	onMounted,
-	onBeforeUpdate,
-	onUpdated,
-	onBeforeUnmount,
-	onUnmounted,
-	onErrorCaptured
-} from 'vue'
+	import {
+		ref,
+		reactive,
+		computed,
+		watch,
+		getCurrentInstance,
+		onBeforeMount,
+		onMounted,
+		onBeforeUpdate,
+		onUpdated,
+		onBeforeUnmount,
+		onUnmounted,
+		onErrorCaptured
+	} from 'vue'
+	import { useRouter } from 'vue-router'
 
-import { provideState, numObj, numAddFun } from '@common/provide/num.js'
+	import { provideState, numObj, numAddFun } from '@common/provide/num.js'
 
-export default {
-	setup() {
-		//data
-		const count = ref(0)
+	export default {
+		setup() {
+			const count = ref(0)
 
-		// provide
-		provideState()
+			const { currentRoute } = useRouter()
 
-		//响应式属性
-		const obj = reactive({ ddd: '1111' })
+			// provide
+			provideState()
 
-		//computed
-		const two_count = computed(() => count.value * 2)
+			//响应式属性
+			const obj = reactive({ ddd: '1111' })
 
-		//watch
-		watch(
-			() => count.value,
-			(val) => console.log(`count is ${val}`)
-		)
+			// computed
+			const two_count = computed(() => count.value * 2)
 
-		const { ctx } = getCurrentInstance()
-		console.log(ctx.$router.currentRoute.value)
+			// watch
+			watch(
+				() => count.value,
+				(val) => console.log(`count is ${val}`)
+			)
 
-		//methods
-		const add = () => count.value++
-		const add_provide = () => {
-			numAddFun()
-			console.log('provide numobj =', numObj.num)
-		}
+			const { ctx } = getCurrentInstance()
+			console.log('ctx', ctx)
+			console.log('currentRoute=', currentRoute.value)
 
-		onBeforeMount(() => {
-			console.log('渲染前...')
-		})
+			// function
+			const add = () => count.value++
+			const add_provide = () => {
+				numAddFun()
+				console.log('provide numobj =', numObj.num)
+			}
 
-		onMounted(() => {
-			console.log('渲染时...')
-		})
+			onBeforeMount(() => {
+				console.log('渲染前...')
+			})
 
-		onBeforeUpdate(() => {
-			console.log('更新前...')
-		})
+			onMounted(() => {
+				console.log('渲染时...')
+			})
 
-		onUpdated(() => {
-			console.log('更新时...')
-		})
+			onBeforeUpdate(() => {
+				console.log('更新前...')
+			})
 
-		onBeforeUnmount(() => {
-			console.log('销毁前...')
-		})
+			onUpdated(() => {
+				console.log('更新时...')
+			})
 
-		onUnmounted(() => {
-			console.log('销毁时...')
-		})
+			onBeforeUnmount(() => {
+				console.log('销毁前...')
+			})
 
-		onErrorCaptured(() => {
-			console.log('错误捕获...')
-		})
+			onUnmounted(() => {
+				console.log('销毁时...')
+			})
 
-		return {
-			obj,
-			count,
-			two_count,
-			add,
-			add_provide,
-			numObj
+			onErrorCaptured(() => {
+				console.log('错误捕获...')
+			})
+
+			return {
+				obj,
+				count,
+				two_count,
+				add,
+				add_provide,
+				numObj
+			}
 		}
 	}
-}
 </script>

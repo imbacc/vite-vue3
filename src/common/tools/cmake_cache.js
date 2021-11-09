@@ -52,19 +52,22 @@ const get_cache = (key) => {
 }
 
 // 删除缓存和记录缓存时间
-const del_cache = (key) => {
+const del_cache = async (key) => {
 	localStorage.removeItem(key)
 	localStorage.removeItem(key + '_time')
 }
 
-const set_cache_loca = (key, val) => {
-	localStorage.setItem(key, JSON.stringify(val))
+// 持久化设置值
+const set_cache_loca = async (key, val) => {
+	localStorage.setItem(key, typeof val === 'object' ? JSON.stringify(val) : val)
 }
 
+// 持久化获取值
 const get_cache_loca = (key) => {
 	let loca = localStorage.getItem(key)
 	try {
-		return JSON.parse(loca)
+		if (~loca.toString().indexOf('{') || ~loca.toString().indexOf('[')) return JSON.parse(loca)
+		return loca
 	} catch (err) {
 		return loca
 	}

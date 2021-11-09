@@ -2,47 +2,78 @@
  * 拦截请求
  */
 import axios from 'axios'
-import { env } from '@common/config/cfg.js'
+import { env, time_out } from '@common/config/cfg.js'
+import { store } from '@/common/store/index.js'
+import message from '@/common/tools/cmake_message.js'
 
-const BASE_API = env.VITE_GLOB_API_URL
+const { VITE_GLOB_API_URL } = env
 const http = axios.create({
-	baseURL: BASE_API, // url = base url + request url
-	timeout: 9000
+	baseURL: VITE_GLOB_API_URL, // url = base url + request url
+	timeout: time_out
 })
 
-const error_msg = (msg = '网络异常') => {
-	// element notice
-	console.log(msg)
+const error_msg = async (msg = '网络异常') => {
+	console.error(msg)
+	message.send(msg, 'error').hide()
 }
-const record = {}
 
+const go_logion = () => {
+	localStorage.removeItem('token')
+	window.location = '/login'
+}
+
+const repeat_function = (cache_name) => {
+	// 处理重复请求
+	const repeat_mark = repeat_record[cache_name]
+	if (!repeat_mark) {
+		repeat_record[cache_name] = true
+		return false
+	}
+	console.error(`${cache_name} 请求重复!`)
+	return true
+}
+
+const repeat_delete = (cache_name) => delete repeat_record[cache_name]
+
+const repeat_record = {}
 // 请求拦截器
 http.interceptors.request.use(
 	(config) => {
 		// 在发送请求之前做些什么
+		let _data = {}
 
-		if (config.data && config.data._rollback) {
-			if (record[config.url]) return Promise.reject(new Error(`_roolback_${config.url}`))
-			record[config.url] = true
+		try {
+			_data = JSON.parse(config.data)
+		} catch (error) {
+			_data = {}
 		}
 
-		if (config.data._noToken) {
+		const { _noToken, _formData, _header } = _data
+		const url = config.url
+
+		const _repeat = repeat_function(url)
+		if (_repeat) return Promise.reject(new Error(`_repeat_${url}`))
+
+		let token = store.state.user_vuex.token
+		if (token) config.headers['Authorization'] = `bearer ${token}`
+
+		if (_noToken) {
 			delete config.data['_noToken']
 			delete config.header['x-access-token']
+			delete config.header['Authorization']
 		}
-		
-		if (config.data._formData) {
+
+		if (_formData) {
 			config.header['content-Type'] = 'application/x-www-form-urlencoded'
 			delete config.data['_formData']
 		}
-		
-		if (config.data._header) {
-			config.header = { ...config.header, ...config.data._header }
+
+		if (_header) {
+			config.headers = { ...config.headers, ..._header }
 			delete config.data['_header']
 		}
 
 		// console.log("【config】 " + JSON.stringify(config))
-
 		return config
 	},
 	(error) => {
@@ -54,66 +85,78 @@ http.interceptors.request.use(
 // 响应拦截器
 http.interceptors.response.use(
 	(response) => {
-		// console.log("【response】 " + response)
+		const { status, data, config } = response
 
-		if (response.status === 401) {
-			// removeToken
-			localStorage.clear()
-			window.location = '/login'
+		repeat_delete(config.url)
+
+		if (status === 401) {
+			go_logion()
 			return
 		}
-		const res = response.data
-		if (res.status === 401) {
-			error_msg('401 error')
+
+		if (status === 200) {
+			if (data.code === 0) return data.data
+		}
+
+		if (data && data?.code < 0) {
+			error_msg(data.msg)
 			return Boolean(false)
 		}
 
-		if (res.status === 503) {
-			error_msg('503 error')
-			return Boolean(false)
-		}
-
-		if (res.data && res.data.error) {
-			error_msg('请求失败', res.data.error)
-			return Boolean(false)
-		}
-
-		return res
+		return Boolean(false)
 	},
 	(error) => {
 		// 对响应错误做点什么
 		const err = error.toString()
+		const { code, msg, message } = error.response?.data || {}
 
-		// 回滚中断请求
-		if (err.indexOf('_roolback_') !== -1) {
-			const key = err.replace('_roolback_', '')
-			delete record[key]
+		if (error.response?.config) repeat_delete(error.response.config.url)
+
+		// 重复请求
+		if (err.indexOf('_repeat_') !== -1) {
+			const key = err.replace('_repeat_', '')
+			repeat_delete(key)
+			return Boolean(false)
+		}
+
+		if (code && code < 0) {
+			if (code === -99999) {
+				localStorage.removeItem('token')
+				location = '/login'
+			}
+			error_msg(msg)
+			return Boolean(false)
+		}
+
+		if (err.indexOf('code 400') !== -1) {
+			error_msg(message || '400 error')
 			return Boolean(false)
 		}
 
 		if (err.indexOf('code 500') !== -1) {
-			error_msg('500 error')
+			error_msg(message || '500 error')
 			return Boolean(false)
 		}
 
 		if (err.indexOf('code 503') !== -1) {
-			error_msg('503 error')
+			error_msg(message || '503 error')
 			return Boolean(false)
 		}
 
 		if (err.indexOf('code 401') !== -1) {
-			error_msg('401 error')
+			error_msg(message || '401 error')
+			go_logion()
 			return Boolean(false)
 		}
 
-		if (err.indexOf('code 422') !== -1) {
+		if (err.indexOf('code 403') !== -1) {
 			// 服务器错误信息回应
-			error_msg(error.response && error.response.data && error.response.data.error, '')
+			error_msg(message || '403 error')
 			return Boolean(false)
 		}
 
-		if (error.toString().indexOf('Error') !== -1) {
-			error_msg('网络异常')
+		if (err.indexOf('Error') !== -1) {
+			error_msg(message || '网络异常')
 			return Boolean(false)
 		}
 

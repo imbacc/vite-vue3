@@ -14,8 +14,13 @@ const state = reactive({
 
 // set数据
 const set_state = (key, val) => {
+	if (val === '') return
 	let cur = get_state(key)
-	state[key] = [...new Set([...cur, ...val])]
+	if (Array.isArray(val)) {
+		state[key] = [...new Set([...cur, ...val])]
+	} else {
+		!state[key].includes(val) && state[key].push(val)
+	}
 	localStorage.setItem(key, JSON.stringify(state[key]))
 }
 

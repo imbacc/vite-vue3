@@ -22,8 +22,7 @@ const routes = [
 		component: () => import('@views/error-page/401.vue')
 	},
 	{
-		path: '/404',
-		name: '404',
+		path: '/:pathMatch(.*)*',
 		component: () => import('@views/error-page/404.vue')
 	}
 ]
@@ -38,15 +37,42 @@ const moduleArray = import.meta.glob('./module/*.js')
 
 /**
  * 注册router
- * @param {*} name: string | Array
+ * @param {*} moduleName: string | Array 模块名称
+ * @param {*} routerName: string | Array 路由名称 为child添加
  */
-const registerRouter = (name) => {
+const registerRouter_cache = {}
+const registerRouter = (moduleName, routerName) => {
 	return new Promise((resovle) => {
-		registerModule(name, moduleArray).then((res) => {
-			res.forEach((r) => {
+		const _cache_name = `${moduleName}_${routerName}`
+		const _result_cache = registerRouter_cache[_cache_name]
+		if (_result_cache) {
+			resovle(router)
+			return
+		}
+		registerModule(moduleName, moduleArray).then((res) => {
+			const add_or_child = (r) => {
+				if (routerName) {
+					router.addRoute(routerName, r)
+				} else {
+					router.addRoute(r)
+				}
+			}
+
+			let no_cache = []
+			for (const r of res) {
+				let no_cache_name = r?.meta?.no_cache
+				if (no_cache_name) !no_cache.includes(no_cache_name) && no_cache.push(no_cache_name)
 				let has = router.hasRoute(r.name) // 初始化加载过的不再重复加载
-				if (!has) router.addRoute(r)
-			})
+				if (!has) {
+					add_or_child(r)
+					if (r?.meta?.child) registerRouter(r.meta.child, r.meta.father)
+				} else {
+					add_or_child(r)
+				}
+			}
+			if (Array.isArray(moduleName)) moduleName = moduleName.filter((f) => !no_cache.includes(f))
+			set_state(LOCA_ROUTER, moduleName)
+			registerRouter_cache[_cache_name] = true
 			set_state(LOCA_ROUTER, name)
 			resovle(router)
 		})

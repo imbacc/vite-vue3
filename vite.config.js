@@ -6,11 +6,11 @@ import envPlugin from './vite-plugin/vite-plugin-env.js' // env 环境
 import gzipPlugin from 'rollup-plugin-gzip' //Gzip
 import { viteMockServe } from 'vite-plugin-mock' // mock
 import componentsPlugin from './vite-plugin/vite-plugin-components.js' // Vite 的按需组件自动导入
-import ViteIcons from 'vite-plugin-icons' // icon 按需引入
 // import RemoteAssets from 'vite-plugin-remote-assets' // 远程图片地址转换成本地地址 http://example.com/image.jpg -> /node_modules/.remote-assets/f83j2f.jpg
 // import windicssPlugin from 'vite-plugin-windicss' // 自动导入路由 需要可以用
 // import routerPages from 'vite-plugin-pages'	// 自动导入路由 需要可以用
-import viteCompression from 'vite-plugin-compression'
+import compression from 'vite-plugin-compression'
+import Icons from 'unplugin-icons/vite' // icon 按需引入
 
 /**
  * @type {import('vite').UserConfig}
@@ -93,7 +93,8 @@ const config = {
 		vue(),
 		envPlugin(),
 		componentsPlugin(),
-		ViteIcons()
+		Icons(),
+		compression()
 		// windicssPlugin()
 	],
 
@@ -120,7 +121,7 @@ export default ({ command, mode }) => {
 	} else {
 		// 开发环境配置
 		// vite-plugin-mock
-		if (VITE_USE_MOCK) config.plugins.push(viteMockServe({ supportTs: false }))
+		if (VITE_USE_MOCK) config.plugins.push(viteMockServe({ mockPath: 'mock', supportTs: false }))
 	}
 	return config
 }

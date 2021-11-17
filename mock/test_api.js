@@ -7,7 +7,7 @@ export default [
 			return {
 				code: 0,
 				message: 'ok',
-				data: '我是/api/test/get_test 测试数据'
+				data: { dd: '我是/api/test/get_test 测试数据' }
 			}
 		}
 	},
@@ -18,18 +18,18 @@ export default [
 			return {
 				code: 0,
 				message: 'ok',
-				data: '我是/api/test/get_test/:id 测试数据'
+				data: { dd: '我是/api/test/get_test/:id 测试数据' }
 			}
 		}
 	},
 	{
-		url: '/api/test/get_test/three?is=param',
+		url: '/api/test/get_test/three',
 		method: 'get',
 		response: () => {
 			return {
 				code: 0,
 				message: 'ok',
-				data: '我是/api/test/get_test/three 测试数据'
+				data: { dd: '我是/api/test/get_test/three 测试数据' }
 			}
 		}
 	}

@@ -3,7 +3,7 @@
  * @param {*} fileName 文件名
  * @param {*} moduleFiles module文件夹下的*.js集合
  */
- const lazyModule = (fileName, moduleFiles, type = 'js') => {
+const lazyModule = (fileName, moduleFiles, type = 'js') => {
 	return new Promise((resolve) => {
 		let name = `./module/${fileName}.${type}`
 		let module = moduleFiles[name]
@@ -33,8 +33,11 @@ const registerModule = (lazyName, lazyArray, type = 'js') => {
 					const result = []
 					res.forEach((r) => {
 						let arr = Array.isArray(r.value)
-						if (arr) result.push(...r.value)
-						if (!arr) result.push(r.value)
+						if (arr) {
+							result.push(...r.value)
+						} else {
+							result.push(r.value)
+						}
 					})
 					resolve(result)
 				}

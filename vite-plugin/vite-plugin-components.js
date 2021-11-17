@@ -1,6 +1,6 @@
 import Components from 'unplugin-vue-components/vite'
 // import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-// import IconsResolver from 'unplugin-icons/resolver'
+import IconsResolver from 'unplugin-icons/resolver'
 
 // 定义自己的解析器
 // const diyResolver = (name) => {
@@ -19,9 +19,7 @@ export default () => {
 		deep: true,
 		// 自定义组件的解析程序
 		// 解析器 -> element plus ui解析
-		resolvers: [
-			// IconsResolver()
-		],
+		resolvers: [IconsResolver()],
 		// 生成“components.d.ts”全局声明，
 		// 还接受自定义文件名的路径
 		dts: false,

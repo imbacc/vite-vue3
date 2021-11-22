@@ -6,11 +6,11 @@
 
 vite2.0 <https://vitejs.dev> vue3.0 <https://v3.cn.vuejs.org>
 
-`pnpm install` `npm dev or npm debug` `建议使用pnpm pnpm pnpm!!!`
+`pnpm install` `pnpm dev or npm debug` `建议使用pnpm pnpm pnpm!!!`
 
-`npm run force` `清除node_module缓存依赖...`
-`npm run debug` `开启debug显示相关debug信息...`
-`npm run serve` `生成线上版本预览...`
+`pnpm run force` `清除node_module缓存依赖...`
+`pnpm run debug` `开启debug显示相关debug信息...`
+`pnpm run serve` `生成线上版本预览...`
 
 ```
  ├── node_modules                      依赖包

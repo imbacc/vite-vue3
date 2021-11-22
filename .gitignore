@@ -4,3 +4,6 @@ dist
 dist-ssr
 *.local
 .history
+.pnpm-debug.log
+.history
+.vscode

@@ -61,7 +61,7 @@ const config = {
 
 	//部门优化选项
 	optimizeDeps: {
-		include: ['nprogress', 'qs-stringify', 'axios', 'vuex']
+		// include: ['nprogress', 'qs-stringify', 'axios', 'vuex']
 		// exclude: ['screenfull', 'nprogress']
 	},
 

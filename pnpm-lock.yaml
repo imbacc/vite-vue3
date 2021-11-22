@@ -17,7 +17,7 @@ specifiers:
   prettier: ^2.2.1
   qs-stringify: ^1.2.1
   rollup: ^2.60.0
-  rollup-plugin-gzip: ^2.5.0
+  rollup-plugin-gzip: ^3.0.0
   sass: 1.38.1
   unplugin-icons: ^0.12.18
   unplugin-vue-components: ^0.17.2
@@ -53,7 +53,7 @@ devDependencies:
   mockjs: registry.npmmirror.com/mockjs/1.1.0
   prettier: registry.nlark.com/prettier/2.4.1
   rollup: registry.npmmirror.com/rollup/2.60.0
-  rollup-plugin-gzip: registry.npmmirror.com/rollup-plugin-gzip/2.5.1_rollup@2.60.0
+  rollup-plugin-gzip: registry.npmmirror.com/rollup-plugin-gzip/3.0.0_rollup@2.60.0
   sass: registry.npmmirror.com/sass/1.38.1
   unplugin-icons: registry.npmmirror.com/unplugin-icons/0.12.18_2ad854331027d6dcd8ff5a0dc6b57075
   unplugin-vue-components: registry.npmmirror.com/unplugin-vue-components/0.17.2_a600010daa7eef5914ffde83d6e5b503
@@ -2978,13 +2978,14 @@ packages:
     dev: true
     optional: true
 
-  registry.npmmirror.com/rollup-plugin-gzip/2.5.1_rollup@2.60.0:
-    resolution: {integrity: sha512-l9h3g0imsGvhjcSsxNRLHNW/gqRSSgaJLCKKWYeRclPHvDMDewmI43ZyiGJ3nc3+sZNy1pJnWzB3Bvm+tJI2jQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/rollup-plugin-gzip/download/rollup-plugin-gzip-2.5.1.tgz}
-    id: registry.npmmirror.com/rollup-plugin-gzip/2.5.1
+  registry.npmmirror.com/rollup-plugin-gzip/3.0.0_rollup@2.60.0:
+    resolution: {integrity: sha512-xvyKihEdKygVk0vJt0tKytVw/WgLEMghX1uWhNc7ANuTpXw46fhvdTTDGC1OHxFBSEwUQ1I34b7S3iD8l+L30g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/rollup-plugin-gzip/download/rollup-plugin-gzip-3.0.0.tgz}
+    id: registry.npmmirror.com/rollup-plugin-gzip/3.0.0
     name: rollup-plugin-gzip
-    version: 2.5.1
+    version: 3.0.0
+    engines: {node: '>=10.0.0'}
     peerDependencies:
-      rollup: '>=0.60.0'
+      rollup: '>=2.0.0'
     dependencies:
       rollup: registry.npmmirror.com/rollup/2.60.0
     dev: true

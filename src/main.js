@@ -14,10 +14,10 @@ import 'nprogress/nprogress.css'
 import '@/styles/index.scss'
 
 const app = createApp(App)
-app.use(direct)
 Promise.allSettled([initLzayStore(), initLzayRouter()]).then(() => {
 	app.use(store)
 	app.use(router)
+	app.use(direct)
 	app.mount('#app')
 })
 

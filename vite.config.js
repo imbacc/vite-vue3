@@ -2,15 +2,14 @@ import vue from '@vitejs/plugin-vue' // v2.0 核心现在与框架无关。现�
 import { resolve } from 'path'
 
 // plugin
+import { viteMockServe } from 'vite-plugin-mock' // mock
 import envPlugin from './vite-plugin/vite-plugin-env.js' // env 环境
 import gzipPlugin from 'rollup-plugin-gzip' //Gzip
-import { viteMockServe } from 'vite-plugin-mock' // mock
+import IconsPlugin from 'unplugin-icons/vite' // icon 按需引入
 import componentsPlugin from './vite-plugin/vite-plugin-components.js' // Vite 的按需组件自动导入
-// import RemoteAssets from 'vite-plugin-remote-assets' // 远程图片地址转换成本地地址 http://example.com/image.jpg -> /node_modules/.remote-assets/f83j2f.jpg
-// import windicssPlugin from 'vite-plugin-windicss' // 自动导入路由 需要可以用
-// import routerPages from 'vite-plugin-pages'	// 自动导入路由 需要可以用
-import compression from 'vite-plugin-compression'
-import Icons from 'unplugin-icons/vite' // icon 按需引入
+import routerPagePlugin from './vite-plugin/vite-plugin-routerPage.js' // 自动导入路由 需要可以用
+import windicssPlugin from 'vite-plugin-windicss' // windicss
+import compressionPlugin from 'vite-plugin-compression' // 使用gzip或brotli来压缩资源
 
 /**
  * @type {import('vite').UserConfig}
@@ -61,7 +60,8 @@ const config = {
 
 	//部门优化选项
 	optimizeDeps: {
-		// include: ['nprogress', 'qs-stringify', 'axios', 'vuex']
+		entries: ['vue', 'vuex', 'nprogress', 'vue-router', 'qs-stringify', 'axios']
+		// include: [],
 		// exclude: ['screenfull', 'nprogress']
 	},
 
@@ -89,14 +89,7 @@ const config = {
 	cssCodeSplit: true,
 
 	// 插件
-	plugins: [
-		vue(),
-		envPlugin(),
-		componentsPlugin(),
-		Icons(),
-		compression()
-		// windicssPlugin()
-	],
+	plugins: [vue(), envPlugin(), IconsPlugin(), componentsPlugin(), routerPagePlugin(), windicssPlugin()],
 
 	// 要将一些共享的全局变量传递给所有的Less样式
 	css: {
@@ -116,8 +109,8 @@ export default ({ command, mode }) => {
 	if (command === 'build' && mode === 'production') {
 		// 编译环境配置
 		// Gzip
-		// if (VITE_REMOTE_ASSETS) config.plugins.push(RemoteAssets())
 		if (VITE_BUILD_GZIP) config.plugins.push(gzipPlugin())
+		config.plugins.push(compressionPlugin())
 	} else {
 		// 开发环境配置
 		// vite-plugin-mock

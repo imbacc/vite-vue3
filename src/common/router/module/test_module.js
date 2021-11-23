@@ -9,7 +9,7 @@ export default [
 		name: 'about',
 		component: () => import('@views/test/about.vue'),
 		meta: {
-			store: ['test_vuex', 'copy_vuex']
+			store: ['test_vuex', 'copy_vuex'] // 加载store
 		}
 	}
 ]

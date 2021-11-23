@@ -6,15 +6,6 @@ import user_vuex from './module/user_vuex.js' // 初始化 user_vuex
 
 // 也可以弃用store,利用reactive特性来实现全局状态管理
 const store = createStore({
-	state: {
-		title: 'i am title'
-	},
-	mutations: {
-		set_vuex(state, [key, val]) {
-			state[key] = val
-		}
-	},
-	actions: {},
 	modules: {
 		user_vuex
 	}
@@ -27,7 +18,7 @@ const moduleArray = import.meta.glob('./module/*.js')
  * 注册store
  * @param {*} name: string | Array
  */
- const registerStore_cache = {}
+const registerStore_cache = {}
 const registerStore = (name) => {
 	return new Promise((resovle) => {
 		const _result_cache = registerStore_cache[name]

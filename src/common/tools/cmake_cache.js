@@ -7,9 +7,6 @@ const set_cache = (key, data, time = 5) => {
 	if (data === '{}') return false
 	if (data instanceof Object) data = JSON.stringify(data)
 
-	// console.log("set_cache key="+key)
-	// console.log("set_cache data="+JSON.stringify(data))
-
 	try {
 		let now = new Date().getTime() + time * 60 * 1000
 

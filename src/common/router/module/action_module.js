@@ -4,7 +4,7 @@ export default [
 		name: 'action',
 		component: () => import('@views/test/action.vue'),
 		meta: {
-			auth: ['user']
+			auth: ['user'] // 权限
 		}
 	}
 ]

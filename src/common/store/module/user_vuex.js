@@ -12,8 +12,6 @@ const state = {
 	user_role: USER_ROLE //用户角色权限
 }
 
-console.log(state)
-
 //同步方法
 const mutations = {
 	set_vuex(state, [key, val]) {

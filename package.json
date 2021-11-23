@@ -40,9 +40,10 @@
 		"sass": "1.38.1",
 		"unplugin-icons": "^0.12.18",
 		"unplugin-vue-components": "^0.17.2",
-		"vite": "2.5.0",
+		"vite": "2.5.10",
 		"vite-plugin-compression": "^0.3.5",
 		"vite-plugin-mock": "^2.9.6",
+		"vite-plugin-pages": "^0.18.2",
 		"vite-plugin-remote-assets": "^0.2.2",
 		"vite-plugin-style-import": "^1.2.1",
 		"vite-plugin-windicss": "^0.17.1"

@@ -1,15 +1,13 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import { registerModule } from '@/common/tools/cmake_lazy.js'
 import { LOCA_ROUTER, set_state, get_state } from '@/common/provide/lazy_state.js'
+import generatedRouters from 'virtual:generated-pages'
+console.log('generatedRouters', generatedRouters)
 
-const routes = [
+const routers = [
 	{
 		path: '/',
-		component: () => import('@views/test/index.vue'),
-		meta: {
-			// auth: ['user']
-			router: ['init_module', 'action_module', 'test_module']
-		}
+		component: () => import('@views/test/index.vue')
 	},
 	{
 		path: '/login',
@@ -28,8 +26,8 @@ const routes = [
 ]
 
 const router = createRouter({
-	history: createWebHashHistory() || createWebHistory(),
-	routes
+	history: createWebHistory() || createWebHashHistory(),
+	routes: [...routers, ...generatedRouters]
 })
 
 // vite自动导入

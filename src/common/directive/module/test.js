@@ -23,11 +23,15 @@ export default (app) => {
 		// called when the bound element's parent component is unmounted
 		unmounted() {},
 		mounted(el, binding, vnode) {
+			if (!el || !binding.value) return
 			console.log('el', el)
 			console.log('binding', binding)
 			console.log('vnode', vnode)
-			console.log(el.toString())
-			if (!hasAuth(binding.value)) el.parentNode.removeChild(el)
+			el.onclick = () => alert('点鸡毛啊看代码!')
+			if (!hasAuth(binding.value)) {
+				el.parentNode.removeChild(el)
+				return
+			}
 		}
 	})
 }

@@ -11,13 +11,13 @@ import direct from '@common/directive/index.js' // 指令
 
 // 全局样式
 import 'nprogress/nprogress.css'
-import '@/styles/index.scss'
+// import 'windi.css' // win
 
 const app = createApp(App)
+app.use(direct)
 Promise.allSettled([initLzayStore(), initLzayRouter()]).then(() => {
 	app.use(store)
 	app.use(router)
-	app.use(direct)
 	app.mount('#app')
 })
 

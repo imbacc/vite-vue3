@@ -12,7 +12,7 @@ const sys_config = {
 	clientWidth,
 	clientHeight
 }
-const time_out = 9000
+const time_out = 3000
 const env = import.meta.env
 const mode = env.MODE // development or production
 const is_dev = Boolean(mode === 'development') // 是否是开发环境

@@ -16,6 +16,14 @@
 	<button @click="all_request">给我一起请求</button>
 </template>
 
+<route>
+{
+	meta: {
+		auth: ['user'] // 权限
+	}
+}
+</route>
+
 <script setup>
 	//setup 方式书写 实验阶段正式环境不建议
 	import api from '@/common/config/api.js'
@@ -31,10 +39,7 @@
 	const app_555 = () => api('app_555')
 	const app_666 = () => api('app_666', { _id: 666 }, { body: '这是POST请求,我是body' })
 	const user_get_user = () => api('user/get_user')
-	const error_msg = () => {
-		api('error')
-		api('error')
-	}
+	const error_msg = () => api('error')
 
 	const all_request = () => {
 		const all = [

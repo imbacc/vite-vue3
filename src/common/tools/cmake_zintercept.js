@@ -33,9 +33,9 @@ const repeat_function = (cache_name) => {
 	return true
 }
 
+const repeat_record = {}
 const repeat_delete = (cache_name) => delete repeat_record[cache_name]
 
-const repeat_record = {}
 // 请求拦截器
 http.interceptors.request.use(
 	(config) => {
@@ -52,7 +52,7 @@ http.interceptors.request.use(
 		const url = config.url
 
 		const _repeat = repeat_function(url)
-		if (_repeat) return Promise.reject(new Error(`_repeat_${url}`))
+		if (_repeat) return Promise.reject(`_repeat_${url}`)
 
 		let token = store.state.user_vuex.token
 		if (token) config.headers['Authorization'] = `bearer ${token}`
@@ -114,7 +114,8 @@ http.interceptors.response.use(
 
 		// 重复请求
 		if (err.indexOf('_repeat_') !== -1) {
-			const key = err.replace('_repeat_', '')
+			let key = err.split('_repeat_')
+			key = key[key.length - 1].trim()
 			repeat_delete(key)
 			return Boolean(false)
 		}

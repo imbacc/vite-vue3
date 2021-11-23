@@ -8,6 +8,8 @@
 		|
 		<router-link to="/action">Action</router-link>
 		|
+		<router-link to="/win">测试 windi</router-link>
+		|
 		<button v-test="['user']">测试 directive v-test</button>
 	</div>
 

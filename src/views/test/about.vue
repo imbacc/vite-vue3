@@ -7,53 +7,58 @@
 		<h1>我是copy_vuex的state内容 {{ name }}</h1>
 		<hr />
 		<h1>{{ title }}</h1>
-		<button @click="update">更新标题</button>
 	</div>
 	<p><button @click="register">这个按钮是懒加载test_vuex copy_vuex模块 js代码</button></p>
 </template>
 
+<route>
+{
+  meta: {
+    store: ['test_vuex', 'copy_vuex'] // 路由加载时 注册store
+  }
+}
+</route>
+
 <script>
-import { computed, getCurrentInstance } from 'vue'
-import { useStore } from 'vuex'
-import { registerStore } from '@/common/store/index.js'
+	import { computed, getCurrentInstance } from 'vue'
+	import { useStore } from 'vuex'
+	import { registerStore } from '@/common/store/index.js'
 
-export default {
-	setup() {
-		const { ctx } = getCurrentInstance() // ctx => vue2 vm
-		const { commit, state } = useStore()
+	export default {
+		setup() {
+			const { ctx } = getCurrentInstance() // ctx => vue2 vm
+			const { commit, state } = useStore()
 
-		console.log('初始化 state', state)
-		console.log('ctx.is_cdn', ctx.is_cdn)
-		console.log(ctx.is_cdn) // 全局 property main.js -> app.config.globalProperties.is_cdn
+			console.log('初始化 state', state)
+			console.log('ctx.is_cdn', ctx.is_cdn)
+			console.log(ctx.is_cdn) // 全局 property main.js -> app.config.globalProperties.is_cdn
 
-		// ---computed---
-		const title = computed(() => state.title)
-		const test = computed(() => state.test_vuex.test)
-		const name = computed(() => state.copy_vuex.name)
-
-		// ---function---
-		const update = () => commit('set_vuex', ['title', 'vue3 composition...'])
-		const register = () => {
-			alert('点我没用看代码!')
-			// 注册test_vuex copy_vuex模块
-			// registerStore(['test_vuex', 'copy_vuex'])
-		}
-		const update_test = () => {
-			commit('test_vuex/set_vuex', ['test', '我修改了test_vuex的state内容!'])
-			commit('copy_vuex/set_vuex', ['name', '我修改了copy_vuex的state内容!'])
-			console.log('修改后 state', state)
-		}
-
-		return {
 			// ---computed---
-			title,
-			test,
-			name,
+			const title = computed(() => state.title)
+			const test = computed(() => state.test_vuex.test)
+			const name = computed(() => state.copy_vuex.name)
+
 			// ---function---
-			update,
-			register,
-			update_test
+			const register = () => {
+				alert('点我没用看代码!')
+				// 手动 注册store test_vuex copy_vuex模块
+				// registerStore(['test_vuex', 'copy_vuex'])
+			}
+			const update_test = () => {
+				commit('test_vuex/set_vuex', ['test', '我修改了test_vuex的state内容!'])
+				commit('copy_vuex/set_vuex', ['name', '我修改了copy_vuex的state内容!'])
+				console.log('修改后 state', state)
+			}
+
+			return {
+				// ---computed---
+				title,
+				test,
+				name,
+				// ---function---
+				register,
+				update_test
+			}
 		}
 	}
-}
 </script>

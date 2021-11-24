@@ -42,6 +42,7 @@
 		"unplugin-vue-components": "^0.17.2",
 		"vite": "2.5.10",
 		"vite-plugin-compression": "^0.3.5",
+		"vite-plugin-html": "^2.1.1",
 		"vite-plugin-mock": "^2.9.6",
 		"vite-plugin-pages": "^0.18.2",
 		"vite-plugin-remote-assets": "^0.2.2",

@@ -3,13 +3,16 @@ import { resolve } from 'path'
 
 // plugin
 import { viteMockServe } from 'vite-plugin-mock' // mock
-import envPlugin from './vite-plugin/vite-plugin-env.js' // env 环境
+
 import gzipPlugin from 'rollup-plugin-gzip' //Gzip
 import IconsPlugin from 'unplugin-icons/vite' // icon 按需引入
-import componentsPlugin from './vite-plugin/vite-plugin-components.js' // Vite 的按需组件自动导入
-import routerPagePlugin from './vite-plugin/vite-plugin-routerPage.js' // 自动导入路由 需要可以用
 import windicssPlugin from 'vite-plugin-windicss' // windicss
 import compressionPlugin from 'vite-plugin-compression' // 使用gzip或brotli来压缩资源
+
+import envPlugin from './vite-plugin/vite-plugin-env.js' // env 环境
+import componentsPlugin from './vite-plugin/vite-plugin-components.js' // Vite 的按需组件自动导入
+import routerPagePlugin from './vite-plugin/vite-plugin-routerPage.js' // 自动导入路由 需要可以用
+import htmlInjectPlugin from './vite-plugin/vite-plugin-htmlInject.js' //html inject
 
 /**
  * @type {import('vite').UserConfig}
@@ -89,7 +92,7 @@ const config = {
 	cssCodeSplit: true,
 
 	// 插件
-	plugins: [vue(), envPlugin(), IconsPlugin(), componentsPlugin(), routerPagePlugin(), windicssPlugin()],
+	plugins: [vue(), envPlugin(), IconsPlugin(), componentsPlugin(), routerPagePlugin(), windicssPlugin(), htmlInjectPlugin()],
 
 	// 要将一些共享的全局变量传递给所有的Less样式
 	css: {

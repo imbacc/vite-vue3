@@ -3,9 +3,11 @@
 const env = process.env
 const fs = require('fs')
 const dotenv = require('dotenv')
+const envDefault = dotenv.parse(fs.readFileSync(`.env`))
 const envConfig = dotenv.parse(fs.readFileSync(`.env.${env.NODE_ENV}`))
-for (const k in envConfig) {
-	env[k] = envConfig[k]
+const envMerge = Object.assign(envDefault, envConfig)
+for (const k in envMerge) {
+	env[k] = envMerge[k]
 }
 
 const createProxy = (list = []) => {

@@ -22,7 +22,7 @@
 <script>
 	import { computed, getCurrentInstance } from 'vue'
 	import { useStore } from 'vuex'
-	import { registerStore } from '@/common/store/index.js'
+	import { registerStore } from 'imba-lazy-store-router'
 
 	export default {
 		setup() {

@@ -2,8 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 // store 和 router
-import { store, initLzayStore } from '@/common/store/index.js'
-import { router, initLzayRouter } from '@/common/tools/cmake_router.js'
+import store from '@/common/store/index.js'
+import router from '@/common/tools/cmake_router.js'
+import { initLzayStore, initLzayRouter } from 'imba-lazy-store-router'
 
 // js
 import { env, is_cdn, is_dev } from '@/common/config/cfg.js'
@@ -14,8 +15,7 @@ import 'nprogress/nprogress.css'
 // import 'windi.css' // win
 
 const app = createApp(App)
-app.use(direct)
-Promise.allSettled([initLzayStore(), initLzayRouter()]).then(() => {
+Promise.allSettled([direct(app), initLzayStore(), initLzayRouter()]).then(() => {
 	app.use(store)
 	app.use(router)
 	app.mount('#app')

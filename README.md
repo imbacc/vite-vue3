@@ -33,8 +33,6 @@ vite2.0 <https://vitejs.dev> vue3.0 <https://v3.cn.vuejs.org>
  │   │     │      ├── module           vuex模块配置
  │   │     │      ├── index.js         vuex配置入口
  │   │     ├── tools                   工具
- │   │     │      ├── cmake_cache.js   缓存数据时间设定
- │   │     │      ├── cmake_lazy.js    懒加载js module
  │   │     │      ├── cmake_router.js  路由拦截
  │   │     │      ├── cmake_tools.js   自定义工具
  │   │     │      ├── cmake_zintercept.js   请求封装

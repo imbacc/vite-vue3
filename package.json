@@ -16,6 +16,10 @@
 	},
 	"dependencies": {
 		"axios": "^0.21.0",
+		"imba-cache": "latest",
+		"imba-lazy": "latest",
+		"imba-lazy-store-router": "latest",
+		"imba-request": "latest",
 		"nprogress": "^0.2.0",
 		"qs-stringify": "^1.2.1",
 		"vue": "^3.2.4",

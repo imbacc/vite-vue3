@@ -12,6 +12,10 @@ specifiers:
   eslint: ^7.18.0
   eslint-config-prettier: ^7.2.0
   eslint-plugin-prettier: ^3.3.1
+  imba-cache: latest
+  imba-lazy: latest
+  imba-lazy-store-router: latest
+  imba-request: latest
   mockjs: ^1.1.0
   nprogress: ^0.2.0
   prettier: ^2.2.1
@@ -35,6 +39,10 @@ specifiers:
 
 dependencies:
   axios: registry.npmmirror.com/axios/0.21.4
+  imba-cache: registry.npmmirror.com/imba-cache/1.0.3
+  imba-lazy: registry.npmmirror.com/imba-lazy/1.0.5
+  imba-lazy-store-router: registry.npmmirror.com/imba-lazy-store-router/1.1.1_vue@3.2.22
+  imba-request: registry.npmmirror.com/imba-request/1.0.4
   nprogress: registry.nlark.com/nprogress/0.2.0
   qs-stringify: registry.npmmirror.com/qs-stringify/1.2.1
   vue: registry.npmmirror.com/vue/3.2.22
@@ -3245,6 +3253,49 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  registry.npmmirror.com/imba-cache/1.0.3:
+    resolution: {integrity: sha512-aelxUa+xcWNoo7S3blqiRSHgqHBtwM8z/+kh7PnAJ/A7cKVnfWt+opgQ6riHRX69kE3Pk562g9Z2jWAGOBYkkA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/imba-cache/download/imba-cache-1.0.3.tgz}
+    name: imba-cache
+    version: 1.0.3
+    engines: {node: '>=12'}
+    dev: false
+
+  registry.npmmirror.com/imba-lazy-store-router/1.1.1_vue@3.2.22:
+    resolution: {integrity: sha512-AfwXAq7eejy1HiqKcELZOjIbhMtby+a8NrulOeAGFjF/VtJRPBO5LirJQJSYLPLDJFqXp/yHBNcfxE0l84giFw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/imba-lazy-store-router/download/imba-lazy-store-router-1.1.1.tgz}
+    id: registry.npmmirror.com/imba-lazy-store-router/1.1.1
+    name: imba-lazy-store-router
+    version: 1.1.1
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      vue: ^2.6.14 || >=3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      imba-cache: registry.npmmirror.com/imba-cache/1.0.3
+      imba-lazy: registry.npmmirror.com/imba-lazy/1.0.5
+      vue: registry.npmmirror.com/vue/3.2.22
+      vue-demi: registry.npmmirror.com/vue-demi/0.12.1_vue@3.2.22
+    dev: false
+
+  registry.npmmirror.com/imba-lazy/1.0.5:
+    resolution: {integrity: sha512-hlN8dk90HmecErNHyeCOrQPacuFEaXAI8M8YWksKXqmdqNpdLSer7MvC4OjoUi+x8HhwfTQTucf6cfVQlkdpVg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/imba-lazy/download/imba-lazy-1.0.5.tgz}
+    name: imba-lazy
+    version: 1.0.5
+    engines: {node: '>=12'}
+    dev: false
+
+  registry.npmmirror.com/imba-request/1.0.4:
+    resolution: {integrity: sha512-KY1PPfHoG9ZzltyGNYhqPUyfdXQrRq/PS14CCBtbk4ciRjsMm4uF737LlsvAKf8amc63Q/yKG8ydgZ1xIKHXkw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/imba-request/download/imba-request-1.0.4.tgz}
+    name: imba-request
+    version: 1.0.4
+    engines: {node: '>=12'}
+    dependencies:
+      imba-cache: registry.npmmirror.com/imba-cache/1.0.3
+      qs-stringify: registry.npmmirror.com/qs-stringify/1.2.1
+    dev: false
+
   registry.npmmirror.com/import-meta-resolve/1.1.1:
     resolution: {integrity: sha1-JE/VQv0frnNVDU+LPN47uh17Kxg=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/import-meta-resolve/download/import-meta-resolve-1.1.1.tgz}
     name: import-meta-resolve
@@ -3927,6 +3978,24 @@ packages:
     optionalDependencies:
       fsevents: registry.npmmirror.com/fsevents/2.3.2
     dev: true
+
+  registry.npmmirror.com/vue-demi/0.12.1_vue@3.2.22:
+    resolution: {integrity: sha1-9+GO++z/0RqwadFHLXoG4xm0F0w=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-demi/download/vue-demi-0.12.1.tgz}
+    id: registry.npmmirror.com/vue-demi/0.12.1
+    name: vue-demi
+    version: 0.12.1
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      vue: registry.npmmirror.com/vue/3.2.22
+    dev: false
 
   registry.npmmirror.com/vue-router/4.0.12_vue@3.2.22:
     resolution: {integrity: sha1-jceSzd9bsavMOQj5BkE23n4TxGA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-router/download/vue-router-4.0.12.tgz?cache=0&sync_timestamp=1636376768460&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fvue-router%2Fdownload%2Fvue-router-4.0.12.tgz}

@@ -1,4 +1,4 @@
-import { store } from '@/common/store/index.js'
+import store from '@/common/store/index.js'
 
 const hasAuth = (role_list) => {
 	const user_role = store.state?.user_vuex.user_role

@@ -2,14 +2,24 @@
  * 拦截请求
  */
 import axios from 'axios'
-import { env, time_out } from '@common/config/cfg.js'
-import { store } from '@/common/store/index.js'
+import store from '@/common/store/index.js'
 import message from '@/common/tools/cmake_message.js'
+
+import { env, time_out, page_name, size_name, is_dev } from '@common/config/cfg.js'
+import { setRequestInit, requestAction } from 'imba-request'
 
 const { VITE_GLOB_API_URL } = env
 const http = axios.create({
 	baseURL: VITE_GLOB_API_URL, // url = base url + request url
 	timeout: time_out
+})
+
+// 初始化封装请求包
+setRequestInit({
+	page: page_name,
+	size: size_name,
+	dev: is_dev,
+	http: http
 })
 
 const error_msg = async (msg = '网络异常') => {
@@ -165,4 +175,4 @@ http.interceptors.response.use(
 	}
 )
 
-export default http
+export default requestAction

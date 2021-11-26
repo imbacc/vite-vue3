@@ -1,5 +1,5 @@
-import action from '@/common/tools/cmake_zrequest.js'
-import { lazyModule } from '@/common/tools/cmake_lazy.js'
+import action from '@/common/tools/cmake_zintercept.js'
+import { lazyModule } from 'imba-lazy'
 import { METHOD } from './cfg.js'
 
 // 公共api

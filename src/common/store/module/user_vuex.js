@@ -1,5 +1,4 @@
-import { store } from '..'
-import { set_cache_loca, get_cache_loca } from '@/common/tools/cmake_cache.js'
+import { set_cache_loca, get_cache_loca } from 'imba-cache'
 
 const TOKEN = localStorage.getItem('token') || false
 const USER_INFO = get_cache_loca('user_info') || false

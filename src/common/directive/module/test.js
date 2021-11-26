@@ -24,9 +24,7 @@ export default (app) => {
 		unmounted() {},
 		mounted(el, binding, vnode) {
 			if (!el || !binding.value) return
-			console.log('el', el)
-			console.log('binding', binding)
-			console.log('vnode', vnode)
+			console.log('v-test directive el-binding-vnode', el, binding, vnode)
 			el.onclick = () => alert('点鸡毛啊看代码!')
 			if (!hasAuth(binding.value)) {
 				el.parentNode.removeChild(el)

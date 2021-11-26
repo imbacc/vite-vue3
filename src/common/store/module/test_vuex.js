@@ -7,7 +7,6 @@ const state = {
 const mutations = {
 	set_vuex(state, [key, val]) {
 		state[key] = val
-		console.log('key', val)
 	}
 }
 

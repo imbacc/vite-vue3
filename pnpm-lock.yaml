@@ -15,7 +15,7 @@ specifiers:
   imba-cache: latest
   imba-lazy: latest
   imba-lazy-store-router: latest
-  imba-request: latest
+  imba-request: ^1.0.5
   mockjs: ^1.1.0
   nprogress: ^0.2.0
   prettier: ^2.2.1
@@ -39,10 +39,10 @@ specifiers:
 
 dependencies:
   axios: registry.npmmirror.com/axios/0.21.4
-  imba-cache: registry.npmmirror.com/imba-cache/1.0.3
+  imba-cache: registry.npmmirror.com/imba-cache/1.0.7
   imba-lazy: registry.npmmirror.com/imba-lazy/1.0.5
   imba-lazy-store-router: registry.npmmirror.com/imba-lazy-store-router/1.1.1_vue@3.2.22
-  imba-request: registry.npmmirror.com/imba-request/1.0.4
+  imba-request: registry.npmmirror.com/imba-request/1.0.5
   nprogress: registry.nlark.com/nprogress/0.2.0
   qs-stringify: registry.npmmirror.com/qs-stringify/1.2.1
   vue: registry.npmmirror.com/vue/3.2.22
@@ -2322,7 +2322,7 @@ packages:
     optional: true
 
   registry.npmmirror.com/@commitlint/load/15.0.0:
-    resolution: {integrity: sha512-Ak1YPeOhvxmY3ioe0o6m1yLGvUAYb4BdfGgShU8jiTCmU3Mnmms0Xh/kfQz8AybhezCC3AmVTyBLaBZxOHR8kg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@commitlint/load/download/@commitlint/load-15.0.0.tgz}
+    resolution: {integrity: sha512-Ak1YPeOhvxmY3ioe0o6m1yLGvUAYb4BdfGgShU8jiTCmU3Mnmms0Xh/kfQz8AybhezCC3AmVTyBLaBZxOHR8kg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@commitlint/load/download/@commitlint/load-15.0.0.tgz?cache=0&sync_timestamp=1637131952207&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40commitlint%2Fload%2Fdownload%2F%40commitlint%2Fload-15.0.0.tgz}
     name: '@commitlint/load'
     version: 15.0.0
     engines: {node: '>=v12'}
@@ -3253,10 +3253,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  registry.npmmirror.com/imba-cache/1.0.3:
-    resolution: {integrity: sha512-aelxUa+xcWNoo7S3blqiRSHgqHBtwM8z/+kh7PnAJ/A7cKVnfWt+opgQ6riHRX69kE3Pk562g9Z2jWAGOBYkkA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/imba-cache/download/imba-cache-1.0.3.tgz}
+  registry.npmmirror.com/imba-cache/1.0.7:
+    resolution: {integrity: sha512-OqscOnBAW7Fq1zK24KAx7QH70H3MK9Mm6p4sCJD7aslTw+jnXmgK9IYrl+flnp8E//oocSSpXd/C4nXmk1D5GA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/imba-cache/download/imba-cache-1.0.7.tgz}
     name: imba-cache
-    version: 1.0.3
+    version: 1.0.7
     engines: {node: '>=12'}
     dev: false
 
@@ -3273,7 +3273,7 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
-      imba-cache: registry.npmmirror.com/imba-cache/1.0.3
+      imba-cache: registry.npmmirror.com/imba-cache/1.0.7
       imba-lazy: registry.npmmirror.com/imba-lazy/1.0.5
       vue: registry.npmmirror.com/vue/3.2.22
       vue-demi: registry.npmmirror.com/vue-demi/0.12.1_vue@3.2.22
@@ -3286,13 +3286,13 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  registry.npmmirror.com/imba-request/1.0.4:
-    resolution: {integrity: sha512-KY1PPfHoG9ZzltyGNYhqPUyfdXQrRq/PS14CCBtbk4ciRjsMm4uF737LlsvAKf8amc63Q/yKG8ydgZ1xIKHXkw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/imba-request/download/imba-request-1.0.4.tgz}
+  registry.npmmirror.com/imba-request/1.0.5:
+    resolution: {integrity: sha512-Rb86+ZSs9KRCz18XhvQLJt4rY2B2v70hXi8ABQ8jLimFfYBgbJVxExVHgaryT43f3ohFK7vyAdQEbtsRJbaD4g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/imba-request/download/imba-request-1.0.5.tgz}
     name: imba-request
-    version: 1.0.4
+    version: 1.0.5
     engines: {node: '>=12'}
     dependencies:
-      imba-cache: registry.npmmirror.com/imba-cache/1.0.3
+      imba-cache: registry.npmmirror.com/imba-cache/1.0.7
       qs-stringify: registry.npmmirror.com/qs-stringify/1.2.1
     dev: false
 

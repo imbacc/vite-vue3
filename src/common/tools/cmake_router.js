@@ -42,7 +42,6 @@ router.beforeEach(({ path, matched }, from, next) => {
 			next(res)
 			return
 		}
-		console.log('res', res)
 		console.log('test berforeInject...')
 		next()
 	})

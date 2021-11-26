@@ -1,8 +1,8 @@
-import { set_cache_loca, get_cache_loca } from 'imba-cache'
+import { setCacheLoca, getCacheLoca } from 'imba-cache'
 
 const TOKEN = localStorage.getItem('token') || false
-const USER_INFO = get_cache_loca('user_info') || false
-const USER_ROLE = get_cache_loca('user_role') || []
+const USER_INFO = getCacheLoca('user_info') || false
+const USER_ROLE = getCacheLoca('user_role') || []
 
 //全局状态
 const state = {
@@ -18,11 +18,11 @@ const mutations = {
 	},
 	set_cache(state, [key, val]) {
 		state[key] = val
-		set_cache_loca(key, val)
+		setCacheLoca(key, val)
 	},
 	set_role(state, role) {
 		state.user_role = [...new Set([...state.user_role, ...role])]
-		set_cache_loca('user_role', state.user_role)
+		setCacheLoca('user_role', state.user_role)
 	},
 	set_logout(state) {
 		state.token = ''

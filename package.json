@@ -4,8 +4,8 @@
 	"license": "ISC",
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development vite --host",
-		"force": "cross-env NODE_ENV=development vite --force",
-		"debug": "cross-env NODE_ENV=development vite --debug",
+		"force": "cross-env NODE_ENV=development vite --host --force",
+		"debug": "cross-env NODE_ENV=development vite --host --debug",
 		"build": " cross-env NODE_ENV=production vite build",
 		"serve": "cross-env NODE_ENV=production vite preview --host",
 		"test:gzip": "npx http-server dist --cors --gzip -c-1"

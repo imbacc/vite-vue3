@@ -36,7 +36,6 @@ vite2.0 <https://vitejs.dev> vue3.0 <https://v3.cn.vuejs.org>
  │   │     │      ├── cmake_router.js  路由拦截
  │   │     │      ├── cmake_tools.js   自定义工具
  │   │     │      ├── cmake_zintercept.js   请求封装
- │   │     │      ├── cmake_zrequest.js     请求和响应拦截
  │   │     │── components              组件
  │   │     │── styles                  全局样式
  │   │     │── views                   页面入口

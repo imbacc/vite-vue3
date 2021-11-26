@@ -1,1 +1,1 @@
-console.log('test inject-test.js ...')
+console.log('test vite plugin inject-test.js ...')

@@ -21,7 +21,6 @@
 		"imba-lazy-store-router": "latest",
 		"imba-request": "latest",
 		"nprogress": "^0.2.0",
-		"qs-stringify": "^1.2.1",
 		"vue": "^3.2.4",
 		"vue-router": "^4.0.11",
 		"vuex": "^4.0.2"

@@ -5,7 +5,7 @@ import axios from 'axios'
 import store from '@/common/store/index.js'
 import message from '@/common/tools/cmake_message.js'
 
-import { env, time_out, page_name, size_name, is_dev } from '@common/config/cfg.js'
+import { env, time_out, page_key, size_key, is_dev } from '@common/config/cfg.js'
 import { setRequestInit, requestAction } from 'imba-request'
 
 const { VITE_GLOB_API_URL } = env
@@ -16,8 +16,8 @@ const http = axios.create({
 
 // 初始化封装请求包
 setRequestInit({
-	page: page_name,
-	size: size_name,
+	page: page_key,
+	size: size_key,
 	dev: is_dev,
 	http: http
 })

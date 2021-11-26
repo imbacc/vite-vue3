@@ -63,7 +63,7 @@ const config = {
 
 	//部门优化选项
 	optimizeDeps: {
-		entries: ['vue', 'vuex', 'nprogress', 'vue-router', 'qs-stringify', 'axios']
+		entries: ['vue', 'vuex', 'nprogress', 'vue-router', 'axios']
 		// include: [],
 		// exclude: ['screenfull', 'nprogress']
 	},

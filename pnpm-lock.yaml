@@ -15,11 +15,10 @@ specifiers:
   imba-cache: latest
   imba-lazy: latest
   imba-lazy-store-router: latest
-  imba-request: ^1.0.5
+  imba-request: latest
   mockjs: ^1.1.0
   nprogress: ^0.2.0
   prettier: ^2.2.1
-  qs-stringify: ^1.2.1
   rollup: ^2.60.0
   rollup-plugin-gzip: ^3.0.0
   sass: 1.38.1
@@ -44,7 +43,6 @@ dependencies:
   imba-lazy-store-router: registry.npmmirror.com/imba-lazy-store-router/1.1.1_vue@3.2.22
   imba-request: registry.npmmirror.com/imba-request/1.0.5
   nprogress: registry.nlark.com/nprogress/0.2.0
-  qs-stringify: registry.npmmirror.com/qs-stringify/1.2.1
   vue: registry.npmmirror.com/vue/3.2.22
   vue-router: registry.npmmirror.com/vue-router/4.0.12_vue@3.2.22
   vuex: registry.nlark.com/vuex/4.0.2_vue@3.2.22

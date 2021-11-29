@@ -82,15 +82,6 @@ const config = {
 		}
 	},
 
-	// 资源路径
-	// assetsDir: 'assets',
-
-	// 小于此数字（以字节为单位）的静态资产文件将内联为 base64字符串。默认限制为“4096”（4kb）。设置为“0”以禁用。
-	assetsInlineLimit: 4096,
-
-	//是否对CSS进行代码拆分。启用时，异步块中的CSS将在块中作为字符串内联，并通过动态创建的加载块时的样式标记。
-	cssCodeSplit: true,
-
 	// 插件
 	plugins: [vue(), envPlugin(), IconsPlugin(), componentsPlugin(), routerPagePlugin(), windicssPlugin(), htmlInjectPlugin()],
 

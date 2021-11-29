@@ -2,6 +2,20 @@
 
 # 使用 vite2 构建 vue3
 
+部分代码已封装成包
+<p>
+    <a href="https://www.npmjs.com/package/imba-cache">imba-cache</a>
+</p>
+<p>
+    <a href="https://www.npmjs.com/package/imba-lazy">imba-lazy</a>
+</p>
+<p>
+    <a href="https://www.npmjs.com/package/imba-lazy-store-router">imba-lazy-store-router</a>
+</p>
+<p>
+    <a href="https://www.npmjs.com/package/imba-request">imba-request</a>
+</p>
+
 掘金文章 -> <https://juejin.cn/post/6931614543999303694>
 
 vite2.0 <https://vitejs.dev> vue3.0 <https://v3.cn.vuejs.org>

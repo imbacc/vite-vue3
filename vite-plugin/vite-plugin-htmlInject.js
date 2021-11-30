@@ -1,7 +1,7 @@
 import html from 'vite-plugin-html'
 const env = process.env
 const is_dev = env.NODE_ENV === 'development'
-const path = is_dev ? 'src/assets/inject' : 'assets/inject'
+const path = '@/assets/inject'
 
 // inject
 const title = env.VITE_GLOB_APP_TITLE

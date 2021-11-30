@@ -25,9 +25,6 @@ const config = {
 		hmr: { overlay: false }
 	},
 
-	// 输出路径
-	outDir: 'dist',
-
 	//编译
 	build: {
 		target: 'modules',

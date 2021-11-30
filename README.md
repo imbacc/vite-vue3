@@ -26,6 +26,8 @@ vite2.0 <https://vitejs.dev> vue3.0 <https://v3.cn.vuejs.org>
 `pnpm run debug` `开启debug显示相关debug信息...`
 `pnpm run serve` `生成线上版本预览...`
 
+[![](https://cloudbase.net/deploy-en.svg)](https://console.cloud.tencent.com/webify/new?tpl=https%3A%2F%2Fgithub.com%2Fimbacc%2Fvite2-vue3)
+
 ```
  ├── node_modules                      依赖包
  ├── mock                              mock

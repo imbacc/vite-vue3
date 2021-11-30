@@ -1,12 +1,13 @@
 import router from '@/common/router/index.js'
 import store from '@/common/store/index.js'
+
 import { configure, start, done } from 'nprogress'
 import { setMetaKey, setUserRole, berforeInject } from 'imba-lazy-store-router'
 
 configure({ showSpinner: false })
 
 // 跳过
-const jump_list = ['/ddd']
+const jump_list = ['/401', '/404']
 //检查权限
 const user_role = () => store.state.user_vuex.user_role
 // 检查登录
@@ -22,7 +23,7 @@ setMetaKey({
 // 设置berforeInject useRole 数据
 setUserRole(user_role)
 
-// ...前置守卫
+// ...前置
 router.beforeEach(({ path, matched }, from, next) => {
 	start()
 	if (path === '/login') {
@@ -47,9 +48,14 @@ router.beforeEach(({ path, matched }, from, next) => {
 	})
 })
 
-// ...后置钩子
+// ...后置
 router.afterEach((to, from) => {
 	done()
+})
+
+// err
+router.onError((err) => {
+	console.log('err', err)
 })
 
 export default router

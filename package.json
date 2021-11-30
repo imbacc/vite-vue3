@@ -2,6 +2,7 @@
 	"name": "vite2-vue3",
 	"version": "1.0.0",
 	"license": "ISC",
+	"author": "imbacc",
 	"scripts": {
 		"dev": "cross-env NODE_ENV=development vite --host",
 		"force": "cross-env NODE_ENV=development vite --host --force",
@@ -43,7 +44,6 @@
 		"vite-plugin-html": "^2.1.1",
 		"vite-plugin-mock": "^2.9.6",
 		"vite-plugin-pages": "^0.18.2",
-		"vite-plugin-remote-assets": "^0.2.2",
 		"vite-plugin-style-import": "^1.2.1",
 		"vite-plugin-windicss": "^1.5.3"
 	}

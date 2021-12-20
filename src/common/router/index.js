@@ -18,11 +18,11 @@ const router = createRouter({
 		{
 			path: '/401',
 			name: '401',
-			component: () => import('@views/error-page/401.vue')
+			component: () => import('@views/error/401.vue')
 		},
 		{
 			path: '/:pathMatch(.*)*',
-			component: () => import('@views/error-page/404.vue')
+			component: () => import('@views/error/404.vue')
 		},
 		...generatedRouters
 	]

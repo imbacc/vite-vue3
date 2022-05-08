@@ -25,6 +25,9 @@ const config = {
 		hmr: { overlay: false }
 	},
 
+	// 输出路径
+	outDir: 'dist',
+
 	//编译
 	build: {
 		target: 'modules',
@@ -34,7 +37,7 @@ const config = {
 		// 生成生产map
 		sourcemap: false,
 		// 关闭brotliSize显示可以稍微缩短打包时间
-		brotliSize: false,
+		brotliSize: true,
 		// chunk 大小警告的限制
 		chunkSizeWarningLimit: 500,
 		// 小于此数字（以字节为单位）的静态资产文件将内联为 base64字符串。默认限制为“4096”（4kb）。设置为“0”以禁用。
@@ -60,7 +63,7 @@ const config = {
 
 	//部门优化选项
 	optimizeDeps: {
-		entries: ['vue', 'vuex', 'nprogress', 'vue-router', 'axios']
+		entries: ['vue', 'nprogress', 'vue-router', 'axios']
 		// include: [],
 		// exclude: ['screenfull', 'nprogress']
 	},
@@ -71,11 +74,6 @@ const config = {
 			// '/@': root, vite 内部在用，这里不能用了
 			// '/root': __dirname, vite 内部在用，这里不能用了
 			'@': resolve(__dirname, 'src'),
-			'@assets': resolve(__dirname, 'src/assets'),
-			'@components': resolve(__dirname, 'src/components'),
-			'@views': resolve(__dirname, 'src/views'),
-			'@common': resolve(__dirname, 'src/common'),
-			'@styles': resolve(__dirname, 'src/styles')
 		}
 	},
 

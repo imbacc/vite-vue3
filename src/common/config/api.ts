@@ -1,4 +1,4 @@
-import action from '@/common/tools/cmake_zintercept.js'
+import action from '@/common/tools/cmake_zintercept'
 import { lazyModule } from 'imba-lazy'
 import { METHOD } from './cfg.js'
 

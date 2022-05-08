@@ -1,4 +1,4 @@
-# vite2-vue3
+# vite2-vue3-ts
 
 # 使用 vite2 构建 vue3
 
@@ -8,9 +8,6 @@
 </p>
 <p>
     <a href="https://www.npmjs.com/package/imba-lazy">imba-lazy</a>
-</p>
-<p>
-    <a href="https://www.npmjs.com/package/imba-lazy-store-router">imba-lazy-store-router</a>
 </p>
 <p>
     <a href="https://www.npmjs.com/package/imba-request">imba-request</a>

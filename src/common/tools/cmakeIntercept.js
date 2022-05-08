@@ -7,6 +7,9 @@ import message from '@/common/tools/cmake_message.js'
 
 import { env, time_out, page_key, size_key, is_dev } from '@common/config/cfg.js'
 import { setRequestInit, requestAction } from 'imba-request'
+import { useUserStore } from '@/common/store/user.js'
+
+import loadingRender from '@/common/render/loadingRender.js'
 
 const { VITE_GLOB_API_URL } = env
 const http = axios.create({
@@ -22,7 +25,7 @@ setRequestInit({
 	http: http
 })
 
-const error_msg = async (msg = '网络异常') => {
+const error_msg = async (msg = '服务器开小差了~') => {
 	console.error(msg)
 	message.send(msg, 'error').hide()
 }
@@ -44,18 +47,21 @@ const repeat_function = (cache_name) => {
 }
 
 const repeat_record = {}
+const repeat_clear = () => Object.keys(repeat_record).forEach((key) => repeat_delete(key))
 const repeat_delete = (cache_name) => delete repeat_record[cache_name]
 
 // 请求拦截器
 http.interceptors.request.use(
 	(config) => {
+		const userStore = useUserStore()
+
 		// 在发送请求之前做些什么
 		let _data = {}
 
 		try {
 			_data = JSON.parse(config.data)
 		} catch (error) {
-			_data = {}
+			_data = typeof config.data === 'object' ? config.data : {}
 		}
 
 		const { _noToken, _formData, _header } = _data
@@ -69,12 +75,12 @@ http.interceptors.request.use(
 
 		if (_noToken) {
 			delete config.data['_noToken']
-			delete config.header['x-access-token']
-			delete config.header['Authorization']
+			delete config.headers['x-access-token']
+			delete config.headers['Authorization']
 		}
 
 		if (_formData) {
-			config.header['content-Type'] = 'application/x-www-form-urlencoded'
+			config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
 			delete config.data['_formData']
 		}
 
@@ -82,6 +88,8 @@ http.interceptors.request.use(
 			config.headers = { ...config.headers, ..._header }
 			delete config.data['_header']
 		}
+
+		loadingRender.open()
 
 		// console.log("【config】 " + JSON.stringify(config))
 		return config
@@ -99,16 +107,18 @@ http.interceptors.response.use(
 
 		repeat_delete(config.url)
 
+		loadingRender.close()
+
 		if (status === 401) {
 			go_logion()
 			return
 		}
 
 		if (status === 200) {
-			if (data.code === 0) return data.data
+			if (data.code === 0 || data?.msg === 'success') return data.data
 		}
 
-		if (data && data?.code < 0) {
+		if (data && data?.code < 0 || data?.msg === 'error') {
 			error_msg(data.msg)
 			return Boolean(false)
 		}
@@ -118,24 +128,18 @@ http.interceptors.response.use(
 	(error) => {
 		// 对响应错误做点什么
 		const err = error.toString()
+		console.error('response error', err)
 		const { code, msg, message } = error.response?.data || {}
 
 		if (error.response?.config) repeat_delete(error.response.config.url)
+
+		loadingRender.close()
 
 		// 重复请求
 		if (err.indexOf('_repeat_') !== -1) {
 			let key = err.split('_repeat_')
 			key = key[key.length - 1].trim()
 			repeat_delete(key)
-			return Boolean(false)
-		}
-
-		if (code && code < 0) {
-			if (code === -99999) {
-				localStorage.removeItem('token')
-				location = '/login'
-			}
-			error_msg(msg)
 			return Boolean(false)
 		}
 
@@ -167,6 +171,7 @@ http.interceptors.response.use(
 		}
 
 		if (err.indexOf('Error') !== -1) {
+			repeat_clear()
 			error_msg(message || '网络异常')
 			return Boolean(false)
 		}

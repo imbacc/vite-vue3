@@ -1,4 +1,5 @@
 import routerPages from 'vite-plugin-pages'
+import { camelCase } from 'lodash'
 
 export default () => {
 	return routerPages({
@@ -6,14 +7,11 @@ export default () => {
 			if (route.path === '/') return route
 			const split = route.path.split('/').filter((f) => f)
 			const name = split[split.length - 1]
-			route.name = name
+			route.name = camelCase(name)
 			route.path = `/${name}`
 			return route
-			// return {
-			// 	...route,
-			// 	meta: { auth: ['user'] }
-			// }
 		},
-		pagesDir: 'src/views'
+		pagesDir: 'src/views',
+		extensions: ['vue']
 	})
 }

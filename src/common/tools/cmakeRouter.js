@@ -25,16 +25,19 @@ setUserRole(user_role)
 
 // ...前置
 router.beforeEach(({ path, matched }, from, next) => {
+	const userStore = useUserStore()
+	
 	start()
-	if (path === '/login') {
-		next()
-		return
-	}
 
 	const ignore = jump_list.includes(path)
-	if (!ignore && !check_login()) {
-		next('/login')
-		return
+	if (path === '/login' || ignore) {
+	  next()
+	  return
+	}
+  
+	if (!ignore && !userStore.hasLogin) {
+	  next('/login')
+	  return
 	}
 
 	// 懒加载执行函数

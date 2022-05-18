@@ -1,10 +1,11 @@
-//配置
+import type { METHOD_DTYPE } from '#/global'
 
 // 请求体方式
-const METHOD = {
+const METHOD: { [key in METHOD_DTYPE]: METHOD_DTYPE } = {
 	POST: 'POST',
 	GET: 'GET',
-	PUT: 'PUT'
+	PUT: 'PUT',
+	OPTIONS: 'OPTIONS'
 }
 
 const { clientWidth, clientHeight } = document.body

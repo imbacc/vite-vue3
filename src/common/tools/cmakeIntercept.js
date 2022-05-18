@@ -5,7 +5,7 @@ import axios from 'axios'
 import store from '@/common/store/index.js'
 import message from '@/common/tools/cmake_message.js'
 
-import { env, time_out, page_key, size_key, is_dev } from '@common/config/cfg.js'
+import { env, time_out, page_key, size_key, is_dev } from '@/common/config/cfg.js'
 import { setRequestInit, requestAction } from 'imba-request'
 import { useUserStore } from '@/common/store/user.js'
 
@@ -70,7 +70,7 @@ http.interceptors.request.use(
 		const _repeat = repeat_function(url)
 		if (_repeat) return Promise.reject(`_repeat_${url}`)
 
-		let token = store.state.user_vuex.token
+		let token = userStore.token
 		if (token) config.headers['Authorization'] = `bearer ${token}`
 
 		if (_noToken) {
@@ -118,7 +118,7 @@ http.interceptors.response.use(
 			if (data.code === 0 || data?.msg === 'success') return data.data
 		}
 
-		if (data && data?.code < 0 || data?.msg === 'error') {
+		if ((data && data?.code < 0) || data?.msg === 'error') {
 			error_msg(data.msg)
 			return Boolean(false)
 		}

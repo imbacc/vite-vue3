@@ -6,7 +6,7 @@ import store from '@/common/store/index'
 import router from '@/common/tools/cmakeRouter'
 
 // js
-import { env, is_cdn } from '@/common/config/cfg.js'
+import { env, isCdn } from '@/common/config/cfg.js'
 import direct from '@/common/directive/index' // 指令
 
 // 全局样式
@@ -22,7 +22,7 @@ app.mount('#app')
 console.log('import.meta.env', env)
 
 // 全局 property
-app.config.globalProperties.is_cdn = is_cdn
+app.config.globalProperties.is_cdn = isCdn
 
 // dev工具
 // app.config.devtools = is_dev

@@ -20,16 +20,17 @@ import htmlInjectPlugin from './vite-plugin/vite-plugin-htmlInject.js' //html in
 
 const config = {
 	server: {
-		// minify: 'esbuild',
 		// open: '/',
 		hmr: { overlay: false }
 	},
 
 	// 输出路径
 	outDir: 'dist',
+	publicDir: 'public',
 
 	//编译
 	build: {
+		minify: 'esbuild',
 		target: 'modules',
 		cssCodeSplit: true,
 		outDir: 'dist',
@@ -73,7 +74,7 @@ const config = {
 			// v2.0不再需要/开始/结束斜杠。 /@/ -> @
 			// '/@': root, vite 内部在用，这里不能用了
 			// '/root': __dirname, vite 内部在用，这里不能用了
-			'@': resolve(__dirname, 'src'),
+			'@': resolve(__dirname, 'src')
 		}
 	},
 
@@ -84,7 +85,7 @@ const config = {
 	css: {
 		preprocessorOptions: {
 			scss: {
-				additionalData: `@use "@styles/global.scss" as *;`
+				additionalData: `@use "@/styles/global.scss" as *;`
 			}
 		}
 	}

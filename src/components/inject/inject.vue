@@ -6,21 +6,21 @@
 </template>
 
 <script>
-import { watchEffect, defineComponent, toRefs } from 'vue'
+	import { watchEffect, defineComponent, toRefs } from 'vue'
 
-import { useState } from '@common/provide/num.js'
+	import { useState } from '@/common/provide/num.js'
 
-export default defineComponent({
-	props: {
-		msg: String
-	},
-	setup() {
-		const { num } = toRefs(useState())
-		watchEffect(() => console.log(`watchEffect num: ${num}`))
+	export default defineComponent({
+		props: {
+			msg: String
+		},
+		setup() {
+			const { num } = toRefs(useState())
+			watchEffect(() => console.log(`watchEffect num: ${num}`))
 
-		return {
-			num
+			return {
+				num
+			}
 		}
-	}
-})
+	})
 </script>

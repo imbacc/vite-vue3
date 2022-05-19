@@ -8,12 +8,12 @@ configure({ showSpinner: false })
 // 跳过
 const jump_list = ['/401', '/404']
 //检查权限
-const user_role = () => useUserStore().userRole
+// const userRole = () => useUserStore().userRole
 // 检查登录
-const check_login = () => useUserStore().token
+// const checkLogin = () => useUserStore().token
 
 // ...前置
-router.beforeEach(({ path, matched }, from, next) => {
+router.beforeEach(({ path }, _from, next) => {
 	const userStore = useUserStore()
 
 	start()
@@ -33,7 +33,7 @@ router.beforeEach(({ path, matched }, from, next) => {
 })
 
 // ...后置
-router.afterEach((to, from) => {
+router.afterEach((_to, _from) => {
 	done()
 })
 

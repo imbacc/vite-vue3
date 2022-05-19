@@ -1,5 +1,4 @@
 import { setCacheLoca, getCacheLoca, delCache } from 'imba-cache'
-import { useLocalStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
 
 const TOKEN = localStorage.getItem('token') || false
@@ -15,24 +14,27 @@ export const useUserStore = defineStore('user', {
 		}
 	},
 	getters: {
-		hasLogin() {
+		hasLogin(): boolean {
 			return Boolean(Object.keys(this.userInfo).length > 0 && this.token)
 		},
-		getSiteId() {
+		getSiteId(): Object {
 			return this.userInfo && this.userInfo.siteid
 		}
 	},
 	actions: {
-		setCache(key, val) {
+		setCache(key: string, val: any) {
 			this.$patch({ [key]: val })
 			setCacheLoca(key, val)
 		},
-		setRole(role) {
+		setRole(role: Array<string>) {
 			this.userRole = [...new Set([...this.userRole, ...role])]
 			setCacheLoca('userRole', this.userRole)
 		},
-		setLogout(state) {
-			this.$patch({ token: '', userInfo: false, userRole: [] })
+		setLogout() {
+			this.token = ''
+			this.userInfo = false
+			this.userRole = []
+			// this.$patch({ token: '', userInfo: false, userRole: [] })
 			delCache('token')
 			delCache('userInfo')
 			delCache('userRole')

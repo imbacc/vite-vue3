@@ -3,7 +3,7 @@
 	<button @click="login">login</button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 	//setup 方式书写 实验阶段正式环境不建议
 	import { useUserStore } from '@/common/store/user.js'
 	import { useRouter } from 'vue-router'

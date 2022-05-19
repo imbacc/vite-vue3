@@ -30,7 +30,7 @@
 	} from 'vue'
 	import { useRouter } from 'vue-router'
 
-	import { provideState, numObj, numAddFun } from '@/common/provide/num.js'
+	import { provideState, numObj, numAddFun } from '@/common/provide/num'
 
 	export default {
 		setup() {

@@ -5,22 +5,12 @@
 	</div>
 </template>
 
-<script>
-	import { watchEffect, defineComponent, toRefs } from 'vue'
+<script setup lang="ts">
+	import { watchEffect, toRefs, defineProps } from 'vue'
+	import { useState } from '@/common/provide/num'
 
-	import { useState } from '@/common/provide/num.js'
+	defineProps({ msg: String })
 
-	export default defineComponent({
-		props: {
-			msg: String
-		},
-		setup() {
-			const { num } = toRefs(useState())
-			watchEffect(() => console.log(`watchEffect num: ${num}`))
-
-			return {
-				num
-			}
-		}
-	})
+	const { num } = toRefs(useState())
+	watchEffect(() => console.log(`watchEffect num: ${num}`))
 </script>

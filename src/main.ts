@@ -10,8 +10,8 @@ import { env, isCdn } from '@/common/config/cfg.js'
 import direct from '@/common/directive/index' // 指令
 
 // 全局样式
+import 'virtual:windi.css' // 原始样式都给我干没了
 import 'nprogress/nprogress.css'
-// import 'windi.css' // win
 
 const app = createApp(App)
 app.use(direct)

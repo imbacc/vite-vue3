@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
-// import { setLazyRouter } from 'imba-lazy-store-router'
+// @ts-ignore
 import generatedRouters from 'virtual:generated-pages'
 console.log('generatedRouters', generatedRouters)
 
@@ -27,9 +27,5 @@ const router = createRouter({
 		...generatedRouters
 	]
 })
-
-// vite自动导入
-// const moduleArray = import.meta.glob('./module/*.js')
-// setLazyRouter(moduleArray, router)
 
 export default router

@@ -1,17 +1,19 @@
+import type { App } from 'vue'
+
 import { useUserStore } from '@/common/store/user.js'
 
 const userStore = useUserStore()
 
-const hasAuth = (role_list) => {
+const hasAuth = (roleList: Array<string>) => {
 	const userRole = userStore.userRole
-	if (userRole && Array.isArray(userRole) && Array.isArray(role_list)) {
-		const some = role_list.some((s) => userRole.includes(s))
+	if (userRole && Array.isArray(userRole) && Array.isArray(roleList)) {
+		const some = roleList.some((s) => userRole.includes(s))
 		return some
 	}
 	return false
 }
 
-export default (app) => {
+export default (app: App) => {
 	app.directive('test', {
 		// Directive has a set of lifecycle hooks:
 		// called before bound element's parent component is mounted

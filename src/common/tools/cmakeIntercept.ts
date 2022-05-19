@@ -1,27 +1,26 @@
-/**
- * 拦截请求
- */
-import axios from 'axios'
-import store from '@/common/store/index.js'
-import message from '@/common/tools/cmake_message.js'
+import type { AxiosRequestHeaders } from 'axios'
+import type { repeatRecord_DTYPE, repeatRecord_KEYOF, requestUseData_DTYPE } from '#/cmakeIntercept'
 
-import { env, time_out, page_key, size_key, is_dev } from '@/common/config/cfg.js'
+import axios from 'axios'
+import message from '@/common/render/messageRender'
+
+import { env, timeOut, pageKey, sizeKey, isDev } from '@/common/config/cfg.js'
 import { setRequestInit, requestAction } from 'imba-request'
 import { useUserStore } from '@/common/store/user.js'
 
 import loadingRender from '@/common/render/loadingRender.js'
 
-const { VITE_GLOB_API_URL } = env
+const baseURL = env.VITE_GLOB_API_URL
 const http = axios.create({
-	baseURL: VITE_GLOB_API_URL, // url = base url + request url
-	timeout: time_out
+	baseURL: baseURL, // url = base url + request url
+	timeout: timeOut
 })
 
 // 初始化封装请求包
 setRequestInit({
-	page: page_key,
-	size: size_key,
-	dev: is_dev,
+	page: pageKey,
+	size: sizeKey,
+	dev: isDev,
 	http: http
 })
 
@@ -32,23 +31,23 @@ const error_msg = async (msg = '服务器开小差了~') => {
 
 const go_logion = () => {
 	localStorage.removeItem('token')
-	window.location = '/login'
+	window.location.href = '/login'
 }
 
-const repeat_function = (cache_name) => {
+const repeat_function = (cacheName: repeatRecord_KEYOF) => {
 	// 处理重复请求
-	const repeat_mark = repeat_record[cache_name]
-	if (!repeat_mark) {
-		repeat_record[cache_name] = true
+	const repeatMark = repeatRecord[cacheName]
+	if (!repeatMark) {
+		repeatRecord[cacheName] = true
 		return false
 	}
-	console.error(`${cache_name} 请求重复!`)
+	console.error(`${cacheName} 请求重复!`)
 	return true
 }
 
-const repeat_record = {}
-const repeat_clear = () => Object.keys(repeat_record).forEach((key) => repeat_delete(key))
-const repeat_delete = (cache_name) => delete repeat_record[cache_name]
+const repeatRecord: repeatRecord_DTYPE = {}
+const repeat_clear = () => Object.keys(repeatRecord).forEach((key) => repeat_delete(key))
+const repeat_delete = (cacheName: repeatRecord_KEYOF) => delete repeatRecord[cacheName]
 
 // 请求拦截器
 http.interceptors.request.use(
@@ -56,7 +55,7 @@ http.interceptors.request.use(
 		const userStore = useUserStore()
 
 		// 在发送请求之前做些什么
-		let _data = {}
+		let _data: requestUseData_DTYPE = {}
 
 		try {
 			_data = JSON.parse(config.data)
@@ -67,20 +66,20 @@ http.interceptors.request.use(
 		const { _noToken, _formData, _header } = _data
 		const url = config.url
 
-		const _repeat = repeat_function(url)
+		const _repeat = repeat_function(url as repeatRecord_KEYOF)
 		if (_repeat) return Promise.reject(`_repeat_${url}`)
 
 		let token = userStore.token
-		if (token) config.headers['Authorization'] = `bearer ${token}`
+		if (token) (config.headers as AxiosRequestHeaders)['Authorization'] = `bearer ${token}`
 
 		if (_noToken) {
 			delete config.data['_noToken']
-			delete config.headers['x-access-token']
-			delete config.headers['Authorization']
+			delete (config.headers as any)['x-access-token']
+			delete (config.headers as any)['Authorization']
 		}
 
 		if (_formData) {
-			config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+			;(config.headers as any)['Content-Type'] = 'application/x-www-form-urlencoded'
 			delete config.data['_formData']
 		}
 
@@ -105,7 +104,7 @@ http.interceptors.response.use(
 	(response) => {
 		const { status, data, config } = response
 
-		repeat_delete(config.url)
+		repeat_delete(config.url as repeatRecord_KEYOF)
 
 		loadingRender.close()
 
@@ -129,7 +128,7 @@ http.interceptors.response.use(
 		// 对响应错误做点什么
 		const err = error.toString()
 		console.error('response error', err)
-		const { code, msg, message } = error.response?.data || {}
+		const { message } = error.response?.data || {}
 
 		if (error.response?.config) repeat_delete(error.response.config.url)
 

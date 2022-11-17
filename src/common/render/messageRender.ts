@@ -1,8 +1,16 @@
-import { ref, render, h } from 'vue'
+import type { CompRender_DTYPE } from '#/loadingRender'
+import type { Component } from 'vue'
+
+import { render, h } from 'vue'
 import messageComp from '@/components/message/message.vue'
 
-class messageRender {
-	constructor(option) {
+class messageRender implements CompRender_DTYPE {
+	public comp: Component | any
+	public option: { [x: string]: any }
+	public container: HTMLElement | null
+	private time: NodeJS.Timeout | null
+
+	constructor(option?: { [key in string]: any }) {
 		this.comp = null
 		this.option = option || {}
 		this.container = null
@@ -17,27 +25,27 @@ class messageRender {
 		// 渲染组件
 		render(this.comp, this.container)
 		// 将模态框添加至 body
-		document.querySelector('#app').appendChild(this.container.firstElementChild)
+		document.querySelector('#app')?.appendChild(this.container.firstElementChild as Element)
 		return this.comp.component.proxy
 	}
 
 	// 调用组建函数
-	send(...args) {
+	send(...args: [string, string]) {
 		this.init().message(...args)
 		return this
 	}
 
 	hide() {
-		clearTimeout(this.time)
+		clearTimeout(this.time as NodeJS.Timeout)
 		this.time = setTimeout(() => {
-			clearTimeout(this.time)
+			clearTimeout(this.time as NodeJS.Timeout)
 			this.init().hide()
 		}, 6000)
 	}
 
 	// 卸载
 	destroy() {
-		render(null, this.container)
+		render(null, this.container as Element)
 	}
 }
 

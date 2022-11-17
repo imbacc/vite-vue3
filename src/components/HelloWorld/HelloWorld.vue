@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<img alt="Vue logo" :src="logo_png" />
-		<h1>{{ msg }}</h1>
-		<button @click="value++">count is: {{ value }}</button>
+		<img alt="Vue logo" :src="logoPng" />
+		<h1>{{ props.msg }}</h1>
+		<button @click="value++">count is: {{ props.value }}</button>
 		<p>
 			Edit
 			<code>components/HelloWorld.vue</code>
@@ -12,41 +12,27 @@
 	</div>
 </template>
 
-<script>
-	import { reactive, toRefs, defineComponent } from 'vue'
-	import logo_png from '@/assets/logo.png'
+<script setup lang="ts">
+	import logoPng from '@/assets/logo.png'
 
-	export default defineComponent({
-		props: {
-			msg: String
-		},
-		emit: ['call'],
-		setup(props, { emit }) {
-			console.log('props=', props)
-			// ---reactive---
-			const data = reactive({ value: 0 })
+	import { reactive, defineProps, defineEmits } from 'vue'
 
-			// ---function---
-			const onclick = (msg) => emit('call', msg)
+	const props = defineProps({ msg: String })
+	const emit = defineEmits(['call'])
 
-			const refClick = () => {
-				console.log('refclick...')
-				fetch('/api/index/ddd')
-					.then((res) => res.json())
-					.then((res) => {
-						console.log('/api/index/ddd', res)
-					})
-			}
+	console.log('props=', props)
+	// ---reactive---
+	const data = reactive({ value: 0 })
 
-			return {
-				// ---reactive---
-				...toRefs(data),
-				// ---function---
-				refClick,
-				onclick,
-				// ---other---
-				logo_png
-			}
-		}
-	})
+	// ---function---
+	const onclick = (msg: string) => emit('call', msg)
+
+	const refClick = () => {
+		console.log('refclick...')
+		fetch('/api/index/ddd')
+			.then((res) => res.json())
+			.then((res) => {
+				console.log('/api/index/ddd', res)
+			})
+	}
 </script>

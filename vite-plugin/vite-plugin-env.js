@@ -17,7 +17,9 @@ const createProxy = (list = []) => {
 		ret[prefix] = {
 			target: target,
 			changeOrigin: true,
-			rewrite: (path) => path.replace(new RegExp(`^${prefix}`), '')
+			ws: true,
+			rewrite: (path) => path.replace(/^\/api/, '')
+			// rewrite: (path) => path.replace(new RegExp(`^${prefix}`), '')
 		}
 	}
 	return ret
@@ -36,11 +38,11 @@ export default function myPlugin() {
 				proxy: createProxy(VITE_PROXY || [])
 			},
 			build: {
-				polyfillDynamicImport: VITE_LEGACY || false,
+				polyfillDynamicImport: Boolean(VITE_LEGACY) || false,
 				terserOptions: {
 					compress: {
 						keep_infinity: true,
-						drop_console: VITE_DROP_CONSOLE || false
+						drop_console: Boolean(VITE_DROP_CONSOLE) || false
 					}
 				}
 			}

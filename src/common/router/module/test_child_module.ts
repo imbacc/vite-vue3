@@ -10,7 +10,6 @@ export default [
 		name: 'test',
 		component: () => import('@/views/test/index.vue'),
 		meta: {
-			store: ['test_vuex'],
 			father: 'layout',
 			child: ['test_child_router']
 		}
@@ -20,7 +19,6 @@ export default [
 		name: 'home',
 		component: () => import('@/views/test/index.vue'),
 		meta: {
-			store: ['test_vuex'],
 			father: 'layout',
 			child: ['test_child_router']
 		}

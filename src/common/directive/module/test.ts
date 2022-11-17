@@ -1,15 +1,19 @@
-import store from '@/common/store/index.js'
+import type { App } from 'vue'
 
-const hasAuth = (role_list) => {
-	const user_role = store.state?.user_vuex.user_role
-	if (user_role && Array.isArray(user_role) && Array.isArray(role_list)) {
-		const some = role_list.some((s) => user_role.includes(s))
+import { useUserStore } from '@/common/store/user.js'
+
+const userStore = useUserStore()
+
+const hasAuth = (roleList: Array<string>) => {
+	const userRole = userStore.userRole
+	if (userRole && Array.isArray(userRole) && Array.isArray(roleList)) {
+		const some = roleList.some((s) => userRole.includes(s))
 		return some
 	}
 	return false
 }
 
-export default (app) => {
+export default (app: App) => {
 	app.directive('test', {
 		// Directive has a set of lifecycle hooks:
 		// called before bound element's parent component is mounted

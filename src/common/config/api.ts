@@ -1,9 +1,11 @@
-import action from '@/common/tools/cmake_zintercept.js'
+import type { api_DTYPE } from '#/global'
+
+import action from '@/common/tools/cmakeIntercept.js'
 import { lazyModule } from 'imba-lazy'
 import { METHOD } from './cfg.js'
 
 // 公共api
-const api = {
+const api: api_DTYPE = {
 	// 普通API 默认请求类型按http_action.js设定 当前默认POST
 	app_111: 'index/ddd',
 	app_222: 'index/:id/fff', // 在param传入 _id 即可
@@ -20,7 +22,7 @@ const api = {
 const moduleFiles = import.meta.glob('./module/*.js')
 // console.log('api moduleFiles', moduleFiles)
 
-export default (name, ...args) => {
+export default (name: string, ...args: Array<any>) => {
 	// 外链请求 不要可以去除
 	if (args && args[0] && args[0]._onec) return name && action(name, ...args)
 
@@ -28,7 +30,7 @@ export default (name, ...args) => {
 	if (name && name.indexOf('/') !== -1) {
 		let [fileName, apiName] = name.split('/')
 		return new Promise((resolve) => {
-			lazyModule(fileName, moduleFiles).then((moduleApi) => {
+			lazyModule(fileName, moduleFiles).then((moduleApi: any) => {
 				resolve(action(moduleApi[apiName], ...args))
 			})
 		})

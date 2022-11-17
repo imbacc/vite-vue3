@@ -2,31 +2,22 @@
 	<div v-show="bool" class="csc">csc 0731</div>
 </template>
 
-<script>
+<script setup lang="ts">
 	import { ref } from 'vue'
 
-	export default {
-		setup() {
-			const bool = ref(false)
+	const bool = ref(false)
 
-			const message = (msg, type) => {
-				console.log('msg', msg)
-				console.log('type', type)
-				bool.value = true
-				console.error(`msg: ${msg} | type: ${type}`)
-				// hide()
-			}
+	// ---function---
+	const message = (msg, type) => {
+		console.log('msg', msg)
+		console.log('type', type)
+		bool.value = true
+		console.error(`msg: ${msg} | type: ${type}`)
+		// hide()
+	}
 
-			const hide = () => {
-				bool.value = false
-			}
-
-			return {
-				bool,
-				message,
-				hide
-			}
-		}
+	const hide = () => {
+		bool.value = false
 	}
 </script>
 

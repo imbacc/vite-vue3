@@ -26,7 +26,7 @@
 
 <script setup>
 	//setup 方式书写 实验阶段正式环境不建议
-	import api from '@/common/config/api.js'
+	import api from '@/common/config/api'
 
 	// api('https://www.baidu.com', { _onec: true, wd: 'vite2vue3' }, {}, 'GET') // 外链请求
 	const test_api_get_test = () => api('test_api/get_test') // 请求test_api.js 里的 get_test

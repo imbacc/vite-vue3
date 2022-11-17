@@ -2,32 +2,30 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 // store 和 router
-import store from '@/common/store/index.js'
-import router from '@/common/tools/cmake_router.js'
-import { initLzayStore, initLzayRouter } from 'imba-lazy-store-router'
+import store from '@/common/store/index'
+import router from '@/common/tools/cmakeRouter'
 
 // js
-import { env, is_cdn, is_dev } from '@/common/config/cfg.js'
-import direct from '@common/directive/index.js' // 指令
+import { env, isCdn } from '@/common/config/cfg.js'
+import direct from '@/common/directive/index' // 指令
 
 // 全局样式
+import 'virtual:windi.css' // 原始样式都给我干没了
 import 'nprogress/nprogress.css'
-// import 'windi.css' // win
 
 const app = createApp(App)
-Promise.allSettled([direct(app), initLzayStore(), initLzayRouter()]).then(() => {
-	app.use(store)
-	app.use(router)
-	app.mount('#app')
-})
+app.use(direct)
+app.use(store)
+app.use(router)
+app.mount('#app')
 
 console.log('import.meta.env', env)
 
 // 全局 property
-app.config.globalProperties.is_cdn = is_cdn
+app.config.globalProperties.is_cdn = isCdn
 
 // dev工具
-app.config.devtools = is_dev
+// app.config.devtools = is_dev
 
 // 处理错误
 // app.config.errorHandler = (err, vm, info) => {

@@ -1,12 +1,9 @@
 {
 	"compilerOptions": {
+		"module": "es6",
 		"target": "es6",
-		"module": "esnext",
 		"baseUrl": ".",
 		"allowJs": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"useDefineForClassFields": true,
 		"moduleResolution": "node",
 		"strict": true,
 		"jsx": "preserve",

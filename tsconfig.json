@@ -30,7 +30,7 @@
 			"#/*": ["./types/*"]
 		}
 	},
-	"include": ["src/**/*.ts", "types/**/*.d.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue","types/**/*.d.ts","vite-plugin/**/*.ts",],
 	"exclude": ["node_modules", "tests", ".history"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+	// "references": [{ "path": "./tsconfig.node.json" }]
 }

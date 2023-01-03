@@ -10,7 +10,7 @@ for (const k in envMerge) {
   env[k] = envMerge[k]
 }
 
-const createProxy = (list: string[] = []) => {
+const createProxy = (list: any[] = []) => {
   if (typeof list === 'string') list = JSON.parse(list)
   const ret = {}
   for (const [prefix, target] of list) {

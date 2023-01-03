@@ -2,13 +2,13 @@ import type { AxiosRequestHeaders } from 'axios'
 import type { repeatRecord_DTYPE, repeatRecord_KEYOF, requestUseData_DTYPE } from '#/cmakeIntercept'
 
 import axios from 'axios'
-import message from '@/common/render/messageRender'
+import message from '@/render/messageRender'
 
-import { env, timeOut, pageKey, sizeKey, isDev } from '@/common/config/cfg.js'
+import { env, timeOut, pageKey, sizeKey, isDev } from '@/common/cfg.js'
 import { setRequestInit, requestAction } from 'imba-request'
-import { useUserStore } from '@/common/store/user.js'
+import { useUserStore } from '@/store/user.js'
 
-import loadingRender from '@/common/render/loadingRender.js'
+import loadingRender from '@/render/loadingRender.js'
 
 const baseURL = env.VITE_GLOB_API_URL
 const http = axios.create({
@@ -69,7 +69,7 @@ http.interceptors.request.use(
 		const _repeat = repeat_function(url as repeatRecord_KEYOF)
 		if (_repeat) return Promise.reject(`_repeat_${url}`)
 
-		let token = userStore.token
+		const token = userStore.token
 		if (token) (config.headers as AxiosRequestHeaders)['Authorization'] = `bearer ${token}`
 
 		if (_noToken) {
@@ -79,7 +79,7 @@ http.interceptors.request.use(
 		}
 
 		if (_formData) {
-			;(config.headers as any)['Content-Type'] = 'application/x-www-form-urlencoded'
+			(config.headers as any)['Content-Type'] = 'application/x-www-form-urlencoded'
 			delete config.data['_formData']
 		}
 

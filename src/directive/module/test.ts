@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 
-import { useUserStore } from '@/common/store/user.js'
+import { useUserStore } from '@/store/user.js'
 
 const userStore = useUserStore()
 

@@ -22,7 +22,7 @@ export default () => {
 		resolvers: [IconsResolver()],
 		// 生成“components.d.ts”全局声明，
 		// 还接受自定义文件名的路径
-		dts: false,
+		dts: 'src/typings/components.d.ts',
 		// 允许子目录作为组件的命名空间前缀。
 		directoryAsNamespace: false,
 		// 用于忽略命名空间前缀的子目录路径

@@ -2,12 +2,12 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 // store 和 router
-import store from '@/common/store/index'
-import router from '@/common/tools/cmakeRouter'
+import store from '@/store/index'
+import router from '@/tools/router'
 
 // js
-import { isCdn } from '@/common/config/cfg.js'
-import direct from '@/common/directive/index' // 指令
+import { isCdn } from '@/common/cfg.js'
+import direct from '@/directive/index' // 指令
 
 // 全局样式
 import 'nprogress/nprogress.css'

@@ -1,5 +1,5 @@
-import AutoImport from "unplugin-auto-import/vite";
+import AutoImport from 'unplugin-auto-import/vite'
 
 export default () => {
-    return AutoImport()
+  return AutoImport()
 }

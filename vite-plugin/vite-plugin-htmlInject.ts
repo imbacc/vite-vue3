@@ -12,14 +12,14 @@ const injectHeader = `<link defer="defer" href="${path}/inject-test.css" />`
 const injectScript = ''
 
 export default () => {
-	return createHtmlPlugin({
-		inject: {
-			data: {
-				title,
-				injectHeader,
-				injectScript
-			}
-		},
-		minify: true
-	})
+  return createHtmlPlugin({
+    inject: {
+      data: {
+        title,
+        injectHeader,
+        injectScript,
+      },
+    },
+    minify: true,
+  })
 }

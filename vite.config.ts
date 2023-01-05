@@ -1,7 +1,7 @@
-import { resolve } from 'path'
-import type { UserConfig } from 'vite'
+import type { PluginOption, UserConfig } from 'vite'
 
-import { loadEnv } from 'vite'
+import { resolve } from 'path'
+import { loadEnv, defineConfig } from 'vite'
 
 // npm plugin
 import { viteMockServe } from 'vite-plugin-mock' // mock
@@ -48,21 +48,20 @@ const config: UserConfig = {
     __VUE_OPTIONS_API__: false, // 明确不使用 options api
   },
 
-  // 部门优化选项
   optimizeDeps: {
-    // entries: ['vue', 'nprogress', 'vue-router', 'axios'],
+    exclude: ['lodash-es'],
   },
 
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
+      '#': resolve(__dirname, 'types'),
     },
   },
 
   // 插件
   plugins: [
     vue(),
-    // envPlugin(),
     IconsPlugin(),
     componentsPlugin(),
     routerPagePlugin(),
@@ -81,27 +80,30 @@ const config: UserConfig = {
   },
 }
 
-export default ({ command, mode }) => {
-  const { VITE_USE_MOCK, VITE_BUILD_GZIP } = loadEnv(mode, process.cwd())
+export default defineConfig(({ command, mode }) => {
+  const VITE_ENV = loadEnv(mode, process.cwd())
+  const { VITE_USE_MOCK, VITE_BUILD_GZIP } = VITE_ENV
   // console.log('command=', command)
   // console.log('mode=', mode)
+
+  // config
 
   if (command === 'build' && mode === 'production') {
     // 编译环境配置
     // Gzip
     if (VITE_BUILD_GZIP) {
-      // config.plugins?.push(gzipPlugin())
+      config.plugins?.push(gzipPlugin() as PluginOption)
       config.plugins?.push(compressionPlugin())
     }
-  }
-  else {
+  } else {
     // 开发环境配置
     // vite-plugin-mock
+    envPlugin(VITE_ENV)
     if (VITE_USE_MOCK) {
-      // config.plugins.push(
-      //   viteMockServe({ mockPath: 'mock', supportTs: false }),
-      // )
+      config.plugins?.push(
+        viteMockServe({ mockPath: 'mock', supportTs: false }),
+      )
     }
   }
   return config
-}
+})

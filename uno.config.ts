@@ -1,14 +1,14 @@
-import { defineConfig } from '@unocss/vite';
-import presetUno from '@unocss/preset-uno';
+import { defineConfig } from '@unocss/vite'
+import presetUno from '@unocss/preset-uno'
 
 export default defineConfig({
   exclude: ['node_modules', 'dist', '.git', '.husky', '.vscode', 'public', 'build', 'mock', '.history'],
   // include: ['index.html', 'src/**/*.{vue,tsx,html}'],
   presets: [presetUno({ dark: 'class' })],
   shortcuts: {
-    h100b: 'h-[100%]',
-    w100b: 'w-[100%]',
-    hw100b: 'h-[100%] w-[100%]',
+    'h100b': 'h-[100%]',
+    'w100b': 'w-[100%]',
+    'hw100b': 'h-[100%] w-[100%]',
     'flex-center': 'flex justify-center',
     'flex-align': 'flex items-center',
     'flex-center-align': 'flex justify-center items-center',
@@ -45,7 +45,7 @@ export default defineConfig({
       error_hover: 'var(--error-color-hover)',
       error_pressed: 'var(--error-color-pressed)',
       error_active: 'var(--error-color-active)',
-      dark: '#18181c'
-    }
-  }
-});
+      dark: '#18181c',
+    },
+  },
+})

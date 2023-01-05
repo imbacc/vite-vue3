@@ -1,7 +1,13 @@
-import { visualizer } from 'rollup-plugin-visualizer';
+import { visualizer } from 'rollup-plugin-visualizer'
 
-export default visualizer({
-  gzipSize: true,
-  brotliSize: true,
-  open: true
-});
+export default () => {
+  return {
+    // visualizer({
+    //   gzipSize: true,
+    //   brotliSize: true,
+    //   open: true,
+    // }),
+    enforce: 'post',
+    apply: 'build',
+  }
+}

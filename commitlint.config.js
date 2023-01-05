@@ -9,7 +9,7 @@ module.exports = {
     { value: '⚡️性能', name: '性能:    提升性能' },
     { value: '✅测试', name: '测试:    添加一个测试' },
     { value: '🔧工具', name: '工具:    开发工具变动(构建、脚手架工具等)' },
-    { value: '⏪回滚', name: '回滚:    代码回退' }
+    { value: '⏪回滚', name: '回滚:    代码回退' },
   ],
   scopes: [{ name: 'leetcode' }, { name: 'javascript' }, { name: 'typescript' }, { name: 'Vue' }, { name: 'node' }],
   // it needs to match the value for field type. Eg.: 'fix'
@@ -31,10 +31,10 @@ module.exports = {
     body: '长说明，使用"|"换行(可选)：\n',
     breaking: '非兼容性说明 (可选):\n',
     footer: '关联关闭的issue，例如：#31, #34(可选):\n',
-    confirmCommit: '确定提交说明?(yes/no)'
+    confirmCommit: '确定提交说明?(yes/no)',
   },
   allowCustomScopes: true,
   allowBreakingChanges: ['特性', '修复'],
   // limit subject length
-  subjectLimit: 100
+  subjectLimit: 100,
 }

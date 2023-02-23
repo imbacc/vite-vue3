@@ -1,5 +1,4 @@
 import { createHtmlPlugin } from 'vite-plugin-html'
-import { resolve } from 'path'
 
 const env = process.env
 const isDev = env.NODE_ENV === 'development'

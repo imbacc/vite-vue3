@@ -6,7 +6,6 @@ import store from '@/store/index'
 import router from '@/tools/router'
 
 // js
-import { isCdn } from '@/common/cfg.js'
 import direct from '@/directive/index' // 指令
 
 // 全局样式
@@ -19,7 +18,7 @@ app.use(router)
 app.mount('#app')
 
 // 全局 property
-app.config.globalProperties.is_cdn = isCdn
+// app.config.globalProperties.xx = 'xx'
 
 // dev工具
 // app.config.devtools = is_dev
@@ -33,14 +32,14 @@ app.config.globalProperties.is_cdn = isCdn
 // 全局注册组件
 // app.component('component-a', {
 // mounted() {
-// 	console.log(this.foo) // 'bar'
+// console.log(this.foo) // 'bar'
 // }
 // })
 
 // 全局注册组件指令
 // app.directive('focus', {
 // mounted() {
-// 	el => el.focus()
+// el => el.focus()
 // }
 //   mounted: el => el.focus()
 // })

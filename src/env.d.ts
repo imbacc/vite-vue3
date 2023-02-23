@@ -7,6 +7,5 @@ declare module '*.vue' {
 	export default component
 }
 
-declare module 'imba-lazy'
-declare module 'imba-request'
 declare module 'nprogress'
+declare module 'virtual:generated-pages'

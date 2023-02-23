@@ -8,9 +8,6 @@
     <a href="https://www.npmjs.com/package/imba-cache">imba-cache</a>
 </p>
 <p>
-    <a href="https://www.npmjs.com/package/imba-lazy">imba-lazy</a>
-</p>
-<p>
     <a href="https://www.npmjs.com/package/imba-request">imba-request</a>
 </p>
 

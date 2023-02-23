@@ -27,4 +27,3 @@ dist-ssr
 .history
 .pnpm-debug.log
 .history/*
-.vscode

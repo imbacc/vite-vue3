@@ -11,6 +11,8 @@ import IconsPlugin from 'unplugin-icons/vite' // icon 按需引入
 import compressionPlugin from 'vite-plugin-compression' // 使用gzip或brotli来压缩资源
 import vueTsx from '@vitejs/plugin-vue-jsx'
 import unocss from '@unocss/vite'
+import inspectPlugin from 'vite-plugin-inspect'
+// 使用gzip或brotli来压缩资源
 
 // user plugin
 import envPlugin from './vite-plugin/vite-plugin-env' // env 环境
@@ -18,6 +20,15 @@ import componentsPlugin from './vite-plugin/vite-plugin-components' // Vite 的�
 import routerPagePlugin from './vite-plugin/vite-plugin-routerPage' // 自动导入路由 需要可以用
 import htmlInjectPlugin from './vite-plugin/vite-plugin-htmlInject' // html inject
 // import type { ENV_DTYPE } from '#/env'
+
+import packageJson from './package.json'
+import dayjs from 'dayjs'
+
+const { dependencies, name, version } = packageJson
+const __APP_INFO__ = {
+  package: { dependencies, name, version },
+  lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+}
 
 const config: UserConfig = {
   publicDir: 'public',
@@ -37,7 +48,7 @@ const config: UserConfig = {
         // chunks 做操作 注释将减少分割
         manualChunks: {
           'vue': ['vue', 'vue-router'],
-          'imba-libs': ['imba-cache', 'imba-lazy', 'imba-request'],
+          'imba-libs': ['imba-cache', 'imba-request'],
           'lodash-es': ['lodash-es'],
         },
       },
@@ -46,6 +57,7 @@ const config: UserConfig = {
 
   define: {
     __VUE_OPTIONS_API__: false, // 明确不使用 options api
+    __APP_INFO__: JSON.stringify(__APP_INFO__),
   },
 
   optimizeDeps: {
@@ -98,12 +110,14 @@ export default defineConfig(({ command, mode }) => {
   } else {
     // 开发环境配置
     // vite-plugin-mock
-    envPlugin(VITE_ENV)
+    const env = envPlugin(VITE_ENV)
+    Object.assign(config, env)
     if (VITE_USE_MOCK) {
       config.plugins?.push(
         viteMockServe({ mockPath: 'mock', supportTs: false }),
       )
     }
+    config.plugins?.push(inspectPlugin())
   }
   return config
 })

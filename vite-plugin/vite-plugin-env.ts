@@ -1,7 +1,5 @@
 import type { PluginOption } from 'vite'
 
-import { loadEnv } from 'vite'
-
 const createProxy = (list: string) => {
   list = JSON.parse(list)
   const ret: { [key: string]: any } = {}
@@ -9,8 +7,6 @@ const createProxy = (list: string) => {
     ret[prefix] = {
       target,
       changeOrigin: true,
-      ws: true,
-      // rewrite: (path) => path.replace(/^\/api/, '')
       rewrite: (path: string) => path.replace(new RegExp(`^${prefix}`), ''),
     }
   }

@@ -1,101 +1,101 @@
+<script>
+import { reactive, toRefs, nextTick, defineComponent } from 'vue'
+
+export default defineComponent({
+  props: {
+    shadeShow: {
+      value: Boolean,
+      default: true,
+    },
+    shadeClick: {
+      value: Boolean,
+      default: false,
+    },
+    custom: {
+      value: Boolean,
+      default: false,
+    },
+    type: {
+      value: Number,
+      default: 1,
+    },
+    width: {
+      value: String,
+      default: '250px',
+    },
+    height: {
+      value: String,
+      default: '150px',
+    },
+    backgroundColor: {
+      value: String,
+      default: '#fff',
+    },
+    callback: {
+      type: Function,
+      default() {},
+    },
+  },
+  setup(props, { emit }) {
+    // reactive
+    const data = reactive({
+      isPopup: false,
+      ani: '',
+    })
+    // function
+    const open = () => {
+      data.isPopup = true
+      nextTick(() => {
+        const time = setTimeout(() => {
+          clearTimeout(time)
+          data.ani = 'open-animation'
+        }, 30)
+      })
+    }
+    const close = (v) => {
+      const isClose = v !== false
+      if (isClose) {
+        data.ani = ''
+        const time = setTimeout(() => {
+          clearTimeout(time)
+          data.isPopup = false
+          emit('callback')
+        }, 200)
+      }
+    }
+    return {
+      // reactive
+      ...toRefs(data),
+      // function
+      open,
+      close,
+    }
+  },
+})
+</script>
+
 <template>
   <div v-show="isPopup" class="loading-popup">
-    <div v-show="shadeShow" class="shade-popup" :class="[ani]" @click="close(shadeClick)"></div>
+    <div v-show="shadeShow" class="shade-popup" :class="[ani]" @click="close(shadeClick)" />
     <div class="loading-content" :class="[ani]" :style="{ height, width, backgroundColor }">
-      <slot></slot>
-      <div class="circle-loading" v-show="!custom && type === 1">
+      <slot />
+      <div v-show="!custom && type === 1" class="circle-loading">
         <div class="dot">
-          <div class="first-dot"></div>
+          <div class="first-dot" />
         </div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+        <div class="dot" />
+        <div class="dot" />
+        <div class="dot" />
       </div>
-      <div class="rectangle-loading" v-show="!custom && type === 2">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+      <div v-show="!custom && type === 2" class="rectangle-loading">
+        <div class="dot" />
+        <div class="dot" />
+        <div class="dot" />
+        <div class="dot" />
       </div>
     </div>
   </div>
 </template>
-
-<script>
-  import { reactive, toRefs, nextTick, defineComponent } from 'vue'
-
-  export default defineComponent({
-    props: {
-      shadeShow: {
-        value: Boolean,
-        default: true
-      },
-      shadeClick: {
-        value: Boolean,
-        default: false
-      },
-      custom: {
-        value: Boolean,
-        default: false
-      },
-      type: {
-        value: Number,
-        default: 1
-      },
-      width: {
-        value: String,
-        default: '250px'
-      },
-      height: {
-        value: String,
-        default: '150px'
-      },
-      backgroundColor: {
-        value: String,
-        default: '#fff'
-      },
-      callback: {
-        type: Function,
-        default: function () {}
-      }
-    },
-    setup(props, { emit }) {
-      // reactive
-      const data = reactive({
-        isPopup: false,
-        ani: ''
-      })
-      // function
-      const open = () => {
-        data.isPopup = true
-        nextTick(() => {
-          let time = setTimeout(() => {
-            clearTimeout(time)
-            data.ani = 'open-animation'
-          }, 30)
-        })
-      }
-      const close = (v) => {
-        let isClose = v == false ? false : true
-        if (isClose) {
-          data.ani = ''
-          let time = setTimeout(() => {
-            clearTimeout(time)
-            data.isPopup = false
-            emit('callback')
-          }, 200)
-        }
-      }
-      return {
-        // reactive
-        ...toRefs(data),
-        // function
-        open,
-        close
-      }
-    }
-  })
-</script>
 
 <style lang="scss" scoped>
   /*弹窗*/

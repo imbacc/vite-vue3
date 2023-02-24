@@ -1,245 +1,114 @@
-<script>
-import { reactive, toRefs, nextTick, defineComponent } from 'vue'
-
-export default defineComponent({
-  props: {
-    shadeShow: {
-      value: Boolean,
-      default: true,
-    },
-    shadeClick: {
-      value: Boolean,
-      default: false,
-    },
-    custom: {
-      value: Boolean,
-      default: false,
-    },
-    type: {
-      value: Number,
-      default: 1,
-    },
-    width: {
-      value: String,
-      default: '250px',
-    },
-    height: {
-      value: String,
-      default: '150px',
-    },
-    backgroundColor: {
-      value: String,
-      default: '#fff',
-    },
-    callback: {
-      type: Function,
-      default() {},
-    },
-  },
-  setup(props, { emit }) {
-    // reactive
-    const data = reactive({
-      isPopup: false,
-      ani: '',
-    })
-    // function
-    const open = () => {
-      data.isPopup = true
-      nextTick(() => {
-        const time = setTimeout(() => {
-          clearTimeout(time)
-          data.ani = 'open-animation'
-        }, 30)
-      })
-    }
-    const close = (v) => {
-      const isClose = v !== false
-      if (isClose) {
-        data.ani = ''
-        const time = setTimeout(() => {
-          clearTimeout(time)
-          data.isPopup = false
-          emit('callback')
-        }, 200)
-      }
-    }
-    return {
-      // reactive
-      ...toRefs(data),
-      // function
-      open,
-      close,
-    }
-  },
-})
-</script>
-
 <template>
-  <div v-show="isPopup" class="loading-popup">
-    <div v-show="shadeShow" class="shade-popup" :class="[ani]" @click="close(shadeClick)" />
-    <div class="loading-content" :class="[ani]" :style="{ height, width, backgroundColor }">
-      <slot />
-      <div v-show="!custom && type === 1" class="circle-loading">
-        <div class="dot">
-          <div class="first-dot" />
-        </div>
-        <div class="dot" />
-        <div class="dot" />
-        <div class="dot" />
-      </div>
-      <div v-show="!custom && type === 2" class="rectangle-loading">
-        <div class="dot" />
-        <div class="dot" />
-        <div class="dot" />
-        <div class="dot" />
-      </div>
+  <div class="first-loading-wrap">
+    <div class="loading-wrap">
+      <span class="dot dot-spin">
+        <i />
+        <i />
+        <i />
+        <i />
+      </span>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-  /*弹窗*/
-  .loading-popup {
-    .shade-popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #000;
-      opacity: 0;
-      transition: all 0.6s;
-      z-index: 9999;
-    }
-    .shade-popup.open-animation {
-      opacity: 0.5;
-    }
-    .loading-content {
-      z-index: 999;
-      position: fixed;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      align-items: center;
-      border-radius: 20px;
-      margin: auto;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      transform: scale(1.2);
-      transition: all 0.6s;
-      opacity: 0;
-    }
-    .loading-content.open-animation {
-      transform: scale(1);
-      opacity: 1;
-    }
+body {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.first-loading-wrap {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.first-loading-wrap > h1 {
+  font-size: 128px;
+}
+
+.first-loading-wrap .loading-wrap {
+  padding: 98px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  animation: antRotate 1.2s infinite linear;
+  transform: rotate(45deg);
+  position: relative;
+  display: inline-block;
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.dot i {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  display: block;
+  background-color: #fff;
+  border-radius: 100%;
+  transform: scale(0.75);
+  transform-origin: 50% 50%;
+  opacity: 0.3;
+  animation: antSpinMove 1s infinite linear alternate;
+}
+
+.dot i:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.dot i:nth-child(2) {
+  top: 0;
+  right: 0;
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+.dot i:nth-child(3) {
+  right: 0;
+  bottom: 0;
+  -webkit-animation-delay: 0.8s;
+  animation-delay: 0.8s;
+}
+
+.dot i:nth-child(4) {
+  bottom: 0;
+  left: 0;
+  -webkit-animation-delay: 1.2s;
+  animation-delay: 1.2s;
+}
+
+@keyframes antRotate {
+  to {
+    -webkit-transform: rotate(405deg);
+    transform: rotate(405deg);
   }
-  /*圆形加载*/
-  .circle-loading {
-    width: 70px;
-    height: 70px;
-    position: relative;
-    margin: auto;
-    .dot {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 70px;
-      height: 70px;
-      animation: 1.5s loadrotate cubic-bezier(0.8, 0.005, 0.5, 1) infinite;
-      &:after,
-      .first-dot {
-        content: '';
-        position: absolute;
-        width: 18px;
-        height: 18px;
-        background: #3aa4f0;
-        border-radius: 50%;
-        left: 50%;
-      }
-      .first-dot {
-        background: #3aa4f0;
-        animation: 1.5s dotscale cubic-bezier(0.8, 0.005, 0.5, 1) infinite;
-      }
-    }
+}
+
+@-webkit-keyframes antRotate {
+  to {
+    -webkit-transform: rotate(405deg);
+    transform: rotate(405deg);
   }
-  @for $i from 1 through 4 {
-    .circle-loading {
-      & > .dot:nth-child(#{$i}) {
-        animation-delay: 0.15s * $i;
-      }
-    }
+}
+
+@keyframes antSpinMove {
+  to {
+    opacity: 1;
   }
-  @keyframes loadrotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+}
+
+@-webkit-keyframes antSpinMove {
+  to {
+    opacity: 1;
   }
-  @keyframes dotscale {
-    0%,
-    10% {
-      width: 28px;
-      height: 28px;
-      margin-left: -2px;
-      margin-top: -5px;
-    }
-    50% {
-      width: 16px;
-      height: 16px;
-      margin-left: 0px;
-      margin-top: 0px;
-    }
-    90%,
-    100% {
-      width: 28px;
-      height: 28px;
-      margin-left: -2px;
-      margin-top: -5px;
-    }
-  }
-  /*矩形加载*/
-  .rectangle-loading {
-    height: 30px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    .dot {
-      height: 30px;
-      width: 10px;
-      margin-right: 20px;
-    }
-  }
-  $color: #ff3404, skyblue, #f48f00, #39d754;
-  @for $i from 1 through 4 {
-    .rectangle-loading {
-      & > .dot:nth-child(#{$i}) {
-        animation: load-frame 1s infinite linear 0s + $i * 0.12;
-        background: #{nth($color, $i)};
-      }
-      @if $i==4 {
-        & > .dot:nth-child(#{$i}) {
-          margin-right: 0;
-        }
-      }
-    }
-  }
-  @keyframes load-frame {
-    0% {
-      height: 35px;
-      background: palegoldenrod;
-    }
-    50% {
-      height: 12px;
-    }
-    100% {
-      height: 35px;
-    }
-  }
+}
 </style>

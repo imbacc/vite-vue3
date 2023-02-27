@@ -9,6 +9,7 @@ import router from '@/tools/router'
 import direct from '@/directive/index' // 指令
 
 // 全局样式
+import 'uno.css'
 import 'nprogress/nprogress.css'
 
 const app = createApp(App)

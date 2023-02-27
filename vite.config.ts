@@ -1,25 +1,32 @@
-import type { PluginOption, UserConfig } from 'vite'
+import type { UserConfig } from 'vite'
 
 import { resolve } from 'path'
 import { loadEnv, defineConfig } from 'vite'
+import { viteMockServe } from 'vite-plugin-mock'
 
-// npm plugin
-import { viteMockServe } from 'vite-plugin-mock' // mock
+// vue
 import vue from '@vitejs/plugin-vue'
-import gzipPlugin from 'rollup-plugin-gzip' // Gzip
-import IconsPlugin from 'unplugin-icons/vite' // icon 按需引入
-import compressionPlugin from 'vite-plugin-compression' // 使用gzip或brotli来压缩资源
-import vueTsx from '@vitejs/plugin-vue-jsx'
-import unocss from '@unocss/vite'
-import inspectPlugin from 'vite-plugin-inspect'
+// icon 按需引入
+import IconsPlugin from 'unplugin-icons/vite'
 // 使用gzip或brotli来压缩资源
+import compressionPlugin from 'vite-plugin-compression'
+// tsx写法
+import vueTsx from '@vitejs/plugin-vue-jsx'
+// 原子和属性css写法
+import unocss from '@unocss/vite'
+// 检查中间状态用于开发和调试
+import inspectPlugin from 'vite-plugin-inspect'
 
-// user plugin
-import envPlugin from './vite-plugin/vite-plugin-env' // env 环境
-import componentsPlugin from './vite-plugin/vite-plugin-components' // Vite 的按需组件自动导入
-import routerPagePlugin from './vite-plugin/vite-plugin-routerPage' // 自动导入路由 需要可以用
-import htmlInjectPlugin from './vite-plugin/vite-plugin-htmlInject' // html inject
-// import type { ENV_DTYPE } from '#/env'
+// env 环境
+import envPlugin from './vite-plugin/vite-plugin-env'
+// Vite 的按需组件自动导入
+import autoImportPlugin from './vite-plugin/vite-plugin-auto-import'
+// Vite 的按需组件自动导入
+import componentsPlugin from './vite-plugin/vite-plugin-components'
+// 自动导入路由 需要可以用
+import routerPagePlugin from './vite-plugin/vite-plugin-routerPage'
+// html inject
+import htmlInjectPlugin from './vite-plugin/vite-plugin-htmlInject'
 
 import packageJson from './package.json'
 import dayjs from 'dayjs'
@@ -61,7 +68,7 @@ const config: UserConfig = {
   },
 
   optimizeDeps: {
-    exclude: ['lodash-es'],
+    // exclude: ['lodash-es'],
   },
 
   resolve: {
@@ -75,6 +82,7 @@ const config: UserConfig = {
   plugins: [
     vue(),
     IconsPlugin(),
+    autoImportPlugin(),
     componentsPlugin(),
     routerPagePlugin(),
     htmlInjectPlugin(),
@@ -104,8 +112,11 @@ export default defineConfig(({ command, mode }) => {
     // 编译环境配置
     // Gzip
     if (VITE_BUILD_GZIP) {
-      config.plugins?.push(gzipPlugin() as PluginOption)
-      config.plugins?.push(compressionPlugin())
+      config.plugins?.push(compressionPlugin({
+        verbose: true,
+        algorithm: 'gzip',
+        ext: '.gz',
+      }))
     }
   } else {
     // 开发环境配置
@@ -117,7 +128,10 @@ export default defineConfig(({ command, mode }) => {
         viteMockServe({ mockPath: 'mock', supportTs: false }),
       )
     }
-    config.plugins?.push(inspectPlugin())
+    config.plugins?.push(inspectPlugin({
+      // build: true,
+      // outputDir: '.vite-inspect',
+    }))
   }
   return config
 })

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-// setup 方式书写 实验阶段正式环境不建议
-import { useUserStore } from '@/common/store/user.js'
+import { useUserStore } from '@/store/user'
 import { useRouter } from 'vue-router'
 
 const { replace } = useRouter()

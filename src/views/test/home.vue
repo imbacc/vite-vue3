@@ -12,7 +12,6 @@ const callClick = (e) => {
   console.log('callClick hhhhhhhhhh')
   if (e) {
     console.log('childRef=', childRef)
-    childRef.value.refClick()
     data.msg = e
   }
 }

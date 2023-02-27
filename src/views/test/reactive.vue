@@ -15,16 +15,11 @@ import {
 } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { provideState, numObj, numAddFun } from '@/common/provide/num'
-
 export default {
   setup() {
     const count = ref(0)
 
     const { currentRoute } = useRouter()
-
-    // provide
-    provideState()
 
     // 响应式属性
     const obj = reactive({ ddd: '1111' })
@@ -44,10 +39,6 @@ export default {
 
     // function
     const add = () => count.value++
-    const add_provide = () => {
-      numAddFun()
-      console.log('provide numobj =', numObj.num)
-    }
 
     onBeforeMount(() => {
       console.log('渲染前...')
@@ -82,8 +73,6 @@ export default {
       count,
       two_count,
       add,
-      add_provide,
-      numObj,
     }
   },
 }
@@ -95,12 +84,8 @@ export default {
     <h1>obj: {{ obj.ddd }}</h1>
     <h1>test count: {{ count }}</h1>
     <h1>count * 2 = {{ two_count }}</h1>
-    <h1>provide numObj = {{ numObj.num }}</h1>
     <button @click="add">
       新增count
-    </button>
-    <button @click="add_provide">
-      新增provide的count
     </button>
     <hr>
     <h1>下面是组件部分</h1>

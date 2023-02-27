@@ -1,5 +1,5 @@
 import routerPages from 'vite-plugin-pages'
-import { camelCase } from 'lodash-es'
+import { camelCase } from 'change-case'
 
 export default () => {
   return routerPages({

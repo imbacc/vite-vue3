@@ -22,7 +22,7 @@ export default () => {
     resolvers: [IconsResolver()],
     // 生成“components.d.ts”全局声明，
     // 还接受自定义文件名的路径
-    dts: 'types/vite-plugin-components/components.d.ts',
+    dts: 'types/vite-plugin/components.d.ts',
     types: [{ from: 'vue-router', names: ['RouterLink', 'RouterView'] }],
     // 允许子目录作为组件的命名空间前缀。
     directoryAsNamespace: false,
@@ -35,7 +35,7 @@ export default () => {
     // 要安装Babel，请运行：`npm install-D@Babel/parser@Babel/traverse`
     directives: true,
     // 用于变换目标的过滤器
-    include: [/\.vue$/, /\.vue\?vue/],
+    include: [/\.vue?$/],
     exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
   })
 }

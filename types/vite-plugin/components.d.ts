@@ -8,9 +8,9 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     HelloWorld: typeof import('./../../src/components/HelloWorld/HelloWorld.vue')['default']
-    Inject: typeof import('./../../src/components/inject/inject.vue')['default']
-    Loading: typeof import('./../../src/components/loading/loading.vue')['default']
-    Message: typeof import('./../../src/components/message/message.vue')['default']
+    Inject: typeof import('./../../src/components/Inject/Inject.vue')['default']
+    Loading: typeof import('./../../src/components/Loading/Loading.vue')['default']
+    Message: typeof import('./../../src/components/Message/Message.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

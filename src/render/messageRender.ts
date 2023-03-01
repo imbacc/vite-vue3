@@ -1,8 +1,8 @@
-import type { CompRender_DTYPE } from '#/loadingRender'
+import type { CompRender_DTYPE } from '#/render/loadingRender'
 import type { Component } from 'vue'
 
 import { render, h } from 'vue'
-import messageComp from '@/components/message/message.vue'
+import messageComp from '@/components/Message/Message.vue'
 
 class MessageRender implements CompRender_DTYPE {
   public comp: Component | any

@@ -25,10 +25,10 @@ const hide = () => {
 
 <style lang="scss" scoped>
 .csc {
-font-size: 66px;
-background-image: url('http://p1.music.126.net/Dnf3d0vpTvaXhI4I4m1n3A==/109951163420050721.jpg');
-height: 600px;
-width: 600px;
-color: white;
+  font-size: 66px;
+  background-image: url('http://p1.music.126.net/Dnf3d0vpTvaXhI4I4m1n3A==/109951163420050721.jpg');
+  height: 600px;
+  width: 600px;
+  color: white;
 }
 </style>

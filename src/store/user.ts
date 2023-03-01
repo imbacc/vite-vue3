@@ -1,24 +1,18 @@
+import type { userStore_DTYPE, setCache_params_DTYPE } from '#/store/user'
+
 import { setCacheLoca, getCacheLoca, delCache } from 'imba-cache'
 import { defineStore } from 'pinia'
 
 const TOKEN = getCacheLoca('token') || ''
 const USER_INFO = getCacheLoca('userInfo') || {}
-const USER_ROLE = getCacheLoca('userRole') || []
-
-interface userStore_DTYPE {
-  token: string
-  userInfo: any
-  userRole: string[]
-}
-
-type setCache_params_DTYPE = { [key in keyof userStore_DTYPE]: key extends keyof userStore_DTYPE ? userStore_DTYPE[key] : never }
+const USER_AUTH = getCacheLoca('userAuth') || []
 
 export const useUserStore = defineStore('user', {
   state: (): userStore_DTYPE => {
     return {
-      token: TOKEN as string, // 用户token
+      token: TOKEN, // 用户token
       userInfo: USER_INFO, // 用户信息
-      userRole: USER_ROLE as string[], // 用户角色权限
+      userAuth: USER_AUTH, // 用户权限
     }
   },
   getters: {
@@ -27,21 +21,29 @@ export const useUserStore = defineStore('user', {
     },
   },
   actions: {
-    setCache(params: setCache_params_DTYPE) {
+    setCache(params: Partial<setCache_params_DTYPE>) {
       this.$patch(params)
       for (const key in params) {
         setCacheLoca(key, params[key as keyof userStore_DTYPE])
       }
     },
-    setRole(role: Array<string>) {
-      this.userRole = [...new Set([...this.userRole, ...role])]
-      setCacheLoca('userRole', this.userRole)
-    },
-    setLogout() {
-      this.$patch({ token: '', userInfo: {}, userRole: [] })
+    logout() {
+      this.$patch({ token: '', userInfo: {}, userAuth: [] })
       delCache('token')
       delCache('userInfo')
       delCache('userRole')
+    },
+    pushAuth(auth: string | Array<string>) {
+      if (typeof auth === 'string') {
+        this.userAuth.push(auth)
+      } else {
+        this.userAuth = [...new Set([...this.userAuth, ...auth])]
+      }
+      this.setCache({ userAuth: this.userAuth })
+    },
+    hasAuth(authList: Array<string>) {
+      console.log('%c [ this.userAuth ]-42', 'font-size:14px; background:#41b883; color:#ffffff;', this.userAuth)
+      return authList.some((s) => this.userAuth.includes(s))
     },
   },
 })

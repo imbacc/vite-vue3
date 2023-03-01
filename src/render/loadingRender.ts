@@ -1,8 +1,8 @@
-import type { CompRender_DTYPE } from '#/loadingRender'
+import type { CompRender_DTYPE } from '#/render/loadingRender'
 import type { Component } from 'vue'
 
 import { render, h } from 'vue'
-import loadingComp from '@/components/loading/loading.vue'
+import loadingComp from '@/components/Loading/Loading.vue'
 
 class CompRender implements CompRender_DTYPE {
   public comp: Component | any
@@ -21,17 +21,18 @@ class CompRender implements CompRender_DTYPE {
     const { comp, option } = this
     if (comp) return comp.component.proxy
     this.comp = h(loadingComp, option)
+    console.log('%c [ this.comp ]-24', 'font-size:14px; background:#41b883; color:#ffffff;', this.comp)
     this.container = document.createElement('div')
     // 渲染组件
     render(this.comp, this.container)
     // 将模态框添加至 body
-    document.querySelector('#app')?.appendChild(this.container.firstElementChild as Element)
+    document.querySelector('#modal')?.appendChild(this.container.firstElementChild as Element)
     return this.comp.component.proxy
   }
 
   // 调用组件函数
   open() {
-    this.init().open()
+    // this.init().open()
     return this
   }
 

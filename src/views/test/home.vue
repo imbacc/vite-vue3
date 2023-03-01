@@ -1,9 +1,21 @@
+<template>
+  <a href="javascript:history.back(-1)">返回上一页</a>
+  <div class="home">
+    <img alt="Vue logo" :src="logoPng">
+    <HelloWorld ref="childRef" :msg="data.msg" @call="callClick" />
+    <button @click="callClick('ref 操作 HelloWorld')">
+      ref 操作 HelloWorld
+    </button>
+    --------------------------------------------
+  </div>
+</template>
+
 <script setup>
-import { reactive, ref } from 'vue'
 import logoPng from '@/assets/logo.png'
 
 // ---reactive---
 const data = reactive({ ddd: 'ddd', msg: 'Welcome to Your vite2 + vue3' })
+
 // ---ref---
 const childRef = ref()
 
@@ -16,15 +28,3 @@ const callClick = (e) => {
   }
 }
 </script>
-
-<template>
-  <a href="javascript:history.back(-1)">返回上一页</a>
-  <div class="home">
-    <img alt="Vue logo" :src="logoPng">
-    <HelloWorld ref="childRef" :msg="data.msg" @call="callClick" />
-    <button @click="callClick('ref 操作 HelloWorld')">
-      ref 操作 HelloWorld
-    </button>
-    --------------------------------------------
-  </div>
-</template>

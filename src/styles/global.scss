@@ -6,23 +6,6 @@ body,
 	@extend .h100b;
 }
 
-// 全局CSS
-.index_view {
-	color: #333;
-	background-color: #f4f5f7;
-	@extend .ff_fw400;
-}
-
-.ff_fw400 {
-	font-family: PingFang SC, Arial, Microsoft YaHei, sans-serif;
-	font-weight: 400;
-}
-
-.f24_fw400 {
-	font-size: 24px;
-	@extend .ff_fw400;
-}
-
 .h100b {
 	height: 100%;
 }
@@ -40,14 +23,10 @@ body,
 	height: 100vh;
 }
 
-.bg_white {
-	background: #ffffff;
-}
-
-.box_shadow {
+.boxShadow {
 	box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.cur_pointer {
+.curPointer {
 	cursor: pointer;
 }

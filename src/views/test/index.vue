@@ -1,12 +1,3 @@
-<script setup lang="ts">
-import { useUserStore } from '@/store/user'
-const userStore = useUserStore()
-
-const auth = () => {
-  userStore.userRole = ['user']
-}
-</script>
-
 <template>
   <div>
     <router-link to="/home">
@@ -29,7 +20,7 @@ const auth = () => {
       测试 windi
     </router-link>
     |
-    <button v-test="['user']">
+    <button v-test="['test']">
       测试 directive v-test
     </button>
   </div>
@@ -41,3 +32,16 @@ const auth = () => {
     </button>
   </div>
 </template>
+
+<script setup lang="ts">
+const userStore = useUserStore()
+
+const a = $ref('aaa')
+
+const auth = () => {
+  userStore.pushAuth('test')
+}
+</script>
+
+<style>
+</style>

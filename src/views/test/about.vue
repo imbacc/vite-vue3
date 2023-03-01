@@ -1,8 +1,3 @@
-<script setup lang="ts">
-import { useUserStore } from '@/store/user'
-const userStore = useUserStore()
-</script>
-
 <template>
   <a href="javascript:history.back(-1)">返回上一页</a>
   <p />
@@ -11,3 +6,7 @@ const userStore = useUserStore()
     <h1>{{ userStore }}</h1>
   </div>
 </template>
+
+<script setup lang="ts">
+const userStore = useUserStore()
+</script>

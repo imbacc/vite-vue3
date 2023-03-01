@@ -2,7 +2,7 @@ export default [
   {
     is_proxy: true, // 全局代理专用 必须在第一个数组
     meta: {
-      no_cache: 'test_router',
+      noCache: 'test_router',
     },
   },
   {

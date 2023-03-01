@@ -1,5 +1,3 @@
-import type { AxiosRequestHeaders } from 'axios'
-
 import axios from 'axios'
 import message from '@/render/messageRender'
 
@@ -29,7 +27,7 @@ http.interceptors.request.use(
   (config) => {
     const userStore = useUserStore()
     const token = userStore.token
-    if (token) (config.headers as AxiosRequestHeaders).Authorization = `bearer ${token}`
+    if (token) config.headers.Authorization = `bearer ${token}`
   },
 )
 

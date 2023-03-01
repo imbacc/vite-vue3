@@ -9,7 +9,7 @@ export default () => {
     // 自动引入的api从这里找
     imports: ['vue', 'vue-router'],
     // 自动引入的目录
-    dirs: ['src/api'],
+    dirs: ['src/api', 'src/store'],
     // 根据项目情况配置eslintrc，默认是不开启的
     eslintrc: {
       enabled: true, // @default false

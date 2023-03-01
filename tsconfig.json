@@ -21,9 +21,8 @@
     "emitDecoratorMetadata": true,
     "noImplicitAny": true,
     "skipLibCheck": false,
-    "rootDir": "src",
     "outDir": "dist",
-    "types": ["node", "@types/lodash-es"],
+    "types": ["@types/lodash-es"],
     "typeRoots": ["types", "node_modules/@types"],
     "paths": {
       "@/*": ["./src/*"],

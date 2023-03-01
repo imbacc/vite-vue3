@@ -1,19 +1,8 @@
 import type { App } from 'vue'
 
-import { useUserStore } from '@/store/user.js'
-
-const userStore = useUserStore()
-
-const hasAuth = (roleList: Array<string>) => {
-  const userRole = userStore.userRole
-  if (userRole && Array.isArray(userRole) && Array.isArray(roleList)) {
-    const some = roleList.some((s) => userRole.includes(s))
-    return some
-  }
-  return false
-}
-
 export default (app: App) => {
+  const userStore = useUserStore()
+
   app.directive('test', {
     // Directive has a set of lifecycle hooks:
     // called before bound element's parent component is mounted
@@ -29,8 +18,8 @@ export default (app: App) => {
     mounted(el, binding, vnode) {
       if (!el || !binding.value) return
       console.log('v-test directive el-binding-vnode', el, binding, vnode)
-      el.onclick = () => alert('点鸡毛啊看代码!')
-      if (!hasAuth(binding.value)) {
+      el.onclick = () => alert('有权限!点鸡毛啊,看代码!')
+      if (!userStore.hasAuth(binding.value)) {
         el.parentNode.removeChild(el)
       }
     },

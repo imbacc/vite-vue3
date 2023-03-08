@@ -41,9 +41,6 @@
 </template>
 
 <script setup>
-// import { getTest, getTest222,getTest333 } from '@/api/testApi'
-// import { getUser } from '@/api/userApi'
-
 // api('https://www.baidu.com', { _onec: true, wd: 'vite2vue3' }, {}, 'GET') // 外链请求
 const test_api_get_test = () => getTest() // 请求test_api.js 里的 get_test
 const test_api_get_test222 = () => getTest222({ _id: 222 }) // 请求test_api.js 里的 get_test222
@@ -56,6 +53,13 @@ const app_555 = () => api('app_555')
 const app_666 = () => api('app_666', { _id: 666 }, { body: '这是POST请求,我是body' })
 // const user_get_user = () => getUser()
 const error_msg = () => api('error')
+
+const test1 = async () => {
+  const res = await getTest333({ is: 'param' }, { body: '我是body' })
+  console.log('%c [ res.test ]-60', 'font-size:14px; background:#41b883; color:#ffffff;', res.test)
+}
+
+test1()
 
 const all_request = () => {
   const all = [

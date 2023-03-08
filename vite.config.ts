@@ -14,8 +14,6 @@ import compressionPlugin from 'vite-plugin-compression'
 import vueTsx from '@vitejs/plugin-vue-jsx'
 // 原子和属性css写法
 import unocss from '@unocss/vite'
-// 检查中间状态用于开发和调试
-import inspectPlugin from 'vite-plugin-inspect'
 
 // env 环境
 import envPlugin from './vite-plugin/vite-plugin-env'
@@ -27,6 +25,8 @@ import componentsPlugin from './vite-plugin/vite-plugin-components'
 import routerPagePlugin from './vite-plugin/vite-plugin-routerPage'
 // html inject
 import htmlInjectPlugin from './vite-plugin/vite-plugin-htmlInject'
+// $ref $computed $shallowRef $customRef $toRef $()解构
+import ReactivityTransform from '@vue-macros/reactivity-transform/vite'
 
 import packageJson from './package.json'
 import dayjs from 'dayjs'
@@ -88,6 +88,7 @@ const config: UserConfig = {
     htmlInjectPlugin(),
     unocss(),
     vueTsx(),
+    ReactivityTransform(),
   ],
 
   // 要将一些共享的全局变量传递给所有的Less样式
@@ -128,10 +129,6 @@ export default defineConfig(({ command, mode }) => {
         viteMockServe({ mockPath: 'mock', supportTs: false }),
       )
     }
-    config.plugins?.push(inspectPlugin({
-      // build: true,
-      // outputDir: '.vite-inspect',
-    }))
   }
   return config
 })

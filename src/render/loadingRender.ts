@@ -19,7 +19,7 @@ class CompRender implements CompRender_DTYPE {
 
   init() {
     const { comp, option } = this
-    if (comp) return comp.component.proxy
+    if (comp) return comp.component
     this.comp = h(loadingComp, option)
     console.log('%c [ this.comp ]-24', 'font-size:14px; background:#41b883; color:#ffffff;', this.comp)
     this.container = document.createElement('div')
@@ -27,7 +27,7 @@ class CompRender implements CompRender_DTYPE {
     render(this.comp, this.container)
     // 将模态框添加至 body
     document.querySelector('#modal')?.appendChild(this.container.firstElementChild as Element)
-    return this.comp.component.proxy
+    return this.comp.component
   }
 
   // 调用组件函数

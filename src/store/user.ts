@@ -19,6 +19,12 @@ export const useUserStore = defineStore('user', {
     hasLogin(): boolean {
       return Boolean(this.token && this.userInfo)
     },
+    hasAuth(state) {
+      return (authList: Array<string>) => {
+        console.log('%c [ authList ]-24', 'font-size:14px; background:#41b883; color:#ffffff;', authList)
+        return authList.some((s) => state.userAuth.includes(s))
+      }
+    },
   },
   actions: {
     setCache(params: Partial<setCache_params_DTYPE>) {
@@ -40,10 +46,6 @@ export const useUserStore = defineStore('user', {
         this.userAuth = [...new Set([...this.userAuth, ...auth])]
       }
       this.setCache({ userAuth: this.userAuth })
-    },
-    hasAuth(authList: Array<string>) {
-      console.log('%c [ this.userAuth ]-42', 'font-size:14px; background:#41b883; color:#ffffff;', this.userAuth)
-      return authList.some((s) => this.userAuth.includes(s))
     },
   },
 })

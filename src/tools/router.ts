@@ -4,12 +4,8 @@ import { configure, start, done } from 'nprogress'
 
 configure({ showSpinner: false })
 
-// 跳过
-const jumpList = ['/401', '/404']
-// 检查权限
-// const userRole = () => useUserStore().userRole
-// 检查登录
-// const checkLogin = () => useUserStore().token
+// 白名单跳过
+const whiteList = ['/login', '/401', '/404']
 
 // ...前置
 router.beforeEach(({ path }, _from, next) => {
@@ -17,8 +13,8 @@ router.beforeEach(({ path }, _from, next) => {
 
   start()
 
-  const ignore = jumpList.includes(path)
-  if (path === '/login' || ignore) {
+  const ignore = whiteList.includes(path)
+  if (ignore) {
     next()
     return
   }

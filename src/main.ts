@@ -21,9 +21,6 @@ app.mount('#app')
 // 全局 property
 // app.config.globalProperties.xx = 'xx'
 
-// dev工具
-// app.config.devtools = is_dev
-
 // 处理错误
 // app.config.errorHandler = (err, vm, info) => {
 //   // `info` 是 Vue 特定的错误信息，比如错误所在的生命周期钩子

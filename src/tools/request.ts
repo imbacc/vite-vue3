@@ -1,10 +1,10 @@
 import axios from 'axios'
-import message from '@/render/messageRender'
+
+// import message from '@/render/messageRender'
+// import loadingRender from '@/render/loadingRender'
 
 import { ImbaRequest } from 'imba-request'
-import { useUserStore } from '@/store/user.js'
-
-import loadingRender from '@/render/loadingRender.js'
+import { useUserStore } from '@/store/user'
 
 const env = import.meta.env
 
@@ -14,7 +14,7 @@ const http = new ImbaRequest(axios.create(), {
 
 const errorMsg = async (msg = '服务器开小差了~') => {
   console.error(msg)
-  message.send(msg, 'error').hide()
+  // message.send(msg, 'error').hide()
 }
 
 const loginOut = () => {
@@ -36,7 +36,7 @@ http.interceptors.response.use(
   (response) => {
     const { status, data, config } = response
 
-    loadingRender.close()
+    // loadingRender.close()
 
     if (status === 401) {
       loginOut()
@@ -60,7 +60,7 @@ http.interceptors.response.use(
     console.error('response error', err)
     const { message } = error.response?.data || {}
 
-    loadingRender.close()
+    // loadingRender.close()
 
     if (err.includes('code 400')) {
       errorMsg(message || '400 error')

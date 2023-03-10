@@ -31,28 +31,28 @@ vite2.0 <https://vitejs.dev> vue3.0 <https://v3.cn.vuejs.org>
  │   ├── common
  │   │     ├── config                  配置信息
  │   │     │      │── module           api模块配置
- │   │     │      │── index.js         api公共配置
- │   │     │      │── cfg.js           全局配置设定
+ │   │     │      │── index            api公共配置
+ │   │     │      │── cfg              全局配置设定
  │   │     ├── provide                 vue3特性抽离 provide 和 inject
  │   │     ├── lib                     js包
  │   │     ├── router                  路由页面配置
  │   │     │      ├── module           router模块配置
- │   │     │      ├── index.js         router配置入口
+ │   │     │      ├── index            router配置入口
  │   │     ├── store                   状态管理配置
  │   │     │      ├── module           store模块配置
- │   │     │      ├── index.js         store配置入口
+ │   │     │      ├── index            store配置入口
  │   │     ├── tools                   工具
- │   │     │      ├── cmake_router.js  路由拦截
- │   │     │      ├── cmake_tools.js   自定义工具
- │   │     │      ├── cmake_zintercept.js   请求封装
+ │   │     │      ├── cmake_router     路由拦截
+ │   │     │      ├── cmake_tools      自定义工具
+ │   │     │      ├── cmake_zintercept   请求封装
  │   │     │── components              组件
  │   │     │── styles                  全局样式
  │   │     │── views                   页面入口
  │   │     │── App.vue                 app.vue
- │   │     │── main.js                 入口
+ │   │     │── main.ts                 入口
  ├── .env                        默认配置
  ├── .env.development            开发配置
  ├── .env.production             线上配置
  ├── package.json                依赖包及配置信息文件
- ├── vite.config.js              vite配置文件
+ ├── vite.config.ts              vite配置文件
 ```

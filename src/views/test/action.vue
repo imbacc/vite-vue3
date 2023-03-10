@@ -42,9 +42,9 @@
 
 <script setup>
 // api('https://www.baidu.com', { _onec: true, wd: 'vite2vue3' }, {}, 'GET') // 外链请求
-const test_api_get_test = () => getTest() // 请求test_api.js 里的 get_test
-const test_api_get_test222 = () => getTest222({ _id: 222 }) // 请求test_api.js 里的 get_test222
-const test_api_get_test333 = () => getTest333({ is: 'param' }, { body: '我是body' }) // 请求test_api.js 里的 get_test222
+const test_api_get_test = () => getTest() // 请求test_api. 里的 get_test
+const test_api_get_test222 = () => getTest222({ _id: 222 }) // 请求test_api 里的 get_test222
+const test_api_get_test333 = () => getTest333({ is: 'param' }, { body: '我是body' }) // 请求test_api 里的 get_test222
 const app_111 = () => api('app_111')
 const app_222 = () => api('app_222', { _id: 222 })
 const app_333 = () => api('app_333', { _id: 333 })
@@ -79,11 +79,3 @@ const all_request = () => {
   Promise.allSettled(pro).then((res) => setTimeout(() => console.log('Promise.allSettled=', res), 10))
 }
 </script>
-
-<route>
-{
-  meta: {
-    auth: ['user'] // 权限
-  }
-}
-</route>

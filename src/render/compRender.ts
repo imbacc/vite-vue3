@@ -1,59 +1,45 @@
-import type { CompRender_DTYPE } from '#/render/loadingRender'
-import type { Component, DefineComponent } from 'vue'
+// import type { CompRender_DTYPE } from '#/render/loadingRender'
+// import type { Component, DefineComponent } from 'vue'
 
-import { render, h } from 'vue'
+// import { render } from 'vue'
 
-class CompRender implements CompRender_DTYPE {
-  public comp: Component | any
-  public option: { [x: string]: any }
-  public container: HTMLElement | null
-  private time: NodeJS.Timeout | null
-  private component: DefineComponent
+// class CompRender implements CompRender_DTYPE {
+//   public instance: Component | null
+//   public option: { [key in string]: any }
+//   public container: HTMLElement | null
+//   private selector: string
+//   private component: DefineComponent
 
-  constructor(component: DefineComponent, option?: { [key in string]: any }) {
-    this.comp = null
-    this.option = option || {}
-    this.container = null
-    this.time = null
-    this.component = component
-  }
+//   constructor(component: DefineComponent, option?: { [key in string]: any }, selector?: string) {
+//     this.option = option || {}
+//     this.container = null
+//     this.component = component
+//     this.selector = selector || '#app'
+//   }
 
-  init() {
-    const { comp, option } = this
-    if (comp) return comp.component
-    this.comp = h(this.component, option)
-    console.log('%c [ this.comp ]-24', 'font-size:14px; background:#41b883; color:#ffffff;', this.comp)
-    this.container = document.createElement('div')
-    // 渲染组件
-    render(this.comp, this.container)
-    // 将模态框添加至 body
-    document.querySelector('#modal')?.appendChild(this.container.firstElementChild as Element)
-    return this.comp.component
-  }
+//   init() {
+//     if (this.instance) return this.instance
+//     this.instance = h(this.component, this.option, {
+//       // default: () => 'default',
+//     //   foo: () => 'foo',
+//     //   bar: () => 'bar'
+//     })
+//     console.log('%c [ this.instance ]-21', 'font-size:14px; background:#41b883; color:#ffffff;', this.instance)
+//     this.container = document.createElement('div')
 
-  // 调用组件函数
-  open() {
-    // this.init().open()
-    return this
-  }
+//     // render(this.instance, this.container)
+//     // document.querySelector(this.selector)?.appendChild(this.container.firstElementChild as Element)
+//     return this.instance.component
+//   }
 
-  close() {
-    clearTimeout(this.time as NodeJS.Timeout)
-    this.time = setTimeout(() => {
-      clearTimeout(this.time as NodeJS.Timeout)
-      this.init().close()
-    }, 300)
-    return this
-  }
+//   // 卸载
+//   destroy() {
+//     render(null, this.container as Element)
+//     this.instance = null
+//     this.option = {}
+//     this.container = null
+//     this.selector = '#app'
+//   }
+// }
 
-  // 卸载
-  destroy() {
-    render(null, this.container as Element)
-    this.comp = null
-    this.option = {}
-    this.container = null
-    this.time = null
-  }
-}
-
-export default CompRender
+// export default CompRender

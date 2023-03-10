@@ -1,5 +1,4 @@
-import router from '@/router/index.js'
-import { useUserStore } from '@/store/user.js'
+import router from '@/router/index'
 import { configure, start, done } from 'nprogress'
 
 configure({ showSpinner: false })

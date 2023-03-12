@@ -8,8 +8,8 @@
       Action
     </router-link>
     |
-    <button v-test="['test']">
-      测试 directive v-test
+    <button v-auth="['test']">
+      测试 directive v-auth
     </button>
 
     <button @click="auth">
@@ -19,12 +19,10 @@
 </template>
 
 <script setup lang="ts">
-const userStore = useUserStore()
-
-const a = $ref('aaa')
+const authStore = useAuthStore()
 
 const auth = () => {
-  userStore.pushAuth('test')
+  authStore.pushAuth('test')
 }
 </script>
 

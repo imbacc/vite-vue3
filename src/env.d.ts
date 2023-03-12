@@ -1,4 +1,7 @@
 /// <reference types="vite/client" />
+/// <reference types="vite-plugin-pages/client" />
+
+declare module 'nprogress'
 
 declare module '*.vue' {
 	import type { DefineComponent } from 'vue'
@@ -6,5 +9,3 @@ declare module '*.vue' {
 	export default component
 }
 
-declare module 'nprogress'
-declare module 'virtual:generated-pages'

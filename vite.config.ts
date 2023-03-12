@@ -1,4 +1,5 @@
 import type { UserConfig } from 'vite'
+import type { ENV_DTYPE } from './types/vite-plugin/auto-env'
 
 import { resolve } from 'path'
 import { loadEnv, defineConfig } from 'vite'
@@ -16,7 +17,7 @@ import vueTsx from '@vitejs/plugin-vue-jsx'
 import unocss from '@unocss/vite'
 
 // env 环境
-import envPlugin from './vite-plugin/vite-plugin-env'
+import envPlugin, { formatEnv } from './vite-plugin/vite-plugin-env'
 // Vite 的按需组件自动导入
 import autoImportPlugin from './vite-plugin/vite-plugin-auto-import'
 // Vite 的按需组件自动导入
@@ -27,6 +28,8 @@ import routerPagePlugin from './vite-plugin/vite-plugin-routerPage'
 import htmlInjectPlugin from './vite-plugin/vite-plugin-htmlInject'
 // $ref $computed $shallowRef $customRef $toRef $()解构
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite'
+// head cache
+import headerCache from './vite-plugin/vite-plugin-cache'
 
 import packageJson from './package.json'
 import dayjs from 'dayjs'
@@ -55,7 +58,7 @@ const config: UserConfig = {
         // chunks 做操作 注释将减少分割
         manualChunks: {
           'vue': ['vue', 'vue-router'],
-          'imba-libs': ['imba-cache', 'imba-request'],
+          'imba-packages': ['imba-cache', 'imba-request'],
           'lodash-es': ['lodash-es'],
         },
       },
@@ -85,7 +88,6 @@ const config: UserConfig = {
     autoImportPlugin(),
     componentsPlugin(),
     routerPagePlugin(),
-    htmlInjectPlugin(),
     unocss(),
     vueTsx(),
     ReactivityTransform(),
@@ -102,16 +104,15 @@ const config: UserConfig = {
 }
 
 export default defineConfig(({ command, mode }) => {
-  const VITE_ENV = loadEnv(mode, process.cwd())
-  const { VITE_USE_MOCK, VITE_BUILD_GZIP } = VITE_ENV
+  const VITE_ENV = formatEnv(loadEnv(mode, process.cwd())) as ENV_DTYPE
+  const { VITE_GLOB_APP_TITLE, VITE_USE_MOCK, VITE_BUILD_GZIP } = VITE_ENV
   // console.log('command=', command)
   // console.log('mode=', mode)
 
-  // config
+  config.plugins?.push(htmlInjectPlugin(VITE_GLOB_APP_TITLE))
 
   if (command === 'build' && mode === 'production') {
     // 编译环境配置
-    // Gzip
     if (VITE_BUILD_GZIP) {
       config.plugins?.push(compressionPlugin({
         verbose: true,
@@ -121,14 +122,12 @@ export default defineConfig(({ command, mode }) => {
     }
   } else {
     // 开发环境配置
-    // vite-plugin-mock
-    const env = envPlugin(VITE_ENV)
-    Object.assign(config, env)
+    config.plugins?.push(headerCache())
+    config.plugins?.push(envPlugin(VITE_ENV))
     if (VITE_USE_MOCK) {
-      config.plugins?.push(
-        viteMockServe({ mockPath: 'mock', supportTs: false }),
-      )
+      config.plugins?.push(viteMockServe({ mockPath: 'mock', supportTs: false }))
     }
   }
+
   return config
 })

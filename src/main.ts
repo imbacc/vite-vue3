@@ -1,21 +1,16 @@
-import { createApp } from 'vue'
 import App from './App.vue'
 
-// store 和 router
-import store from '@/store/index'
-import router from '@/tools/router'
-
-// js
-import direct from '@/directive/index' // 指令
+import router from '@/router/index'
+import direct from '@/directive/index'
 
 // 全局样式
 import 'uno.css'
 import 'nprogress/nprogress.css'
 
 const app = createApp(App)
-app.use(direct)
-app.use(store)
+app.use(createPinia())
 app.use(router)
+app.use(direct)
 app.mount('#app')
 
 // 全局 property

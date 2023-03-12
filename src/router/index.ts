@@ -1,30 +1,49 @@
-import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
-import generatedRouters from 'virtual:generated-pages'
-console.log('generatedRouters', generatedRouters)
+import { router } from '@/router/create'
+import { start, done } from 'nprogress'
 
-const router = createRouter({
-  history: createWebHistory() || createWebHashHistory(),
-  routes: [
-    {
-      path: '/',
-      component: () => import('@/views/test/index.vue'),
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/views/test/login.vue'),
-    },
-    {
-      path: '/401',
-      name: '401',
-      component: () => import('@/views/error/401.vue'),
-    },
-    {
-      path: '/:pathMatch(.*)*',
-      component: () => import('@/views/error/404.vue'),
-    },
-    ...generatedRouters,
-  ],
+// configure({ showSpinner: false })
+
+// ...前置
+router.beforeEach(({ path, meta }, from, next) => {
+  start()
+
+  const userStore = useUserStore()
+  const authStore = useAuthStore()
+
+  // 白名单跳过
+  if (authStore.hasIgnore(path)) {
+    next()
+    return
+  }
+
+  // 没有登陆
+  if (!userStore.hasLogin) {
+    next('/login')
+    return
+  }
+
+  console.log('%c [ meta ]-26', 'font-size:14px; background:#41b883; color:#ffffff;', meta)
+  const metaAuth = meta.auth as Array<string>
+  console.log('%c [ metaAuth ]-26', 'font-size:14px; background:#41b883; color:#ffffff;', metaAuth)
+  // 判断是否有权限
+  if (metaAuth) {
+    if (!authStore.hasAuth(metaAuth)) {
+      console.error('没有权限!', window?.location?.pathname)
+      next('/401')
+      return
+    }
+  }
+  next()
+})
+
+// ...后置
+router.afterEach((_to, _from) => {
+  done()
+})
+
+// err
+router.onError((err) => {
+  console.log('err', err)
 })
 
 export default router

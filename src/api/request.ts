@@ -25,6 +25,7 @@ const loginOut = () => {
 // 请求拦截器
 http.interceptors.request.use(
   (config) => {
+    console.log('%c [ config ]-28', 'font-size:14px; background:#41b883; color:#ffffff;', config)
     const userStore = useUserStore()
     const token = userStore.token
     if (token) config.headers.Authorization = `bearer ${token}`

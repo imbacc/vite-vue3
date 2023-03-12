@@ -1,4 +1,4 @@
 {
-  "*.{js,jsx,ts,tsx}": ["eslint", "echo eslint success!!!"],
-  "*.{css,less,scss}": ["stylelint", "echo stylelint success!!!"]
+  "*.{js,jsx,ts,tsx}": ["eslint"],
+  "*.{css,less,scss}": ["stylelint"]
 }

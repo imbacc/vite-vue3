@@ -10,7 +10,7 @@ const router = useRouter()
 const userStore = useUserStore()
 
 const login = () => {
-  userStore.setCache({ token: 'vue3 token', userInfo: { username: 'imbacc', password: 'vite2vue3' } })
+  userStore.setStoreCache({ token: 'vue3 token', userInfo: { username: 'imbacc', password: 'vite2vue3' } })
   router.replace({ path: '/' })
 }
 </script>

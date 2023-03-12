@@ -22,8 +22,8 @@ export default () => {
     resolvers: [IconsResolver()],
     // 生成“components.d.ts”全局声明，
     // 还接受自定义文件名的路径
-    dts: 'types/vite-plugin/components.d.ts',
-    types: [{ from: 'vue-router', names: ['RouterLink', 'RouterView'] }],
+    dts: 'types/vite-plugin/auto-components.d.ts',
+    // types: [{ from: 'vue-router', names: ['RouterLink', 'RouterView'] }],
     // 允许子目录作为组件的命名空间前缀。
     directoryAsNamespace: false,
     // 用于忽略命名空间前缀的子目录路径

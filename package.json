@@ -50,7 +50,7 @@
     "eslint": "^8.34.0",
     "eslint-plugin-vue": "^9.8.0",
     "husky": "^8.0.2",
-    "imba-eslint-config": "^1.0.2",
+    "imba-eslint-config": "^1.0.4",
     "lint-staged": "^13.1.0",
     "mockjs": "^1.1.0",
     "rollup": "^2.72.1",

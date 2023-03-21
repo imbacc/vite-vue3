@@ -8,21 +8,40 @@
       Action
     </router-link>
     |
-    <button v-auth="['test']">
+    <button v-auth="['test']" @click="alert">
       测试 directive v-auth
     </button>
 
     <button @click="auth">
       点我授权去Action
     </button>
+
+    <button @click="loginOut">
+      退出登录
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
 const authStore = useAuthStore()
+const userStore = useUserStore()
+
+const alert = () => {
+  window.alert('能点')
+}
 
 const auth = () => {
-  authStore.pushAuth('test')
+  if (authStore.hasRouterAuth(['test'])) {
+    window.alert('已经点过了')
+    return
+  }
+  authStore.pushRouterAuth('test')
+  window.location.reload()
+}
+
+const loginOut = () => {
+  authStore.clear()
+  userStore.loginOut()
 }
 </script>
 

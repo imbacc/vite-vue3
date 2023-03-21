@@ -20,7 +20,6 @@ export default () => {
       return route
     },
     dirs: [
-      { dir: 'src/views/error', baseRoute: '' },
       { dir: 'src/views/test', baseRoute: '' },
     ],
     pagesDir: 'src/views',

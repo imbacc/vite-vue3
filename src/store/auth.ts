@@ -1,23 +1,43 @@
-import type { key_valueof_CONVERT } from '#/global'
 import type { authStore_DTYPE } from '#/store/auth'
 
 import { getCacheLoca } from 'imba-cache'
 
 const WHITELIST = ['/login', '/401', '/404']
 
+const pushValue = (_this: any, page: string | Array<string>, key: keyof authStore_DTYPE) => {
+  const list: Array<string> = []
+  if (typeof page === 'string') {
+    list.push(page)
+  } else {
+    for (const key of page) {
+      if (list.includes(key)) continue
+      list.push(key)
+    }
+  }
+  list.unshift(..._this[key])
+  useSetStoreCache(_this, { [key]: list })
+}
+
 export const useAuthStore = defineStore('auth', {
   state: (): authStore_DTYPE => {
     return {
-      whiteList: getCacheLoca('whiteList') || WHITELIST,
-      authList: getCacheLoca('authList') || [],
+      // 路由白名单
+      whiteIgnoreList: getCacheLoca('whiteIgnoreList') || WHITELIST,
+      // 路由权限
+      routerAuthList: getCacheLoca('routerAuthList') || [],
+      // 粒度权限
+      meshAuthList: getCacheLoca('meshAuthList') || [],
     }
   },
   getters: {
-    hasAuth(state) {
-      return (list: Array<string>) => list.some((s) => state.authList.includes(s))
+    hasWhiteIgnore(state) {
+      return (path: string) => state.whiteIgnoreList.includes(path)
     },
-    hasIgnore(state) {
-      return (path: string) => state.whiteList.includes(path)
+    hasRouterAuth(state) {
+      return (list: Array<string>) => list.some((s) => state.routerAuthList.includes(s))
+    },
+    hasMeshAuth(state) {
+      return (list: Array<string>) => list.some((s) => state.meshAuthList.includes(s))
     },
   },
   actions: {
@@ -26,28 +46,16 @@ export const useAuthStore = defineStore('auth', {
     },
     clear() {
       useClearStore(this)
+      this.whiteIgnoreList = WHITELIST
     },
-    pushWhile(page: string | Array<string>) {
-      if (typeof page === 'string') {
-        this.whiteList.push(page)
-      } else {
-        for (const key of page) {
-          if (this.whiteList.includes(key)) continue
-          this.whiteList.push(key)
-        }
-      }
-      this.setStoreCache({ whiteList: this.whiteList })
+    pushWhiteIgnore(page: string | Array<string>) {
+      pushValue(this, page, 'whiteIgnoreList')
     },
-    pushAuth(auth: string | Array<string>) {
-      if (typeof auth === 'string') {
-        this.authList.push(auth)
-      } else {
-        for (const key of auth) {
-          if (this.authList.includes(key)) continue
-          this.authList.push(key)
-        }
-      }
-      this.setStoreCache({ authList: this.authList })
+    pushRouterAuth(auth: string | Array<string>) {
+      pushValue(this, auth, 'routerAuthList')
+    },
+    pushMeshAuth(auth: string | Array<string>) {
+      pushValue(this, auth, 'meshAuthList')
     },
   },
 })

@@ -1,17 +1,36 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import pages from '~pages'
 
-pages.push(...[
+const defaultRouter = [
+  {
+    name: 'login',
+    path: '/login',
+    component: () => import('@/views/test/login.vue'),
+  },
+  {
+    name: 'index',
+    path: '/',
+    component: () => import('@/views/test/index.vue'),
+  },
+  {
+    name: '404',
+    path: '/404',
+    component: () => import('@/views/error/404.vue'),
+  },
+  {
+    name: '401',
+    path: '/401',
+    component: () => import('@/views/error/401.vue'),
+  },
   {
     path: '/:pathMatch(.*)*',
     component: () => import('@/views/error/404.vue'),
   },
-])
-console.log('%c [ pages ]-5', 'font-size:14px; background:#41b883; color:#ffffff;', pages)
+]
 
 const router = createRouter({
   history: createWebHistory() || createWebHashHistory(),
-  routes: pages,
+  routes: defaultRouter,
 })
 
 export {

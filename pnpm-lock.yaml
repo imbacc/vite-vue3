@@ -19,6 +19,7 @@ specifiers:
   eslint-plugin-vue: ^9.8.0
   husky: ^8.0.2
   imba-cache: ^1.1.6
+  imba-config: ^1.0.0
   imba-eslint-config: ^1.0.4
   imba-request: ^1.0.17
   lint-staged: ^13.1.0
@@ -73,6 +74,7 @@ devDependencies:
   eslint: 8.34.0
   eslint-plugin-vue: 9.8.0_eslint@8.34.0
   husky: 8.0.2
+  imba-config: 1.0.0
   imba-eslint-config: 1.0.4_qqlqjyza7fjmozzju63hj774li
   lint-staged: 13.1.0
   mockjs: 1.1.0
@@ -3981,6 +3983,10 @@ packages:
   /imba-cache/1.1.6:
     resolution: {integrity: sha512-vcWhohjnT5Jx4HXJGu8urUkjcoC2VTQjzcbb4dmS0KtTJm866FES3KA7Z6EOToD/YNKp3S/jRFHb93Viti1x8g==}
     dev: false
+
+  /imba-config/1.0.0:
+    resolution: {integrity: sha512-wtF/u6enumofOdjwcvXDBzgisdVGITKtPOoiuIFCLVHuzOB3zqMz/fzFC4UDCTf2pSF8gECAIS+jQ1o1AFAzgQ==}
+    dev: true
 
   /imba-eslint-config/1.0.4_qqlqjyza7fjmozzju63hj774li:
     resolution: {integrity: sha512-RCDZpMVTrjF3QsbjXwKtC4nfc7LTO3adcyggF5XQcIMFSv2uCW+M2/NJ02ZLRFCmc7D2g72r/qmtKli4jhHEcw==}

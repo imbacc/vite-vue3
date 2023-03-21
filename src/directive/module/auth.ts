@@ -8,7 +8,7 @@ export default (app: App) => {
     beforeMount() {},
     mounted(el, binding, vnode) {
       if (!el || !binding.value) return
-      if (!authStore.hasAuth(binding.value)) {
+      if (!authStore.hasRouterAuth(binding.value)) {
         el.parentNode.removeChild(el)
       } else {
         el.onclick = () => console.log('有权限click!', binding.value)

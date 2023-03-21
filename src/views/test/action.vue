@@ -82,11 +82,3 @@ const all_request = () => {
   Promise.allSettled(pro).then((res) => setTimeout(() => console.log('Promise.allSettled=', res), 10))
 }
 </script>
-
-<route>
- {
-   meta: {
-     auth: ['test']
-   }
- }
-</route>

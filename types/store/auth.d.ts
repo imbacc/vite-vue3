@@ -1,5 +1,5 @@
 export interface authStore_DTYPE {
-  whiteList: Array<string>
-  authList: Array<string>
+  whiteIgnoreList: Array<string>
+  routerAuthList: Array<string>
+  meshAuthList: Array<string>
 }
-

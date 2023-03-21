@@ -1,17 +1,43 @@
-import { router } from '@/router/create'
+import type { _RouteLocationBase } from 'vue-router'
+
 import { start, done } from 'nprogress'
+import { pages, router } from '@/router/create'
+import { addAsyncRouterList, addLocalRouterList, initMetaState } from '@/router/meta'
+
+const env = import.meta.env
 
 // configure({ showSpinner: false })
 
+const sleep = () => {
+  return new Promise<Partial<_RouteLocationBase>[]>((resolve) => {
+    setTimeout(() => {
+      resolve([
+        {
+          name: 'about',
+          meta: {
+            auth: ['test'],
+          },
+        },
+        {
+          path: '/action',
+          meta: {
+            auth: ['test'],
+          },
+        },
+      ])
+    }, 500)
+  })
+}
+
 // ...前置
-router.beforeEach(({ path, meta }, from, next) => {
+router.beforeEach(async ({ path, meta }, from, next) => {
   start()
 
   const userStore = useUserStore()
   const authStore = useAuthStore()
 
   // 白名单跳过
-  if (authStore.hasIgnore(path)) {
+  if (authStore.hasWhiteIgnore(path)) {
     next()
     return
   }
@@ -22,17 +48,26 @@ router.beforeEach(({ path, meta }, from, next) => {
     return
   }
 
-  console.log('%c [ meta ]-26', 'font-size:14px; background:#41b883; color:#ffffff;', meta)
+  if (!initMetaState.value) {
+    if (env.VITE_ROUTER_LOADER === 'local') {
+      await addLocalRouterList(router, pages)
+    } else {
+      await addAsyncRouterList(router, pages, sleep)
+    }
+    initMetaState.value = true
+  }
+  console.log('%c [ router ]-49', 'font-size:14px; background:#41b883; color:#ffffff;', router.getRoutes())
+
   const metaAuth = meta.auth as Array<string>
-  console.log('%c [ metaAuth ]-26', 'font-size:14px; background:#41b883; color:#ffffff;', metaAuth)
   // 判断是否有权限
   if (metaAuth) {
-    if (!authStore.hasAuth(metaAuth)) {
-      console.error('没有权限!', window?.location?.pathname)
+    if (!authStore.hasRouterAuth(metaAuth)) {
+      console.error(`${path} 没有权限!`)
       next('/401')
       return
     }
   }
+
   next()
 })
 

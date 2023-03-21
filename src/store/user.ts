@@ -1,4 +1,3 @@
-import type { key_valueof_CONVERT } from '#/global'
 import type { userStore_DTYPE } from '#/store/user'
 
 import { getCacheLoca } from 'imba-cache'
@@ -21,6 +20,10 @@ export const useUserStore = defineStore('user', {
     },
     clear() {
       useClearStore(this)
+    },
+    loginOut() {
+      this.clear()
+      window.location.replace('/login')
     },
   },
 })

@@ -1,17 +1,23 @@
 import App from './App.vue'
 
-import router from '@/router/index'
 import direct from '@/directive/index'
+import { loadRouterMode } from '@/router/index'
 
 // 全局样式
 import 'uno.css'
 import 'nprogress/nprogress.css'
 
-const app = createApp(App)
-app.use(createPinia())
-app.use(router)
-app.use(direct)
-app.mount('#app')
+const setup = async () => {
+  const app = createApp(App)
+  const store = await createPinia()
+  const router = await loadRouterMode()
+  app.use(store)
+  app.use(router)
+  app.use(direct)
+  app.mount('#app')
+}
+
+setup()
 
 // 全局 property
 // app.config.globalProperties.xx = 'xx'

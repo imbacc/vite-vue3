@@ -20,7 +20,6 @@ specifiers:
   husky: ^8.0.2
   imba-cache: ^1.1.6
   imba-config: ^1.0.0
-  imba-eslint-config: ^1.0.4
   imba-request: ^1.0.17
   lint-staged: ^13.1.0
   lodash-es: ^4.17.21
@@ -75,7 +74,6 @@ devDependencies:
   eslint-plugin-vue: 9.8.0_eslint@8.34.0
   husky: 8.0.2
   imba-config: 1.0.0
-  imba-eslint-config: 1.0.4_qqlqjyza7fjmozzju63hj774li
   lint-staged: 13.1.0
   mockjs: 1.1.0
   rollup: 2.72.1
@@ -3986,16 +3984,6 @@ packages:
 
   /imba-config/1.0.0:
     resolution: {integrity: sha512-wtF/u6enumofOdjwcvXDBzgisdVGITKtPOoiuIFCLVHuzOB3zqMz/fzFC4UDCTf2pSF8gECAIS+jQ1o1AFAzgQ==}
-    dev: true
-
-  /imba-eslint-config/1.0.4_qqlqjyza7fjmozzju63hj774li:
-    resolution: {integrity: sha512-RCDZpMVTrjF3QsbjXwKtC4nfc7LTO3adcyggF5XQcIMFSv2uCW+M2/NJ02ZLRFCmc7D2g72r/qmtKli4jhHEcw==}
-    peerDependencies:
-      '@antfu/eslint-config': '>=0.30.0'
-      typescript: '>=3.9'
-    dependencies:
-      '@antfu/eslint-config': 0.35.2_zze6pch7fuublmr3af5csndthi
-      typescript: 4.6.4
     dev: true
 
   /imba-request/1.0.17:

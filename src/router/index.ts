@@ -29,6 +29,18 @@ const sleep = () => {
   })
 }
 
+const loadRouterMode = async () => {
+  if (!initMetaState.value) {
+    if (env.VITE_ROUTER_LOADER === 'local') {
+      await addLocalRouterList(router, pages)
+    } else {
+      await addAsyncRouterList(router, pages, sleep)
+    }
+    initMetaState.value = true
+  }
+  return router
+}
+
 // ...前置
 router.beforeEach(async ({ path, meta }, from, next) => {
   start()
@@ -47,16 +59,6 @@ router.beforeEach(async ({ path, meta }, from, next) => {
     next('/login')
     return
   }
-
-  if (!initMetaState.value) {
-    if (env.VITE_ROUTER_LOADER === 'local') {
-      await addLocalRouterList(router, pages)
-    } else {
-      await addAsyncRouterList(router, pages, sleep)
-    }
-    initMetaState.value = true
-  }
-  console.log('%c [ router ]-49', 'font-size:14px; background:#41b883; color:#ffffff;', router.getRoutes())
 
   const metaAuth = meta.auth as Array<string>
   // 判断是否有权限
@@ -81,4 +83,7 @@ router.onError((err) => {
   console.log('err', err)
 })
 
-export default router
+export {
+  loadRouterMode,
+  router,
+}

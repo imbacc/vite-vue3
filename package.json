@@ -18,7 +18,7 @@
     "typecheck": "vue-tsc --noEmit --skipLibCheck",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "czc": "git add . && pnpm exec cz",
+    "czc": "git add . && cz",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install"
   },

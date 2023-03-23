@@ -20,7 +20,7 @@ specifiers:
   husky: ^8.0.2
   imba-cache: ^1.1.6
   imba-config: ^1.0.0
-  imba-request: ^1.0.17
+  imba-request: ^1.0.18
   lint-staged: ^13.1.0
   lodash-es: ^4.17.21
   mitt: ^3.0.0
@@ -49,7 +49,7 @@ dependencies:
   axios: 1.3.4
   dayjs: 1.11.7
   imba-cache: 1.1.6
-  imba-request: 1.0.17
+  imba-request: 1.0.18
   lodash-es: 4.17.21
   mitt: 3.0.0
   nprogress: 0.2.0
@@ -596,6 +596,31 @@ packages:
       - '@swc/core'
       - '@swc/wasm'
     dev: true
+
+  /@commitlint/load/17.5.0:
+    resolution: {integrity: sha512-l+4W8Sx4CD5rYFsrhHH8HP01/8jEP7kKf33Xlx2Uk2out/UKoKPYMOIRcDH5ppT8UXLMV+x6Wm5osdRKKgaD1Q==}
+    engines: {node: '>=v14'}
+    requiresBuild: true
+    dependencies:
+      '@commitlint/config-validator': 17.4.4
+      '@commitlint/execute-rule': 17.4.0
+      '@commitlint/resolve-extends': 17.4.4
+      '@commitlint/types': 17.4.4
+      '@types/node': 18.14.0
+      chalk: 4.1.2
+      cosmiconfig: 8.0.0
+      cosmiconfig-typescript-loader: 4.3.0_ipkhww4xc5z2tt2x53vp2mt2be
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      lodash.uniq: 4.5.0
+      resolve-from: 5.0.0
+      ts-node: 10.9.1_tncu2ai53lzgmizdedur7lbibe
+      typescript: 4.9.5
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@swc/wasm'
+    dev: true
+    optional: true
 
   /@commitlint/message/17.4.2:
     resolution: {integrity: sha512-3XMNbzB+3bhKA1hSAWPCQA3lNxR4zaeQAQcHj0Hx5sVdO6ryXtgUBGGv+1ZCLMgAPRixuc6en+iNAzZ4NzAa8Q==}
@@ -2471,7 +2496,7 @@ packages:
       longest: 2.0.1
       word-wrap: 1.2.3
     optionalDependencies:
-      '@commitlint/load': 17.4.4
+      '@commitlint/load': 17.5.0
     transitivePeerDependencies:
       - '@swc/core'
       - '@swc/wasm'
@@ -3974,22 +3999,22 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /imba-cache/1.1.5:
-    resolution: {integrity: sha512-QHnrNJCMXeljcQ9M2XpCs9dCa6V4KoVBmCd/vvDZuXwkhbgUJI5L9r8B4hcflBmmv0qvS9FbQGHcP2KgbfyTbQ==}
-    dev: false
-
   /imba-cache/1.1.6:
     resolution: {integrity: sha512-vcWhohjnT5Jx4HXJGu8urUkjcoC2VTQjzcbb4dmS0KtTJm866FES3KA7Z6EOToD/YNKp3S/jRFHb93Viti1x8g==}
+    dev: false
+
+  /imba-cache/1.1.9:
+    resolution: {integrity: sha512-qGtBljoJZZwDSpG5RxUvbLqUItHCqWcSqKHPQa5pSjh6YB7OFXk1+0d76tt8SkhrryaH+x49kHBdiCXPbOkGsw==}
     dev: false
 
   /imba-config/1.0.0:
     resolution: {integrity: sha512-wtF/u6enumofOdjwcvXDBzgisdVGITKtPOoiuIFCLVHuzOB3zqMz/fzFC4UDCTf2pSF8gECAIS+jQ1o1AFAzgQ==}
     dev: true
 
-  /imba-request/1.0.17:
-    resolution: {integrity: sha512-fvBwAFCFhgVRM/PjyIStlcNrwuHWU4/OtV/7b1ROfF8TyUWM6pYQ5eq4Au3dJWjIM4pVa2WQeBlqTDrn/xZOcw==}
+  /imba-request/1.0.18:
+    resolution: {integrity: sha512-T4xKv8d9PFNmV71ED+g6EDcVNDPwUBkDcNor2SEeugEO9N0R0PEqzK9pbaZpz8ouaFdvGMg1wPRjlG32yDUnng==}
     dependencies:
-      imba-cache: 1.1.5
+      imba-cache: 1.1.9
       qs-stringify: 1.2.1
     dev: false
 

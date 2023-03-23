@@ -59,7 +59,7 @@ const test_api_get_test333 = () => getTest333({ is: 'param1111' }, { body: '我�
 
 const test1 = async () => {
   const res = await getTest333({ is: 'param2222' }, { body: '我是body2222' })
-  console.log('%c [ res.test ]-60', 'font-size:14px; background:#41b883; color:#ffffff;', res.test)
+  console.log('%c [ res.test ]-60', 'font-size:14px; background:#41b883; color:#ffffff;', res)
 }
 
 test1()

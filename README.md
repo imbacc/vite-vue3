@@ -16,29 +16,6 @@ vite2.0 <https://vitejs.dev> vue3.0 <https://v3.cn.vuejs.org>
  ├── public                            从未在源代码中引用(例如robots.txt)
  ├── vite-plugin                       vite自定义插件
  ├── src                               源代码
- │   ├── assets                        静态资源
- │   ├── common
- │   │     ├── config                  配置信息
- │   │     │      │── module           api模块配置
- │   │     │      │── index            api公共配置
- │   │     │      │── cfg              全局配置设定
- │   │     ├── provide                 vue3特性抽离 provide 和 inject
- │   │     ├── lib                     js包
- │   │     ├── router                  路由页面配置
- │   │     │      ├── module           router模块配置
- │   │     │      ├── index            router配置入口
- │   │     ├── store                   状态管理配置
- │   │     │      ├── module           store模块配置
- │   │     │      ├── index            store配置入口
- │   │     ├── tools                   工具
- │   │     │      ├── cmake_router     路由拦截
- │   │     │      ├── cmake_tools      自定义工具
- │   │     │      ├── cmake_zintercept   请求封装
- │   │     │── components              组件
- │   │     │── styles                  全局样式
- │   │     │── views                   页面入口
- │   │     │── App.vue                 app.vue
- │   │     │── main.ts                 入口
  ├── .env                        默认配置
  ├── .env.development            开发配置
  ├── .env.production             线上配置

@@ -22,7 +22,7 @@
     "noImplicitAny": true,
     "skipLibCheck": false,
     "outDir": "dist",
-    "types": ["@types/lodash-es", "@vue-macros/reactivity-transform/macros-global", "vite/client"],
+    "types": ["@types/lodash-es", "vite/client"],
     "typeRoots": ["types", "node_modules/@types"],
     "paths": {
       "@/*": ["./src/*"],

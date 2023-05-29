@@ -7,9 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Index2: typeof import('./../../src/components/toast-msg/index2.vue')['default']
     Loading: typeof import('./../../src/components/loading/loading.vue')['default']
-    Message: typeof import('./../../src/components/message/message.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ToastMsg: typeof import('./../../src/components/toast-msg/index.vue')['default']
   }
 }

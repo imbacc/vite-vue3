@@ -74,6 +74,8 @@
     "useRouter": true,
     "useScript": true,
     "useSetStoreCache": true,
+    "useShowToast": true,
+    "useShowToast2": true,
     "useSlots": true,
     "useUserStore": true,
     "watch": true,

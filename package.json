@@ -42,7 +42,6 @@
     "@unocss/vite": "^0.48.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
-    "@vue-macros/reactivity-transform": "^0.2.4",
     "change-case": "^4.1.2",
     "commitizen": "^4.3.0",
     "commitlint": "^17.4.4",

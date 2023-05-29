@@ -18,18 +18,14 @@ import unocss from '@unocss/vite'
 
 // env 环境
 import envPlugin, { formatEnv } from './vite-plugin/vite-plugin-env'
+// 自动导入路由 需要可以用
+import routerPagePlugin from './vite-plugin/vite-plugin-routerPage'
 // Vite 的按需组件自动导入
 import autoImportPlugin from './vite-plugin/vite-plugin-auto-import'
 // Vite 的按需组件自动导入
-import componentsPlugin from './vite-plugin/vite-plugin-components'
-// 自动导入路由 需要可以用
-import routerPagePlugin from './vite-plugin/vite-plugin-routerPage'
-// html inject
-import htmlInjectPlugin from './vite-plugin/vite-plugin-htmlInject'
-// $ref $computed $shallowRef $customRef $toRef $()解构
-import ReactivityTransform from '@vue-macros/reactivity-transform/vite'
-// head cache
-import headerCache from './vite-plugin/vite-plugin-cache'
+import autoComponentsPlugin from './vite-plugin/vite-plugin-auto-components'
+// env类型
+import htmlInject from './vite-plugin/vite-plugin-htmlInject'
 
 import packageJson from './package.json'
 import dayjs from 'dayjs'
@@ -55,7 +51,7 @@ const config: UserConfig = {
     assetsInlineLimit: 4096,
     rollupOptions: {
       output: {
-        // chunks 做操作 注释将减少分割
+        // chunks
         manualChunks: {
           'vue': ['vue', 'vue-router'],
           'imba-packages': ['imba-cache', 'imba-request'],
@@ -85,22 +81,20 @@ const config: UserConfig = {
   plugins: [
     vue(),
     IconsPlugin(),
-    autoImportPlugin(),
-    componentsPlugin(),
     routerPagePlugin(),
     unocss(),
     vueTsx(),
-    ReactivityTransform(),
+    autoImportPlugin(),
+    autoComponentsPlugin(),
   ],
 
-  // 要将一些共享的全局变量传递给所有的Less样式
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: '@use "@/styles/global.scss" as *;',
-      },
-    },
-  },
+  // css: {
+  //   preprocessorOptions: {
+  //     scss: {
+  //       additionalData: '',
+  //     },
+  //   },
+  // },
 }
 
 export default defineConfig(({ command, mode }) => {
@@ -109,7 +103,8 @@ export default defineConfig(({ command, mode }) => {
   // console.log('command=', command)
   // console.log('mode=', mode)
 
-  config.plugins?.push(htmlInjectPlugin(VITE_GLOB_APP_TITLE))
+  config.plugins?.push(envPlugin(VITE_ENV))
+  config.plugins?.push(htmlInject(VITE_GLOB_APP_TITLE))
 
   if (command === 'build' && mode === 'production') {
     // 编译环境配置
@@ -122,8 +117,6 @@ export default defineConfig(({ command, mode }) => {
     }
   } else {
     // 开发环境配置
-    config.plugins?.push(headerCache())
-    config.plugins?.push(envPlugin(VITE_ENV))
     if (VITE_USE_MOCK) {
       config.plugins?.push(viteMockServe({ mockPath: 'mock', supportTs: false }))
     }

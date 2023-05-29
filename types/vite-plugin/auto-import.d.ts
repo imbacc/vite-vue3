@@ -75,6 +75,8 @@ declare global {
   const useRouter: typeof import('vue-router')['useRouter']
   const useScript: typeof import('../../src/hooks/useScriptHooks')['useScript']
   const useSetStoreCache: typeof import('../../src/hooks/usePiniaHooks')['useSetStoreCache']
+  const useShowToast2: typeof import('../../src/hooks/useToastRender')['useShowToast2']
+  const useShowToast: typeof import('../../src/hooks/useToastRender')['useShowToast']
   const useSlots: typeof import('vue')['useSlots']
   const useUserStore: typeof import('../../src/store/user')['useUserStore']
   const watch: typeof import('vue')['watch']

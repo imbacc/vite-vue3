@@ -1,15 +1,12 @@
 import Axios from 'axios'
 
-// import message from '@/render/messageRender'
-// import loadingRender from '@/render/loadingRender'
-
 import { ImbaRequest } from 'imba-request'
 import { useUserStore } from '@/store/user'
 
-const env = import.meta.env
+const VITE_GLOB_API_URL = import.meta.env.VITE_GLOB_API_URL
 
 const axios = Axios.create({
-  baseURL: env.VITE_GLOB_API_URL,
+  baseURL: VITE_GLOB_API_URL,
   timeout: 3000 * 10,
 })
 
@@ -65,17 +62,16 @@ const http = new ImbaRequest(axios, {
 
 const errorMsg = async (msg = '服务器开小差了~') => {
   console.error(msg)
-  // message.send(msg, 'error').hide()
+  useShowToast(msg)
 }
 
 const loginOut = () => {
-  localStorage.removeItem('token')
-  window.location.href = '/login'
+  const userStore = useUserStore()
+  userStore.loginOut()
 }
 
 // 请求拦截器
 axios.interceptors.request.use((config) => {
-  console.log('%c [ config ]-28', 'font-size:14px; background:#41b883; color:#ffffff;', config)
   const userStore = useUserStore()
   const token = userStore.token
   if (token) config.headers.Authorization = `bearer ${token}`
@@ -87,14 +83,13 @@ axios.interceptors.request.use((config) => {
 axios.interceptors.response.use((response) => {
   const { status, data, config } = response
 
-  // loadingRender.close()
-
   if (status === 401) {
     loginOut()
     return false
   }
 
   if (status === 200) {
+    if (config.headers['skip-interceptors']) return data
     if (data.code === 0 || data?.msg === 'success') return data.data
   }
 
@@ -135,7 +130,6 @@ axios.interceptors.response.use((response) => {
   }
 
   if (err.includes('code 403')) {
-    // 服务器错误信息回应
     errorMsg(message || '403 error')
     return Boolean(false)
   }

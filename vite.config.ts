@@ -109,16 +109,12 @@ export default defineConfig(({ command, mode }) => {
   if (command === 'build' && mode === 'production') {
     // 编译环境配置
     if (VITE_BUILD_GZIP) {
-      config.plugins?.push(compressionPlugin({
-        verbose: true,
-        algorithm: 'gzip',
-        ext: '.gz',
-      }))
+      config.plugins?.push(compressionPlugin())
     }
   } else {
     // 开发环境配置
     if (VITE_USE_MOCK) {
-      config.plugins?.push(viteMockServe({ mockPath: 'mock', supportTs: false }))
+      config.plugins?.push(viteMockServe({ mockPath: 'mock' }))
     }
   }
 

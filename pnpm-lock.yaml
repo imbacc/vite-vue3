@@ -1,4 +1,8 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 dependencies:
   axios:
@@ -8,11 +12,11 @@ dependencies:
     specifier: ^1.11.7
     version: 1.11.7
   imba-cache:
-    specifier: ^1.1.6
-    version: 1.1.6
+    specifier: ^1.1.13
+    version: 1.1.13
   imba-request:
-    specifier: ^1.0.18
-    version: 1.0.18
+    specifier: ^1.0.25
+    version: 1.0.25
   lodash-es:
     specifier: ^4.17.21
     version: 4.17.21
@@ -631,7 +635,7 @@ packages:
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
       resolve-from: 5.0.0
-      ts-node: 10.9.1(@types/node@18.14.0)(typescript@4.6.4)
+      ts-node: 10.9.1(@types/node@18.14.0)(typescript@4.9.5)
       typescript: 4.9.5
     transitivePeerDependencies:
       - '@swc/core'
@@ -655,7 +659,7 @@ packages:
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
       resolve-from: 5.0.0
-      ts-node: 10.9.1(@types/node@18.14.0)(typescript@4.9.5)
+      ts-node: 10.9.1(@types/node@18.14.0)(typescript@4.6.4)
       typescript: 4.9.5
     transitivePeerDependencies:
       - '@swc/core'
@@ -4191,22 +4195,23 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /imba-cache@1.1.6:
-    resolution: {integrity: sha512-vcWhohjnT5Jx4HXJGu8urUkjcoC2VTQjzcbb4dmS0KtTJm866FES3KA7Z6EOToD/YNKp3S/jRFHb93Viti1x8g==}
-    dev: false
-
-  /imba-cache@1.1.9:
-    resolution: {integrity: sha512-qGtBljoJZZwDSpG5RxUvbLqUItHCqWcSqKHPQa5pSjh6YB7OFXk1+0d76tt8SkhrryaH+x49kHBdiCXPbOkGsw==}
+  /imba-cache@1.1.13:
+    resolution: {integrity: sha512-6C9svkndf8REbFQmpNxE17e43Wp2Sz1jcIzIoboEFi0GOKW7rSmgFQsGiswJSxp8gJ7ZNIJrl1+n9BvBTynb1Q==}
     dev: false
 
   /imba-config@1.0.0:
     resolution: {integrity: sha512-wtF/u6enumofOdjwcvXDBzgisdVGITKtPOoiuIFCLVHuzOB3zqMz/fzFC4UDCTf2pSF8gECAIS+jQ1o1AFAzgQ==}
     dev: true
 
-  /imba-request@1.0.18:
-    resolution: {integrity: sha512-T4xKv8d9PFNmV71ED+g6EDcVNDPwUBkDcNor2SEeugEO9N0R0PEqzK9pbaZpz8ouaFdvGMg1wPRjlG32yDUnng==}
+  /imba-md5@1.0.0:
+    resolution: {integrity: sha512-5PwK4bhU86f6/YxMgvfuqQkAOO6bBr8Thow5OQxbAGHUOoxwzQ8/MgyTw47F5+o4YJXRMdjQORINAWZBfcooMQ==}
+    dev: false
+
+  /imba-request@1.0.25:
+    resolution: {integrity: sha512-RbssVeN6SeAii6hWmKdLDPwxE2ikkHkH9/hhVwIt4LgvYUUMbQ5vRTCtCtqTPV2351nZdmP7deoSz5oGinTqsQ==}
     dependencies:
-      imba-cache: 1.1.9
+      imba-cache: 1.1.13
+      imba-md5: 1.0.0
       qs-stringify: 1.2.1
     dev: false
 
@@ -6320,6 +6325,7 @@ packages:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
+    optional: true
 
   /ts-node@10.9.1(@types/node@18.14.0)(typescript@4.9.5):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}

@@ -18,7 +18,7 @@ export const useShowToast = (msg: string, time = 2000) => {
     render(null, div)
     div.remove()
     queue.pop()
-  }, time + (queue.length * 99300))
+  }, time + (queue.length * 300))
 }
 
 const queue2: any[] = []

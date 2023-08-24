@@ -22,3 +22,7 @@ vite2.0 <https://vitejs.dev> vue3.0 <https://v3.cn.vuejs.org>
  ├── package.json                依赖包及配置信息文件
  ├── vite.config.ts              vite配置文件
 ```
+
+![image](https://github.com/imbacc/vite2-vue3/assets/28825000/c28916c7-a0ce-49e9-8b38-2818338f1567)
+
+unplugin-vue-components包之前生产环境打包是有问题的,现在可以不需要import引用了,解决了!!!

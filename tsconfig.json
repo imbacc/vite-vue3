@@ -22,8 +22,8 @@
     "noImplicitAny": true,
     "skipLibCheck": false,
     "outDir": "dist",
-    "types": ["@types/lodash-es", "vite/client"],
-    "typeRoots": ["types", "node_modules/@types"],
+    "types": ["vite/client"],
+    "typeRoots": ["types", "node_modules/@types", "node_modules/@types/lodash-es"],
     "paths": {
       "@/*": ["./src/*"],
       "#/*": ["./types/*"]
@@ -31,5 +31,4 @@
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "types/**/*.d.ts", "vite-plugin/**/*.ts"],
   "exclude": ["node_modules", "tests", ".history"]
-  // "references": [{ "path": "./tsconfig.node.json" }]
 }

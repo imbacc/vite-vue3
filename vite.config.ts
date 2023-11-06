@@ -68,6 +68,7 @@ const config: UserConfig = {
 
   optimizeDeps: {
     // exclude: ['lodash-es'],
+    exclude: ['lodash-es'],
   },
 
   resolve: {
@@ -114,7 +115,10 @@ export default defineConfig(({ command, mode }) => {
   } else {
     // 开发环境配置
     if (VITE_USE_MOCK) {
-      config.plugins?.push(viteMockServe({ mockPath: 'mock' }))
+      const mockPlugins = viteMockServe({ mockPath: 'mock' })
+      if (!config.plugins?.includes(mockPlugins)) {
+        config.plugins?.push(mockPlugins)
+      }
     }
   }
 

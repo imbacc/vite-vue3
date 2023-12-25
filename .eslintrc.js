@@ -1,5 +1,2 @@
-const { eslintConfig } = require('imba-config')
-eslintConfig.rules = Object.assign(eslintConfig.rules, {
-  '@typescript-eslint/no-use-before-define': 'off',
-})
-module.exports = eslintConfig
+import { eslintConfig } from 'imba-config'
+export default eslintConfig

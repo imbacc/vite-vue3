@@ -1,2 +1,2 @@
-const { czConfig } = require('imba-config')
-module.exports = czConfig
+import { czConfig } from 'imba-config'
+export default czConfig

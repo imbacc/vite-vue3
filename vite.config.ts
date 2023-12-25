@@ -5,6 +5,8 @@ import { resolve } from 'path'
 import { loadEnv, defineConfig } from 'vite'
 import { viteMockServe } from 'vite-plugin-mock'
 
+// vite-plugin-cdn-import
+
 // vue
 import vue from '@vitejs/plugin-vue'
 // icon 按需引入
@@ -26,6 +28,9 @@ import autoImportPlugin from './vite-plugin/vite-plugin-auto-import'
 import autoComponentsPlugin from './vite-plugin/vite-plugin-auto-components'
 // env类型
 import htmlInject from './vite-plugin/vite-plugin-htmlInject'
+
+// legacy
+import legacy from '@vitejs/plugin-legacy'
 
 import packageJson from './package.json'
 import dayjs from 'dayjs'
@@ -111,6 +116,33 @@ export default defineConfig(({ command, mode }) => {
     // 编译环境配置
     if (VITE_BUILD_GZIP) {
       config.plugins?.push(compressionPlugin())
+    }
+
+    if (VITE_BUILD_GZIP) {
+      legacy({
+        targets: ['chrome 52'],
+        additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+        renderLegacyChunks: true,
+        polyfills: [
+          'es.symbol',
+          'es.promise',
+          'es.promise.finally',
+          'es/map',
+          'es/set',
+          'es.array.filter',
+          'es.array.for-each',
+          'es.array.flat-map',
+          'es.object.define-properties',
+          'es.object.define-property',
+          'es.object.get-own-property-descriptor',
+          'es.object.get-own-property-descriptors',
+          'es.object.keys',
+          'es.object.to-string',
+          'web.dom-collections.for-each',
+          'esnext.global-this',
+          'esnext.string.match-all',
+        ],
+      })
     }
   } else {
     // 开发环境配置

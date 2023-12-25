@@ -42,6 +42,7 @@
     "@types/lodash-es": "^4.17.10",
     "@unocss/preset-uno": "^0.57.2",
     "@unocss/vite": "^0.57.2",
+    "@vitejs/plugin-legacy": "^5.2.0",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "change-case": "^4.1.2",

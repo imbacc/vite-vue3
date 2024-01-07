@@ -1,2 +1,2 @@
-import { commitlintConfig } from 'imba-config'
-export default commitlintConfig
+const { commitlintConfig } = require('imba-config')
+module.exports = commitlintConfig

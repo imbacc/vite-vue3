@@ -17,7 +17,6 @@ import compressionPlugin from 'vite-plugin-compression'
 import vueTsx from '@vitejs/plugin-vue-jsx'
 // 原子和属性css写法
 import unocss from '@unocss/vite'
-
 // env 环境
 import envPlugin, { formatEnv } from './vite-plugin/vite-plugin-env'
 // 自动导入路由 需要可以用

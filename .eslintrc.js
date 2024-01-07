@@ -1,2 +1,2 @@
-import { eslintConfig } from 'imba-config'
-export default eslintConfig
+const { eslintConfig } = require('imba-config')
+module.exports = eslintConfig

@@ -15,16 +15,16 @@ import routerPages from 'vite-plugin-pages'
 
 function camelCase(str: string) {
   // 将字符串分割成单词数组
-  const words = str.split(/[\s_-]+/);
+  const words = str.split(/[\s_-]+/)
 
   // 将第一个单词小写化，保留其他单词的首字母大写
-  let result = words[0].toLowerCase();
+  let result = words[0].toLowerCase()
   for (let i = 1, j = words.length; i < j; i++) {
-    const word = words[i];
-    result += word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    const word = words[i]
+    result += word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
   }
 
-  return result;
+  return result
 }
 
 export default () => {

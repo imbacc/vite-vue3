@@ -1,18 +1,13 @@
 import type { UserConfig } from 'vite'
-import type { ENV_DTYPE } from './types/vite-plugin/auto-env'
 
 import { resolve } from 'path'
 import { loadEnv, defineConfig } from 'vite'
 import { viteMockServe } from 'vite-plugin-mock'
 
-// vite-plugin-cdn-import
-
 // vue
 import vue from '@vitejs/plugin-vue'
 // icon 按需引入
 import IconsPlugin from 'unplugin-icons/vite'
-// 使用gzip或brotli来压缩资源
-import compressionPlugin from 'vite-plugin-compression'
 // tsx写法
 import vueTsx from '@vitejs/plugin-vue-jsx'
 // 原子和属性css写法
@@ -27,9 +22,12 @@ import autoImportPlugin from './vite-plugin/vite-plugin-auto-import'
 import autoComponentsPlugin from './vite-plugin/vite-plugin-auto-components'
 // env类型
 import htmlInject from './vite-plugin/vite-plugin-htmlInject'
-
+// 使用gzip或brotli来压缩资源
+import compressionPlugin from './vite-plugin/vite-plugin-compress'
 // legacy
-import legacy from '@vitejs/plugin-legacy'
+import legacyPlugin from './vite-plugin/vite-plugin-legacy'
+// cdn import
+// import cdnImportPlugin from './vite-plugin/vite-plugin-cdn-import'
 
 import packageJson from './package.json'
 import dayjs from 'dayjs'
@@ -72,7 +70,7 @@ const config: UserConfig = {
 
   optimizeDeps: {
     // exclude: ['lodash-es'],
-    exclude: ['lodash-es'],
+    // exclude: ['lodash-es'],
   },
 
   resolve: {
@@ -103,8 +101,8 @@ const config: UserConfig = {
 }
 
 export default defineConfig(({ command, mode }) => {
-  const VITE_ENV = formatEnv(loadEnv(mode, process.cwd())) as ENV_DTYPE
-  const { VITE_GLOB_APP_TITLE, VITE_USE_MOCK, VITE_BUILD_GZIP } = VITE_ENV
+  const VITE_ENV = formatEnv(loadEnv(mode, process.cwd())) as ViteEnv_DTYPE
+  const { VITE_GLOB_APP_TITLE, VITE_USE_MOCK, VITE_BUILD_GZIP, VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE } = VITE_ENV
   // console.log('command=', command)
   // console.log('mode=', mode)
 
@@ -114,34 +112,11 @@ export default defineConfig(({ command, mode }) => {
   if (command === 'build' && mode === 'production') {
     // 编译环境配置
     if (VITE_BUILD_GZIP) {
-      config.plugins?.push(compressionPlugin())
+      config.plugins?.push(compressionPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE))
     }
 
     if (VITE_BUILD_GZIP) {
-      legacy({
-        targets: ['chrome 52'],
-        additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
-        renderLegacyChunks: true,
-        polyfills: [
-          'es.symbol',
-          'es.promise',
-          'es.promise.finally',
-          'es/map',
-          'es/set',
-          'es.array.filter',
-          'es.array.for-each',
-          'es.array.flat-map',
-          'es.object.define-properties',
-          'es.object.define-property',
-          'es.object.get-own-property-descriptor',
-          'es.object.get-own-property-descriptors',
-          'es.object.keys',
-          'es.object.to-string',
-          'web.dom-collections.for-each',
-          'esnext.global-this',
-          'esnext.string.match-all',
-        ],
-      })
+      config.plugins?.push(legacyPlugin())
     }
   } else {
     // 开发环境配置

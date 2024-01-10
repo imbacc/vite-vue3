@@ -29,6 +29,6 @@
       "#/*": ["./types/*"]
     }
   },
-  "include": ["src/**/*.ts","src/**/*.d.ts","src/**/*.tsx", "src/**/*.vue","types/**/*.d.ts","vite-plugin/**/*.ts"],
+  "include": ["src/**/*.ts","src/**/*.d.ts","src/**/*.tsx", "src/**/*.vue","types/**/*.d.ts","vite-plugin/**/*.ts", "vite.config.ts"],
   "exclude": ["node_modules","tests",".history", ".husky","docker"]
 }

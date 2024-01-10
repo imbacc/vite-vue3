@@ -8,4 +8,4 @@ export const API: API_DTYPE = {
 
 export const getTest = () => http.request(API.getTest)
 export const getTest222 = (id: number) => http.request(API.getTestById, { _id: `${id}` })
-export const getTest333 = (param = {}, body = {}) => http.request<{ test: 1 }>(API.getTestThree, { _param: param, _body: body })
+export const getTest333 = (param = {}, body = {}) => http.request<{ test: number }>(API.getTestThree, { _param: param, _body: body })

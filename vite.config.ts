@@ -69,6 +69,13 @@ const config: UserConfig = {
   },
 
   optimizeDeps: {
+    // include: [
+    //   'mitt',
+    //   'dayjs',
+    //   'axios',
+    //   'pinia',
+    //   'lodash-es',
+    // ],
     // exclude: ['lodash-es'],
     // exclude: ['lodash-es'],
   },

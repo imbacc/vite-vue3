@@ -1,4 +1,3 @@
-import type { ENV_DTYPE } from '#/vite-plugin/auto-env'
 import type { PluginOption } from 'vite'
 
 const createProxy = (list: any) => {
@@ -14,7 +13,7 @@ const createProxy = (list: any) => {
   return result
 }
 
-export const formatEnv = (viteEnv: Record<string, any>): ENV_DTYPE => {
+export const formatEnv = (viteEnv: Record<string, any>): ViteEnv_DTYPE => {
   const entries = Object.entries(viteEnv)
   for (const [key, val] of entries) {
     if (val === 'true') {
@@ -37,10 +36,10 @@ export const formatEnv = (viteEnv: Record<string, any>): ENV_DTYPE => {
       continue
     }
   }
-  return viteEnv as ENV_DTYPE
+  return viteEnv as ViteEnv_DTYPE
 }
 
-export default (VITE_ENV: ENV_DTYPE): PluginOption => {
+export default (VITE_ENV: ViteEnv_DTYPE): PluginOption => {
   const { VITE_HOST, VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE, VITE_LEGACY } = VITE_ENV
 
   return {

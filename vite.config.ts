@@ -16,9 +16,9 @@ import unocss from '@unocss/vite'
 import envPlugin, { formatEnv } from './vite-plugin/vite-plugin-env'
 // 自动导入路由 需要可以用
 import routerPagePlugin from './vite-plugin/vite-plugin-routerPage'
-// Vite 的按需组件自动导入
+// api函数自动导入
 import autoImportPlugin from './vite-plugin/vite-plugin-auto-import'
-// Vite 的按需组件自动导入
+// 按需组件自动导入
 import autoComponentsPlugin from './vite-plugin/vite-plugin-auto-components'
 // env类型
 import htmlInject from './vite-plugin/vite-plugin-htmlInject'
@@ -65,6 +65,7 @@ const config: UserConfig = {
 
   define: {
     __VUE_OPTIONS_API__: false, // 明确不使用 options api
+    __VUE_PROD_DEVTOOLS__: false, // production 关闭 devtools
     __APP_INFO__: JSON.stringify(__APP_INFO__),
   },
 

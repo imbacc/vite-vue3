@@ -8,13 +8,13 @@ declare global {
 
   export const __APP_INFO__: {
     pkg: {
-      name: string;
-      version: string;
-      dependencies: Record<string, any>;
-      devDependencies: Record<string, any>;
-    };
-    lastBuildTime: string;
-  };
+      name: string
+      version: string
+      dependencies: Record<string, any>
+      devDependencies: Record<string, any>
+    }
+    lastBuildTime: string
+  }
 
   export interface ViteEnv_DTYPE {
     /**
@@ -77,5 +77,5 @@ declare global {
 declare module 'vue' {
   export type JSXComponent<Props = any> =
     | { new(): ComponentPublicInstance<Props> }
-    | FunctionalComponent<Props>;
+    | FunctionalComponent<Props>
 }

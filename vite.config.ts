@@ -1,6 +1,7 @@
 import type { UserConfig } from 'vite'
 
-import { resolve } from 'path'
+import process from 'node:process'
+import { resolve } from 'node:path'
 import { loadEnv, defineConfig } from 'vite'
 import { viteMockServe } from 'vite-plugin-mock'
 

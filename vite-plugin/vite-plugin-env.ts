@@ -26,8 +26,8 @@ export const formatEnv = (viteEnv: Record<string, any>): ViteEnv_DTYPE => {
       continue
     }
 
-    if (!isNaN(val)) {
-      viteEnv[key] = parseInt(val)
+    if (!Number.isNaN(val)) {
+      viteEnv[key] = Number.parseInt(val)
       continue
     }
 
@@ -52,6 +52,13 @@ export default (VITE_ENV: ViteEnv_DTYPE): PluginOption => {
           port: VITE_PORT,
           proxy: VITE_PROXY,
           open: false,
+          warmup: {
+            clientFiles: [
+              './src/components/*.vue',
+              './src/views/*.vue',
+              './src/tools/*.js',
+            ],
+          },
         },
         build: {
           polyfillDynamicImport: Boolean(VITE_LEGACY) || false,

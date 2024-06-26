@@ -22,7 +22,7 @@
     "noImplicitAny": true,
     "skipLibCheck": false,
     "outDir": "dist",
-    "types": ["vite/client"],
+    "types": [],
     "typeRoots": ["types","node_modules/@types","node_modules/@types/lodash-es"],
     "paths": {
       "@/*": ["./src/*"],

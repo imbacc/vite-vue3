@@ -15,6 +15,7 @@ const createProxy = (list: any) => {
 
 export const formatEnv = (viteEnv: Record<string, any>): ViteEnv_DTYPE => {
   const entries = Object.entries(viteEnv)
+  const reg = /^-?\d+(?:\.\d+)?$/
   for (const [key, val] of entries) {
     if (val === 'true') {
       viteEnv[key] = true
@@ -26,15 +27,17 @@ export const formatEnv = (viteEnv: Record<string, any>): ViteEnv_DTYPE => {
       continue
     }
 
-    if (!Number.isNaN(val)) {
-      viteEnv[key] = Number.parseInt(val)
-      continue
-    }
-
     if (key === 'VITE_PROXY') {
       viteEnv[key] = createProxy(val)
       continue
     }
+
+    if (reg.test(val)) {
+      viteEnv[key] = Number.parseInt(val)
+      continue
+    }
+
+    viteEnv[key] = val
   }
   return viteEnv as ViteEnv_DTYPE
 }

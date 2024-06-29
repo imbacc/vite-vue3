@@ -8,6 +8,7 @@
     "dev:p": "vite -m development --profile",
     "dev:test": "vite -m testing",
     "dev:prod": "vite -m production",
+    "test": "vitest",
     "build": "vite build -m production",
     "build:test": "vite build -m testing",
     "build:prod": "vite build -m production",

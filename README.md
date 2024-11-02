@@ -5,7 +5,7 @@ vite <https://cn.vitejs.dev/> vue3 <https://cn.vuejs.org/>
 ## ✨ Features
 
 - **api自动导入** - 包库api自动导入行为 unplugin-auto-import
-- **组件自动导入** - 在使用Template 时自动导入组件，<XXX></XXX>
+- **组件自动导入** - 在使用Template 时自动导入组件，<Xxx></Xxx>
 - **单元测试** - 使用vitest单元测试
 - **专属小库** - imba-cache,imba-request,https://www.npmjs.com/package/imba-cache,https://www.npmjs.com/package/imba-request
 

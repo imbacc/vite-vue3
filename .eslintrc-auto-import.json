@@ -94,6 +94,11 @@
     "Ref": true,
     "VNode": true,
     "WritableComputedRef": true,
-    "toValue": true
+    "toValue": true,
+    "emitEmitEvent": true,
+    "emitter": true,
+    "offEmitEvent": true,
+    "onEmitEvent": true,
+    "useHasState": true
   }
 }

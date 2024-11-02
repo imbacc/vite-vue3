@@ -7,10 +7,10 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Index2: typeof import('./../../src/components/toast-msg/index2.vue')['default']
-    Loading: typeof import('./../../src/components/loading/loading.vue')['default']
+    Index2: typeof import('./../../src/components/ToastMsg/index2.vue')['default']
+    Loading: typeof import('./../../src/components/Loading/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    ToastMsg: typeof import('./../../src/components/toast-msg/index.vue')['default']
+    ToastMsg: typeof import('./../../src/components/ToastMsg/index.vue')['default']
   }
 }

@@ -1,7 +1,7 @@
 import { createVNode, render } from 'vue'
 
-import ToastMsg from '@/components/toast-msg/index.vue'
-import ToastMsg2 from '@/components/toast-msg/index2.vue'
+import ToastMsg from '@/components/ToastMsg/index.vue'
+import ToastMsg2 from '@/components/ToastMsg/index2.vue'
 
 const queue: any[] = []
 export const useShowToast = (msg: string, time = 2000) => {

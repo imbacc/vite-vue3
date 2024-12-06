@@ -12,6 +12,7 @@
     "build": "vite build -m production",
     "build:test": "vite build -m testing",
     "build:prod": "vite build -m production",
+    "dk": "pnpm run build && docker build -t test2 -f ./docker/Dockerfile .",
     "preview:test": "vite -m testing preview",
     "preview:prod": "vite -m production preview",
     "test:gzip": "npx http-server dist --cors --gzip -c-1",

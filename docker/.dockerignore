@@ -30,3 +30,5 @@ pnpm-debug.log*
 yarn.lock
 pnpm-lock.yaml
 /vite-profile.cpuprofile
+mock/
+tests/

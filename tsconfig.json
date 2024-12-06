@@ -12,6 +12,8 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["esnext","es6","webworker","DOM","DOM.Iterable"],
+    "allowImportingTsExtensions": true,
+    "emitDeclarationOnly": true,
     "alwaysStrict": true,
     "declaration": true,
     "removeComments": true,

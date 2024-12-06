@@ -1,21 +1,10 @@
-FROM node:16.15.0 as builder
+FROM nginx:alpine
+COPY ./dist /usr/share/nginx/html
+COPY ./docker/nginx.conf /etc/nginx/conf.d/dk.conf
 
-ENV WORKDIR=/vite2-vue3
+RUN mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
 
-WORKDIR $WORKDIR
+EXPOSE 8088
 
-COPY ./ $WORKDIR/
-
-ARG version
-ENV COMMITID=$version
-
-RUN npm i -g pnpm && pnpm install && pnpm build
-
-FROM nginx:alpine as prod
-
-RUN mkdir /soybean
-
-COPY --from=builder /vite2-vue3/dist /vite2-vue3
-COPY --from=builder /vite2-vue3/docker/nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 80
+# start nginx
+CMD ["nginx", "-g", "daemon off;"]

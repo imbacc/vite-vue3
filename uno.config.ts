@@ -2,11 +2,7 @@ import { defineConfig } from '@unocss/vite'
 import presetUno from '@unocss/preset-uno'
 
 export default defineConfig({
-  content: {
-    pipeline: {
-      exclude: ['node_modules', 'dist', '.git', '.husky', '.vscode', 'public', 'build', 'mock', '.history'],
-    },
-  },
+  exclude: ['node_modules', 'dist', '.git', '.husky', '.vscode', 'public', 'build', 'mock', '.history'],
   // include: ['index.html', 'src/**/*.{vue,tsx,html}'],
   presets: [presetUno({ dark: 'class' })],
   shortcuts: {

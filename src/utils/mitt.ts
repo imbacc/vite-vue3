@@ -1,4 +1,4 @@
-import type { emitterMap_DTYPE, emitterMapKey_DTYPE, emitterHandler_DTYPE } from '#/tools/mitt'
+import type { emitterMap_DTYPE, emitterMapKey_DTYPE, emitterHandler_DTYPE } from '#/utils/mitt'
 
 import mitt from 'mitt'
 export const emitter = mitt()

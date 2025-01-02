@@ -99,6 +99,15 @@
     "emitter": true,
     "offEmitEvent": true,
     "onEmitEvent": true,
-    "useHasState": true
+    "useHasState": true,
+    "createPiniaStore": true,
+    "getTest222Api": true,
+    "getTest333Api": true,
+    "getTestApi": true,
+    "getUserApi": true,
+    "useRequestLoading": true,
+    "useLoading": true,
+    "useRequest": true,
+    "getTest444Api": true
   }
 }

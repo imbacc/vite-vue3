@@ -1,19 +1,19 @@
 <template>
   <div>
-    <router-link to="/about">
+    <RouterLink to="/about">
       About
-    </router-link>
+    </RouterLink>
     |
-    <router-link to="/action">
+    <RouterLink to="/action">
       Action
-    </router-link>
+    </RouterLink>
     |
-    <button v-auth="['test']" @click="alert">
-      测试 directive v-auth
+    <button v-auth="['test', 'qqq']" @click="alert">
+      测试v-auth,加权'qweasd'去action
     </button>
 
     <button @click="auth">
-      点我授权去Action
+      点我加权'action'
     </button>
 
     <button @click="loginOut">
@@ -23,25 +23,41 @@
 </template>
 
 <script setup lang="ts">
+const router = useRouter()
 const authStore = useAuthStore()
 const userStore = useUserStore()
 
+console.log('%c [ toRaw(authStore.$state) ]-31', 'font-size:14px; background:#41b883; color:#ffffff;', toRaw(authStore.$state))
+
 const alert = () => {
+  // eslint-disable-next-line no-alert
   window.alert('能点')
+  authStore.pushRouterAuth('qweasd')
+  router.push('/action')
 }
 
 const auth = () => {
-  if (authStore.hasRouterAuth(['test'])) {
-    window.alert('已经点过了')
+  if (authStore.hasMeshAuth(['test'])) {
+    // window.alert('已经点过了')
+    authStore.pushMeshAuth(Math.random().toString())
+
+    const value = authStore.utGetCache('meshAuthList')
+    console.log('%c [ value ]-42', 'font-size:14px; background:#41b883; color:#ffffff;', value)
+    if (value.length >= 10) {
+      authStore.utClearCache(['meshAuthList'])
+      console.log('%c [ authStore ]-45', 'font-size:14px; background:#41b883; color:#ffffff;', toRaw(authStore.$state))
+    }
     return
   }
-  authStore.pushRouterAuth('test')
+  authStore.pushMeshAuth(['test', 'qqq'])
+  authStore.pushRouterAuth('action')
   window.location.reload()
 }
 
 const loginOut = () => {
-  authStore.clear()
-  userStore.loginOut()
+  authStore.utClearCache()
+  userStore.utClearCache()
+  window.location.reload()
 }
 </script>
 

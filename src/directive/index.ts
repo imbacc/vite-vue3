@@ -1,12 +1,9 @@
 import type { App } from 'vue'
 
-interface res_DTYPE { default: (app: App) => void }
-const modules = import.meta.glob('./module/*.ts', { eager: true }) as Record<string, res_DTYPE>
+const modules = import.meta.glob('./modules/*.ts', { eager: true }) as Record<string, any>
 
 export default {
   install: (app: App) => {
-    Object.values(modules).forEach((res) => {
-      res.default(app)
-    })
+    Object.values(modules).forEach((res) => res.default(app))
   },
 }

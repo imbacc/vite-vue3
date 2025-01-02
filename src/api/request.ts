@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 import { ImbaRequest } from 'imba-request'
-import { useUserStore } from '@/store/user'
+import { useUserStore } from '@/store/modules/user'
 
 const VITE_GLOB_API_URL = import.meta.env.VITE_GLOB_API_URL
 
@@ -17,46 +17,46 @@ const http = new ImbaRequest(axios, {
    */
   cacheBool: true,
   /**
- * 缓存&SWR 缓存时间 默认分单位 mm
- * 默认 -1
- */
+   * 缓存&SWR 缓存时间 默认分单位 mm
+   * 默认 -1
+   */
   cacheTime: 1,
   /**
- * 缓存&SWR 缓存单位 mm | ss
- * 默认 mm
- */
+   * 缓存&SWR 缓存单位 mm | ss
+   * 默认 mm
+   */
   cacheUnit: 'mm',
   /**
-  * 是否重复请求合并
-  * 默认 true
-  */
+   * 是否重复请求合并
+   * 默认 true
+   */
   repeatMergeBool: true,
   /**
-  * 是否请求错误后重试
-  * 默认 true
-  */
+   * 是否请求错误后重试
+   * 默认 true
+   */
   retryBool: true,
   /**
- * 请求重试错误次数
- * 默认 2
- */
+   * 请求重试错误次数
+   * 默认 2
+   */
   retryCount: 2,
   /**
- * 重试内时间定位 单位秒
- * 默认 5
- */
+   * 重试内时间定位 单位秒
+   * 默认 5
+   */
   retryInterval: 5,
   /**
- * 分页字段设置
- */
+   * 分页字段设置
+   */
   pageKey: ['page', 'size'],
   /**
-* 打印API接口地址是否MD5化
-*/
+   * 打印API接口地址是否MD5化
+   */
   printMD5: false,
   /**
- * 是否开启打印请求数据
- */
+   * 是否开启打印请求数据
+   */
   printConsole: true,
 })
 

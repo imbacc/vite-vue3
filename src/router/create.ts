@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
-import pages from '~pages'
+
+import intercept from './intercept'
+import { addRouterList } from './convert'
 
 const defaultRouter = [
   {
@@ -33,7 +35,10 @@ const router = createRouter({
   routes: defaultRouter,
 })
 
-export {
-  router,
-  pages,
+const createRouterMode = () => {
+  intercept(router)
+  addRouterList(router)
+  return router
 }
+
+export { createRouterMode, router }

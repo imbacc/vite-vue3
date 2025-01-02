@@ -1,12 +1,10 @@
 import type { userStore_DTYPE } from '#/store/user'
 
-import { getCacheLoca } from 'imba-cache'
-
 export const useUserStore = defineStore('user', {
   state: (): userStore_DTYPE => {
     return {
-      token: getCacheLoca('token') || '',
-      userInfo: getCacheLoca('userInfo') || {},
+      token: '',
+      userInfo: {},
     }
   },
   getters: {
@@ -15,14 +13,10 @@ export const useUserStore = defineStore('user', {
     },
   },
   actions: {
-    setStoreCache(params: Partial<key_valueof_CONVERT<userStore_DTYPE>>) {
-      useSetStoreCache(this, params)
-    },
-    clear() {
-      useClearStore(this)
+    test() {
+      this.utSetCache({ token: 'vue3 token', userInfo: { username: 'imbacc', password: 'vite2vue3' } })
     },
     loginOut() {
-      this.clear()
       window.location.replace('/login')
     },
   },

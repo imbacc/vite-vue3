@@ -3,7 +3,7 @@ const { eslintConfig, ignoresConfig } = require('imba-config')
 
 module.exports = antfu({
   typescript: true,
-  vue: false,
+  vue: true,
 
   // Disable jsonc and yaml support
   jsonc: false,

@@ -11,7 +11,7 @@
 const router = useRouter()
 const userStore = useUserStore()
 
-const login = () => {
+function login() {
   userStore.test()
   router.replace({ path: '/' })
 }

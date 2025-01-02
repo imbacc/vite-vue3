@@ -16,6 +16,7 @@ const createProxy = (list: any) => {
 export const formatEnv = (viteEnv: Record<string, any>): ViteEnv_DTYPE => {
   const entries = Object.entries(viteEnv)
   const reg = /^-?\d+(?:\.\d+)?$/
+
   for (const [key, val] of entries) {
     if (val === 'true') {
       viteEnv[key] = true
@@ -39,6 +40,7 @@ export const formatEnv = (viteEnv: Record<string, any>): ViteEnv_DTYPE => {
 
     viteEnv[key] = val
   }
+
   return viteEnv as ViteEnv_DTYPE
 }
 
@@ -59,7 +61,7 @@ export default (VITE_ENV: ViteEnv_DTYPE): PluginOption => {
             clientFiles: [
               './src/components/*.vue',
               './src/views/*.vue',
-              './src/tools/*.js',
+              './src/utils/*.js',
             ],
           },
         },

@@ -57,7 +57,7 @@ const config: UserConfig = {
         // chunks
         manualChunks: {
           'vue': ['vue', 'vue-router'],
-          'imba-packages': ['imba-cache', 'imba-request'],
+          'imba-libs': ['imba-cache', 'imba-request'],
           'lodash-es': ['lodash-es'],
         },
       },

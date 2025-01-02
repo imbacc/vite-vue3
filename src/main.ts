@@ -11,13 +11,10 @@ import 'nprogress/nprogress.css'
 const setup = async () => {
   const app = createApp(App)
 
-  const store = await createPiniaStore()
-  app.use(store)
-
-  const router = await createRouterMode()
-  app.use(router)
-
+  app.use(createPiniaStore())
+  app.use(createRouterMode())
   app.use(direct)
+
   app.mount('#app')
 }
 

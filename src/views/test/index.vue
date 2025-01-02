@@ -29,14 +29,14 @@ const userStore = useUserStore()
 
 console.log('%c [ toRaw(authStore.$state) ]-31', 'font-size:14px; background:#41b883; color:#ffffff;', toRaw(authStore.$state))
 
-const alert = () => {
+function alert() {
   // eslint-disable-next-line no-alert
   window.alert('能点')
   authStore.pushRouterAuth('qweasd')
   router.push('/action')
 }
 
-const auth = () => {
+function auth() {
   if (authStore.hasMeshAuth(['test'])) {
     // window.alert('已经点过了')
     authStore.pushMeshAuth(Math.random().toString())
@@ -54,7 +54,7 @@ const auth = () => {
   window.location.reload()
 }
 
-const loginOut = () => {
+function loginOut() {
   authStore.utClearCache()
   userStore.utClearCache()
   window.location.reload()

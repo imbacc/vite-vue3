@@ -31,7 +31,7 @@
     "axios": "^1.6.5",
     "dayjs": "^1.11.10",
     "imba-cache": "^1.1.16",
-    "imba-pinia-plugin": "^1.0.5",
+    "imba-pinia-plugin": "^1.0.10",
     "imba-request": "^1.0.25",
     "lodash-es": "^4.17.21",
     "mitt": "^3.0.1",

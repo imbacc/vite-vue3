@@ -33,7 +33,7 @@ export default (router: Router) => {
     const metaAuth = to.meta.auth as Array<string>
     if (metaAuth && Array.isArray(metaAuth)) {
       if (!authStore.hasRouterAuth(metaAuth)) {
-        console.error(`${to.path} 没有权限!`)
+        console.error(`${to.path} 没有权限! ${metaAuth}`)
         next('/401')
         return
       }

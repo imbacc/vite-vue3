@@ -11,10 +11,4 @@ export default [
       auth: ['action', 'qweasd'],
     },
   },
-  {
-    name: 'about',
-    meta: {
-      auth: ['about'],
-    },
-  },
 ]

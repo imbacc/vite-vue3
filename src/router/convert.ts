@@ -3,29 +3,25 @@ import type { Router, RouteRecordRaw } from 'vue-router'
 import pages from '~pages'
 import metas from './metas'
 
-const metasMapRecord = (metaList: Array<{ name?: string, path?: string, meta: Record<string, string | string[] | object> }>) => {
-  const lastMetaMap = new Map()
-  const list = [...metaList]
+const mapRecord = (inList: Array<{ path: string }>) => {
+  const lastMap = new Map()
+  const list = [...inList]
   while (list.length > 0) {
     const item = list.shift()
-    lastMetaMap.set(item?.path || item?.name, item)
+    lastMap.set(item?.path, item)
   }
-  return lastMetaMap
+  return lastMap
 }
 
 export const addRouterList = (router: Router) => {
-  const metaMap = metasMapRecord(metas)
+  const metaMap = mapRecord(metas)
 
   const queue = [...pages]
   while (queue.length > 0) {
     const page = queue.shift() as RouteRecordRaw
 
-    let key = page.path
-    let findMeta = metaMap.get(key)
-    if (!findMeta) {
-      key = page.name as string
-      findMeta = metaMap.get(key)
-    }
+    const key = page.path
+    const findMeta = metaMap.get(key)
     if (findMeta) {
       page.meta = Object.assign(page.meta || {}, findMeta.meta)
       metaMap.delete(key)
